@@ -1,5 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>cz.cvut.fit.miadp</groupId>
   <artifactId>mvcgame</artifactId>
@@ -10,11 +11,14 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>12</maven.compiler.source>
-    <maven.compiler.target>12</maven.compiler.target>
+    <maven.compiler.source>15</maven.compiler.source>
+    <maven.compiler.target>15</maven.compiler.target>
     <main.class>cz.cvut.fit.miadp.MvcGameJavaFxLauncher</main.class>
     <!--<main.class>cz.cvut.fit.miadp.MvcGameSlick2DLauncher</main.class>-->
+    <javafx.version>19</javafx.version>
+    <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
   </properties>
+
 
   <dependencies>
 	<dependency>
@@ -27,7 +31,7 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>13</version>
+      <version>${javafx.version}</version>
     </dependency>
 
     <!-- Slick2D dependencies requires Java 8 JDK!!!!
@@ -52,7 +56,7 @@
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.3</version>
+        <version>${javafx.maven.plugin.version}</version>
         <configuration>
             <source>${maven.compiler.source}</source>
             <target>${maven.compiler.target}</target>
