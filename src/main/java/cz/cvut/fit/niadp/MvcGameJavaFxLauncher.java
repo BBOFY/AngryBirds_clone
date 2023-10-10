@@ -1,18 +1,16 @@
-package cz.cvut.fit.miadp;
+package cz.cvut.fit.niadp;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-import cz.cvut.fit.miadp.mvcgame.MvcGame;
+import cz.cvut.fit.niadp.mvcgame.MvcGame;
 
 public class MvcGameJavaFxLauncher extends Application {
 
@@ -28,59 +26,38 @@ public class MvcGameJavaFxLauncher extends Application {
         String winTitle = theMvcGame.getWindowTitle();
         int winWidth = theMvcGame.getWindowWidth();
         int winHeigth = theMvcGame.getWindowHeight();
-
         stage.setTitle( winTitle );
-
         Group root = new Group();
         Scene theScene = new Scene( root );
         stage.setScene( theScene );
-            
         Canvas canvas = new Canvas( winWidth, winHeigth );
         root.getChildren().add( canvas );
-            
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        ArrayList<String> pressedKeysCodes = new ArrayList<String>();
- 
+        ArrayList<String> pressedKeysCodes = new ArrayList<>();
         theScene.setOnKeyPressed(
-            new EventHandler<KeyEvent>()
-            {
-                public void handle(KeyEvent e)
-                {
+                e -> {
                     String code = e.getCode().toString();
- 
                     // only add once... prevent duplicates
-                    if ( !pressedKeysCodes.contains(code) )
-                        pressedKeysCodes.add( code );
+                    if (!pressedKeysCodes.contains(code))
+                        pressedKeysCodes.add(code);
                 }
-            }
         );
- 
         theScene.setOnKeyReleased(
-            new EventHandler<KeyEvent>()
-            {
-                public void handle(KeyEvent e)
-                {
+                e -> {
                     String code = e.getCode().toString();
                     pressedKeysCodes.remove( code );
                 }
-            }
         );
-
         // the game-loop
-        new AnimationTimer()
-        {
-            public void handle(long currentNanoTime)
-            {
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
                 // Clear the canvas
                 gc.clearRect(0, 0, winWidth, winHeigth);
-    
                 theMvcGame.processPressedKeys(pressedKeysCodes);
                 theMvcGame.update();
                 theMvcGame.render(gc);
             }
         }.start();
-            
         stage.show();
     }
 
