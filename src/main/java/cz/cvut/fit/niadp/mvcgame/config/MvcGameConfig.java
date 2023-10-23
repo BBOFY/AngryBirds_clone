@@ -9,4 +9,6 @@ public class MvcGameConfig {
     public static final int MAX_X = 1920;
     public static final int MAX_Y = 1080;
 
+    public static final String WINDOW_TITLE = "The NI-ADP MvcGame";
+
 }

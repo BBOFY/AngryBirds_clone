@@ -48,7 +48,7 @@ public class MvcGame {
     }
 
     public String getWindowTitle() {
-        return "The NI-ADP MvcGame";
+        return MvcGameConfig.WINDOW_TITLE;
     }
 
     public int getWindowWidth() {
