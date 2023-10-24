@@ -1,5 +1,8 @@
 package cz.cvut.fit.niadp;
 
+import cz.cvut.fit.niadp.mvcgame.nullPattern.AbstractGraphicsContextWrapper;
+import cz.cvut.fit.niadp.mvcgame.nullPattern.GraphicsContextWrapper;
+import cz.cvut.fit.niadp.mvcgame.nullPattern.NullGraphicsContextWrapper;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -25,14 +28,16 @@ public class MvcGameJavaFxLauncher extends Application {
     public void start(Stage stage) {
         String winTitle = theMvcGame.getWindowTitle();
         int winWidth = theMvcGame.getWindowWidth();
-        int winHeigth = theMvcGame.getWindowHeight();
+        int winHeight = theMvcGame.getWindowHeight();
         stage.setTitle( winTitle );
         Group root = new Group();
         Scene theScene = new Scene( root );
         stage.setScene( theScene );
-        Canvas canvas = new Canvas( winWidth, winHeigth );
+        Canvas canvas = new Canvas( winWidth, winHeight );
         root.getChildren().add( canvas );
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        AbstractGraphicsContextWrapper gc = new GraphicsContextWrapper(
+                canvas.getGraphicsContext2D()
+        );
         ArrayList<String> pressedKeysCodes = new ArrayList<>();
         theScene.setOnKeyPressed(
                 e -> {
