@@ -1,14 +1,9 @@
 package cz.cvut.fit.niadp;
 
-import cz.cvut.fit.niadp.mvcgame.nullPattern.AbstractGraphicsContextWrapper;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.GraphicsContextWrapper;
-import cz.cvut.fit.niadp.mvcgame.nullPattern.NullGraphicsContextWrapper;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -26,7 +21,7 @@ public class MvcGameJavaFxLauncher extends Application {
 
     @Override
     public void start(Stage stage) {
-        AbstractGraphicsContextWrapper gc = new GraphicsContextWrapper(
+        GraphicsContextWrapper gc = new GraphicsContextWrapper(
                 theMvcGame,
                 stage
         );
