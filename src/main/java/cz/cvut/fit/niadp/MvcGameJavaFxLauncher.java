@@ -26,18 +26,13 @@ public class MvcGameJavaFxLauncher extends Application {
 
     @Override
     public void start(Stage stage) {
-        String winTitle = theMvcGame.getWindowTitle();
-        int winWidth = theMvcGame.getWindowWidth();
-        int winHeight = theMvcGame.getWindowHeight();
-        stage.setTitle( winTitle );
-        Group root = new Group();
-        Scene theScene = new Scene( root );
-        stage.setScene( theScene );
-        Canvas canvas = new Canvas( winWidth, winHeight );
-        root.getChildren().add( canvas );
         AbstractGraphicsContextWrapper gc = new GraphicsContextWrapper(
-                canvas.getGraphicsContext2D()
+                theMvcGame,
+                stage
         );
+
+        Scene theScene = gc.getScene();
+
         ArrayList<String> pressedKeysCodes = new ArrayList<>();
         theScene.setOnKeyPressed(
                 e -> {
