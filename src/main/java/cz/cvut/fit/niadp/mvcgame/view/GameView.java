@@ -6,10 +6,8 @@ import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 import cz.cvut.fit.niadp.mvcgame.model.Position;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.AbstractGraphicsContextWrapper;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.NullGraphicsContextWrapper;
-import cz.cvut.fit.niadp.mvcgame.observer.IObserver;
-import javafx.scene.image.Image;
 
-public class GameView implements IObserver {
+public class GameView {
 
     private final GameModel model;
     private final GameController controller;
@@ -18,7 +16,7 @@ public class GameView implements IObserver {
     public GameView(GameModel model) {
         this.model = model;
         this.controller = new GameController(this.model);
-        model.registerObserver(this);
+        model.cannonMovedEvent.addListener(this::onObjectMoved);
     }
 
     public GameController getController() {
@@ -40,8 +38,8 @@ public class GameView implements IObserver {
         render();
     }
 
-    @Override
-    public void update() {
+    public void onObjectMoved() {
+        drawCannon();
         render();
     }
 }

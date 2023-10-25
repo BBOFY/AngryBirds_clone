@@ -1,20 +1,16 @@
 package cz.cvut.fit.niadp.mvcgame.model;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Cannon;
-import cz.cvut.fit.niadp.mvcgame.observer.IObservable;
-import cz.cvut.fit.niadp.mvcgame.observer.IObserver;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class GameModel implements IObservable {
+public class GameModel {
     private final Cannon cannon;
-    private final Set<IObserver> observers;
+    public final MyEvent cannonMovedEvent;
 
     public GameModel() {
         this.cannon = new Cannon(MvcGameConfig.INIT_CANNON_POSITION);
-        this.observers = new HashSet<>();
+        this.cannonMovedEvent = new MyEvent();
     }
 
     public Position getCannonPos() {
@@ -23,30 +19,16 @@ public class GameModel implements IObservable {
 
     public void moveCannonUp() {
         cannon.moveUp();
-        notifyObservers();
+        cannonMovedEvent.invoke();
     }
 
     public void moveCannonDown() {
         cannon.moveDown();
-        notifyObservers();
+        cannonMovedEvent.invoke();
     }
 
     public void update() {
         // update missiles here
     }
 
-    @Override
-    public void registerObserver(IObserver observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void unregisterObserver(IObserver observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        observers.forEach(IObserver::update);
-    }
 }
