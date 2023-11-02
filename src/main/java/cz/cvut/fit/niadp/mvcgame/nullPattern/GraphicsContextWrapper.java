@@ -1,7 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.nullPattern;
 
 import cz.cvut.fit.niadp.mvcgame.MvcGame;
-import cz.cvut.fit.niadp.mvcgame.model.Position;
+import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -33,7 +33,7 @@ public class GraphicsContextWrapper extends AbstractGraphicsContextWrapper {
     }
 
     @Override
-    public void drawImage(String imagePath, Position imagePosition) {
+    public void drawImage(String imagePath, Vector2 imagePosition) {
         gc.drawImage(new Image(imagePath), imagePosition.getX(), imagePosition.getY());
     }
 

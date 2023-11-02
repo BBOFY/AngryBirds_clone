@@ -1,6 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.nullPattern;
 
-import cz.cvut.fit.niadp.mvcgame.model.Position;
+import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 
 public class NullGraphicsContextWrapper extends AbstractGraphicsContextWrapper {
     @Override
@@ -9,7 +9,7 @@ public class NullGraphicsContextWrapper extends AbstractGraphicsContextWrapper {
     }
 
     @Override
-    public void drawImage(String imagePath, Position imagePosition) {
+    public void drawImage(String imagePath, Vector2 imagePosition) {
         System.err.println("Method drawImage is not implemented.");
     }
 }

@@ -2,7 +2,6 @@ package cz.cvut.fit.niadp.mvcgame.controller;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.GameModel;
-import cz.cvut.fit.niadp.mvcgame.model.Position;
 
 import java.util.List;
 
@@ -22,6 +21,9 @@ public class GameController {
                     break;
                 case MvcGameConfig.DOWN_KEY:
                     model.moveCannonDown();
+                    break;
+                case MvcGameConfig.SHOOT_KEY:
+                    model.cannonShoot();
                     break;
                 case MvcGameConfig.EXIT_KEY:
                     System.exit(0);
