@@ -3,21 +3,22 @@ package cz.cvut.fit.niadp.mvcgame.view;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.model.GameModel;
-import cz.cvut.fit.niadp.mvcgame.model.Vector2;
-import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.AbstractGraphicsContextWrapper;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.NullGraphicsContextWrapper;
+import cz.cvut.fit.niadp.mvcgame.visitor.GameObjectsRenderer;
 
 public class GameView {
 
     private final GameModel model;
     private final GameController controller;
-    private AbstractGraphicsContextWrapper gc = new NullGraphicsContextWrapper();
+    private final GameObjectsRenderer renderer;
+    private AbstractGraphicsContextWrapper gc = NullGraphicsContextWrapper.getCurr();
 
     public GameView(GameModel model) {
         this.model = model;
         this.controller = new GameController(this.model);
-        model.cannonMovedEvent.addListener(this::onObjectMoved);
+        model.gameObjectMovedEvent.addListener(this::onObjectMoved);
+        this.renderer = new GameObjectsRenderer();
     }
 
     public GameController getController() {
@@ -25,27 +26,17 @@ public class GameView {
     }
 
     private void render() {
-        gc.clearRect(0, 0, MvcGameConfig.MAX_X, MvcGameConfig.MAX_Y);
-        drawCannon();
-    }
-
-    private void drawCannon() {
-        Vector2 cannonPosition = model.getCannonPos();
-        gc.drawImage(MvcGameConfig.CANNON_IMAGE_RESOURCE, cannonPosition);
-    }
-
-    private void drawMissile(AbsMissile missile) {
-        Vector2 missilePosition = model.getCannonPos();
-        gc.drawImage(MvcGameConfig.MISSILE_IMAGE_RESOURCE, missile.getPosition());
+        gc.clearRect(0, 0, MvcGameConfig.SCREEN_WIDTH, MvcGameConfig.SCREEN_HEIGHT);
+        model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(renderer));
     }
 
     public void setGraphicsContext(AbstractGraphicsContextWrapper gc) {
         this.gc = gc;
+        renderer.setGraphicContext(gc);
         render();
     }
 
     public void onObjectMoved() {
-        drawCannon();
         render();
     }
 }

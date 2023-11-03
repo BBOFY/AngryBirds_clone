@@ -6,8 +6,15 @@ import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.CannonA;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.MissileA;
 
 public class GameObjectFactoryA implements IGameObjectFactory {
-
+    private static IGameObjectFactory curr;
     private GameModel model;
+
+    public static IGameObjectFactory getCurr() {
+//        if (curr == null) {
+//            curr = new GameObjectFactoryA()
+//        }
+        return curr;
+    }
 
     public GameObjectFactoryA(GameModel model) {
         this.model = model;

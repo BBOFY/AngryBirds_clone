@@ -34,7 +34,7 @@ public class GraphicsContextWrapper extends AbstractGraphicsContextWrapper {
 
     @Override
     public void drawImage(String imagePath, Vector2 imagePosition) {
-        gc.drawImage(new Image(imagePath), imagePosition.getX(), imagePosition.getY());
+        gc.drawImage(new Image(imagePath), imagePosition.x, imagePosition.y);
     }
 
     public Scene getScene() {

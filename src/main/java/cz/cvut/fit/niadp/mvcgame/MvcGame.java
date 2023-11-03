@@ -8,7 +8,6 @@ import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.AbstractGraphicsContextWrapper;
 import cz.cvut.fit.niadp.mvcgame.view.GameView;
-import javafx.scene.canvas.GraphicsContext;
 
 public class MvcGame {
     private GameModel model;
@@ -30,14 +29,18 @@ public class MvcGame {
     }
 
     public int getWindowWidth() {
-        return MvcGameConfig.MAX_X;
+        return MvcGameConfig.SCREEN_WIDTH;
     }
 
     public int getWindowHeight() {
-        return  MvcGameConfig.MAX_Y;
+        return  MvcGameConfig.SCREEN_HEIGHT;
     }
 
     public void setGraphicsContext(AbstractGraphicsContextWrapper gc) {
         this.view.setGraphicsContext(gc);
+    }
+
+    public void updateModel() {
+        model.update();
     }
 }
