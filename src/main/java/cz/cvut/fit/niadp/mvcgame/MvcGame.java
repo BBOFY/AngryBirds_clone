@@ -15,7 +15,7 @@ public class MvcGame {
     private GameController controller;
 
     public void init() {
-        this.model = new GameModel();
+        this.model = GameModel.getInst();
         this.view = new GameView(model);
         this.controller = this.view.getController();
     }

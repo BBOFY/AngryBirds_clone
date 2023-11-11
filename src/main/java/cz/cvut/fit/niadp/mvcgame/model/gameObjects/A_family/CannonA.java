@@ -27,7 +27,7 @@ public class CannonA extends AbsCannon {
 
     @Override
     public AbsMissile shoot() {
-        return gameObjectFactory.createMissile(this.position);
+        return gameObjectFactory.createMissile(this.position.clone());
     }
 
 }

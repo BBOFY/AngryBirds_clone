@@ -17,11 +17,16 @@ public final class NullGraphicsContextWrapper extends AbstractGraphicsContextWra
 
     @Override
     public void clearRect(double x, double y, double w, double h) {
-        System.err.println("Method clearRect is not implemented.");
+        System.err.println("Method clearRect is not implemented. Check graphics context initialization.");
     }
 
     @Override
     public void drawImage(String imagePath, Vector2 imagePosition) {
-        System.err.println("Method drawImage is not implemented.");
+        System.err.println("Method drawImage is not implemented. Check graphics context initialization.");
+    }
+
+    @Override
+    public void playSound(String audioPath, Vector2 soundOrigin) {
+        System.err.println("Method playSound is not implemented. Check graphics context initialization.");
     }
 }

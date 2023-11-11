@@ -1,4 +1,4 @@
-package cz.cvut.fit.niadp.mvcgame.visitor;
+package cz.cvut.fit.niadp.mvcgame.visitor.renderer;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
@@ -16,12 +16,12 @@ public class GameObjectsRenderer implements IGameObjectsVisitor {
 
 
     @Override
-    public void visitCannon(AbsCannon cannon) {
+    public void renderVisitCannon(AbsCannon cannon) {
         gc.drawImage(MvcGameConfig.CANNON_IMAGE_RESOURCE, cannon.getPos());
     }
 
     @Override
-    public void visitMissile(AbsMissile missile) {
+    public void renderVisitMissile(AbsMissile missile) {
         gc.drawImage(MvcGameConfig.MISSILE_IMAGE_RESOURCE, missile.getPos());
     }
 }
