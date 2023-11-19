@@ -6,9 +6,17 @@ import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
 public abstract class AbsCannon extends GameObject implements IAudioVisitable {
 
-    public abstract void moveUp();
+    protected int power;
+    protected double angle;
 
+    public abstract void moveUp();
     public abstract void moveDown();
+
+    public abstract void aimUp();
+    public abstract void aimDown();
+
+    public abstract void powerUp();
+    public abstract void powerDown();
 
     public abstract AbsMissile shoot();
 

@@ -59,6 +59,26 @@ public class GameModel {
         missileLaunchedEvent.invoke(newMissile);
     }
 
+    public void aimCannonUp() {
+        this.cannon.aimUp();
+        gameObjectMovedEvent.invoke();
+    }
+
+    public void aimCannonDown() {
+        this.cannon.aimDown();
+        gameObjectMovedEvent.invoke();
+    }
+
+    public void cannonPowerUp() {
+        this.cannon.powerUp();
+        gameObjectMovedEvent.invoke();
+    }
+
+    public void cannonPowerDown() {
+        this.cannon.powerDown();
+        gameObjectMovedEvent.invoke();
+    }
+
     public void update() {
         moveMissiles();
         destroyMissiles();

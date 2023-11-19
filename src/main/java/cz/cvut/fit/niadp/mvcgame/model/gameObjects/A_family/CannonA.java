@@ -8,11 +8,14 @@ import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 
 public class CannonA extends AbsCannon {
 
-    private IGameObjectFactory gameObjectFactory;
+    private final IGameObjectFactory gameObjectFactory;
 
     public CannonA(Vector2 initPosition, IGameObjectFactory gameObjectFactory) {
         this.position = initPosition;
         this.gameObjectFactory = gameObjectFactory;
+
+        this.power = MvcGameConfig.INIT_POWER;
+        this.angle = MvcGameConfig.INIT_ANGLE;
     }
 
     @Override
@@ -26,8 +29,28 @@ public class CannonA extends AbsCannon {
     }
 
     @Override
+    public void aimUp() {
+        angle -= MvcGameConfig.ANGLE_STEP;
+    }
+
+    @Override
+    public void aimDown() {
+        angle += MvcGameConfig.ANGLE_STEP;
+    }
+
+    @Override
+    public void powerUp() {
+        power += MvcGameConfig.POWER_STEP;
+    }
+
+    @Override
+    public void powerDown() {
+        power -= MvcGameConfig.POWER_STEP;
+    }
+
+    @Override
     public AbsMissile shoot() {
-        return gameObjectFactory.createMissile(this.position.clone());
+        return gameObjectFactory.createMissile(position.clone(), angle, power);
     }
 
 }

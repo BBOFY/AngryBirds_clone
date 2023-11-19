@@ -22,7 +22,7 @@ public class GameObjectFactoryA implements IGameObjectFactory {
     }
 
     @Override
-    public MissileA createMissile(Vector2 position) {
-        return new MissileA(position);
+    public MissileA createMissile(Vector2 position, double angle, int velocity) {
+        return new MissileA(position, angle, velocity);
     }
 }
