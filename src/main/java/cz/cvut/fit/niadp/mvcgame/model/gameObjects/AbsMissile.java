@@ -8,12 +8,12 @@ import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 public abstract class AbsMissile extends LifetimeLimitedGameObject implements IAudioVisitable {
 
     private double initAngle;
-    private int initVelocity;
+    private double initSpeed;
 
-    protected AbsMissile(Vector2 initPosition, double initAngle, int initVelocity) {
+    protected AbsMissile(Vector2 initPosition, double initAngle, double initSpeed) {
         super(initPosition);
         this.initAngle = initAngle;
-        this.initVelocity = initVelocity;
+        this.initSpeed = initSpeed;
     }
 
     public abstract void move();
@@ -22,8 +22,8 @@ public abstract class AbsMissile extends LifetimeLimitedGameObject implements IA
         return initAngle;
     }
 
-    public int getInitVelocity() {
-        return initVelocity;
+    public double getInitSpeed() {
+        return initSpeed;
     }
 
     @Override

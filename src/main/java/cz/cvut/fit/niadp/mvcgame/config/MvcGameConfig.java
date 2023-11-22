@@ -38,6 +38,7 @@ public class MvcGameConfig {
     public static final String CANNON_MOVE_AUDIO_RESOURCE = "/audio/cannonMove.mp3";
     public static final String SAVE_SNAPSHOT_KEY = "F5";
     public static final String LOAD_SNAPSHOT_KEY = "F9";
+    public static final long MISSILE_LIFETIME_MILLS = 10000;
 
     private MvcGameConfig(){
 

@@ -3,8 +3,8 @@ package cz.cvut.fit.niadp.mvcgame.model;
 import cz.cvut.fit.niadp.mvcgame.prototype.IClonable;
 
 public class Vector2 implements IClonable {
-    public int x = 0;
-    public int y = 0;
+    public double x = 0;
+    public double y = 0;
 
     public Vector2() {}
 
@@ -13,7 +13,7 @@ public class Vector2 implements IClonable {
         this.y = other.y;
     }
 
-    public Vector2(int x, int y) {
+    public Vector2(double x, double y) {
         this.x = x;
         this.y = y;
     }

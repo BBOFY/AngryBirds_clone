@@ -39,7 +39,7 @@ public class GameController {
                     model.cannonShoot();
                     break;
                 case MvcGameConfig.TOGGLE_MOVING_STRATEGY_KEY:
-                    model.toggleMovingStrategy();
+                    model.getMovingStrategyContext().toggleMovingStrategy();
                     break;
                 case MvcGameConfig.TOGGLE_SHOOTING_MODE_KEY:
                     model.toggleShootingMode();

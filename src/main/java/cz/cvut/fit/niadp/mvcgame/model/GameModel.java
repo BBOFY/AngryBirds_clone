@@ -8,16 +8,15 @@ import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent_1;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
-import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
-import cz.cvut.fit.niadp.mvcgame.strategy.RealisticMovingStrategy;
-import cz.cvut.fit.niadp.mvcgame.strategy.SimpleMovingStrategy;
+import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 public class GameModel {
+
+    public static double delta = 0;
 
     public final MyEvent gameObjectMovedEvent;
     public final MyEvent_1<AbsCannon> cannonMovedEvent;
@@ -26,10 +25,9 @@ public class GameModel {
     private static GameModel inst;
     private final AbsCannon cannon;
 
+    private MissileMovingStrategyContext missileMovingStrategyContext;
+
     private final List<AbsMissile> missiles;
-    private IMovingStrategy movingStrategy;
-    private List<IMovingStrategy> movingStrategies = new ArrayList<>();
-    private int movingStrategySelector = 0;
 
     private IGameObjectFactory gameObjectFactory;
 
@@ -48,9 +46,9 @@ public class GameModel {
         this.cannonMovedEvent = new MyEvent_1<>();
         this.missileLaunchedEvent = new MyEvent_1<>();
 
-        this.movingStrategies.add(new SimpleMovingStrategy());
-        this.movingStrategies.add(new RealisticMovingStrategy());
-        movingStrategy = movingStrategies.get(0);
+        this.missileMovingStrategyContext = new MissileMovingStrategyContext();
+
+
     }
 
     public void moveCannonUp() {
@@ -69,7 +67,6 @@ public class GameModel {
         missiles.addAll(cannon.shoot());
         gameObjectMovedEvent.invoke();
         missileLaunchedEvent.invoke(missiles.get(0));
-
     }
 
     public void aimCannonUp() {
@@ -102,6 +99,8 @@ public class GameModel {
         missiles.removeAll(
             missiles.stream().filter(missile ->
                 missile.position.x > MvcGameConfig.SCREEN_WIDTH || missile.position.y > MvcGameConfig.SCREEN_HEIGHT
+                || missile.position.x < 0 || missile.position.y < 0
+                    || missile.getAge() > MvcGameConfig.MISSILE_LIFETIME_MILLS
             ).toList()
         );
 
@@ -119,22 +118,13 @@ public class GameModel {
         return Stream.concat(Stream.of(cannon), missiles.stream()).toList();
     }
 
-    public IMovingStrategy getMovingStrategy() {
-        return movingStrategy;
-    }
-
-    public void toggleMovingStrategy() {
-        movingStrategySelector += 1;
-        if (movingStrategySelector >= movingStrategies.size()) {
-            movingStrategySelector = 0;
-        }
-        movingStrategy = movingStrategies.get(movingStrategySelector);
+    public MissileMovingStrategyContext getMovingStrategyContext() {
+        return missileMovingStrategyContext;
     }
 
     public void toggleShootingMode() {
         cannon.toggleShootingMode();
     }
-
 
     private static class Memento {
         private Vector2 cannonPosition;

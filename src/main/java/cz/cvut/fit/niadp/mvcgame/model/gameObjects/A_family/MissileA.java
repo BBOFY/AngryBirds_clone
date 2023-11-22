@@ -8,8 +8,8 @@ public class MissileA extends AbsMissile {
 
     private IMovingStrategy movingStrategy;
 
-    public MissileA(Vector2 initPosition, double initAngle, int initVelocity, IMovingStrategy movingStrategy) {
-        super(initPosition, initAngle, initVelocity);
+    public MissileA(Vector2 initPosition, double initAngle, double initSpeed, IMovingStrategy movingStrategy) {
+        super(initPosition, initAngle, initSpeed);
         this.movingStrategy = movingStrategy;
     }
 
