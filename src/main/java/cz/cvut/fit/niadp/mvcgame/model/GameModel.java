@@ -8,6 +8,9 @@ import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent_1;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
+import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
+import cz.cvut.fit.niadp.mvcgame.strategy.RealisticMovingStrategy;
+import cz.cvut.fit.niadp.mvcgame.strategy.SimpleMovingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,12 @@ public class GameModel {
 
     private static GameModel inst;
     private final AbsCannon cannon;
+
     private final List<AbsMissile> missiles;
+    private IMovingStrategy movingStrategy;
+    private List<IMovingStrategy> movingStrategies = new ArrayList<>();
+    private int movingStrategySelector = 0;
+
     private IGameObjectFactory gameObjectFactory;
 
     public static GameModel getInst() {
@@ -38,6 +46,10 @@ public class GameModel {
         this.gameObjectMovedEvent = new MyEvent();
         this.cannonMovedEvent = new MyEvent_1<>();
         this.missileLaunchedEvent = new MyEvent_1<>();
+
+        this.movingStrategies.add(new SimpleMovingStrategy());
+        this.movingStrategies.add(new RealisticMovingStrategy());
+        movingStrategy = movingStrategies.get(0);
     }
 
     public void moveCannonUp() {
@@ -53,10 +65,10 @@ public class GameModel {
     }
 
     public void cannonShoot() {
-        AbsMissile newMissile = cannon.shoot();
-        missiles.add(newMissile);
+        missiles.addAll(cannon.shoot());
         gameObjectMovedEvent.invoke();
-        missileLaunchedEvent.invoke(newMissile);
+        missileLaunchedEvent.invoke(missiles.get(0));
+
     }
 
     public void aimCannonUp() {
@@ -95,7 +107,7 @@ public class GameModel {
     }
 
     private void moveMissiles() {
-        missiles.forEach(missile -> missile.move(new Vector2(MvcGameConfig.MOVE_STEP, 0)));
+        missiles.forEach(AbsMissile::move);
     }
 
     public List<AbsMissile> getMissiles() {
@@ -104,5 +116,21 @@ public class GameModel {
 
     public List<? extends GameObject> getGameObjects() {
         return Stream.concat(Stream.of(cannon), missiles.stream()).toList();
+    }
+
+    public IMovingStrategy getMovingStrategy() {
+        return movingStrategy;
+    }
+
+    public void toggleMovingStrategy() {
+        movingStrategySelector += 1;
+        if (movingStrategySelector >= movingStrategies.size()) {
+            movingStrategySelector = 0;
+        }
+        movingStrategy = movingStrategies.get(movingStrategySelector);
+    }
+
+    public void toggleShootingMode() {
+        cannon.toggleShootingMode();
     }
 }

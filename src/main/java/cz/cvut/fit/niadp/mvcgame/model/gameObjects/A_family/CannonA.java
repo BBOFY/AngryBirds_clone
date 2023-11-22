@@ -6,9 +6,14 @@ import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CannonA extends AbsCannon {
 
     private final IGameObjectFactory gameObjectFactory;
+
+    private final List<AbsMissile> missilesBatch = new ArrayList<>();
 
     public CannonA(Vector2 initPosition, IGameObjectFactory gameObjectFactory) {
         this.position = initPosition;
@@ -16,6 +21,8 @@ public class CannonA extends AbsCannon {
 
         this.power = MvcGameConfig.INIT_POWER;
         this.angle = MvcGameConfig.INIT_ANGLE;
+
+        this.shootingMode = SINGLE_MODE;
     }
 
     @Override
@@ -40,17 +47,29 @@ public class CannonA extends AbsCannon {
 
     @Override
     public void powerUp() {
-        power += MvcGameConfig.POWER_STEP;
+        power = Math.min(power += MvcGameConfig.POWER_STEP, MvcGameConfig.MAX_CANNON_POWER);
     }
 
     @Override
     public void powerDown() {
-        power -= MvcGameConfig.POWER_STEP;
+        power = Math.max(power -= MvcGameConfig.POWER_STEP, MvcGameConfig.MIN_CANNON_POWER);
     }
 
     @Override
-    public AbsMissile shoot() {
-        return gameObjectFactory.createMissile(position.clone(), angle, power);
+    public void addMissileToBatch() {
+        missilesBatch.add(gameObjectFactory.createMissile(position.clone(), angle, power));
+    }
+
+    @Override
+    public List<AbsMissile> shoot() {
+        missilesBatch.clear();
+        shootingMode.shoot(this);
+        return missilesBatch;
+    }
+
+    @Override
+    public void toggleShootingMode() {
+        shootingMode = shootingMode.nextState();
     }
 
 }

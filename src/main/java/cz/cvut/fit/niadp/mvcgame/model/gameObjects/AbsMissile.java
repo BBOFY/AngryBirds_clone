@@ -16,6 +16,8 @@ public abstract class AbsMissile extends LifetimeLimitedGameObject implements IA
         this.initVelocity = initVelocity;
     }
 
+    public abstract void move();
+
     public double getInitAngle() {
         return initAngle;
     }

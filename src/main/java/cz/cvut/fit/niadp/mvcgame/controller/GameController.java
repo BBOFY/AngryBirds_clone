@@ -37,6 +37,12 @@ public class GameController {
                 case MvcGameConfig.SHOOT_KEY:
                     model.cannonShoot();
                     break;
+                case MvcGameConfig.TOGGLE_MOVING_STRATEGY_KEY:
+                    model.toggleMovingStrategy();
+                    break;
+                case MvcGameConfig.TOGGLE_SHOOTING_MODE_KEY:
+                    model.toggleShootingMode();
+                    break;
                 case MvcGameConfig.EXIT_KEY:
                     System.exit(0);
                     break;
