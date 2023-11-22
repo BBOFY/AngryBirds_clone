@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.controller;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.niadp.mvcgame.memento.CareTaker;
 import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 
 import java.util.List;
@@ -42,6 +43,12 @@ public class GameController {
                     break;
                 case MvcGameConfig.TOGGLE_SHOOTING_MODE_KEY:
                     model.toggleShootingMode();
+                    break;
+                case MvcGameConfig.SAVE_SNAPSHOT_KEY:
+                    CareTaker.createMemento();
+                    break;
+                case MvcGameConfig.LOAD_SNAPSHOT_KEY:
+                    CareTaker.setMemento();
                     break;
                 case MvcGameConfig.EXIT_KEY:
                     System.exit(0);

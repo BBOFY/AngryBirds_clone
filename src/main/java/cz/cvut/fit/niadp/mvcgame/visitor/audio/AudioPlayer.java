@@ -17,7 +17,7 @@ public class AudioPlayer implements IAudioVisitor {
 
     @Override
     public void audioVisitCannonMove(AbsCannon cannon) {
-        gc.playSound(MvcGameConfig.CANNON_MOVE_AUDIO_RESOURCE, cannon.getPos());
+        gc.playSound(MvcGameConfig.CANNON_MOVE_AUDIO_RESOURCE, cannon.position);
         Media media = new Media(getClass().getResource(MvcGameConfig.CANNON_MOVE_AUDIO_RESOURCE).toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
@@ -25,7 +25,7 @@ public class AudioPlayer implements IAudioVisitor {
 
     @Override
     public void audioVisitMissileShoot(AbsMissile missile) {
-        gc.playSound(MvcGameConfig.CANNON_FIRE_AUDIO_RESOURCE, missile.getPos());
+        gc.playSound(MvcGameConfig.CANNON_FIRE_AUDIO_RESOURCE, missile.position);
 
     }
 }

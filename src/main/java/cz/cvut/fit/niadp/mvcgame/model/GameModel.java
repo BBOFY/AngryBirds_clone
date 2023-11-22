@@ -14,6 +14,7 @@ import cz.cvut.fit.niadp.mvcgame.strategy.SimpleMovingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class GameModel {
@@ -100,7 +101,7 @@ public class GameModel {
     private void destroyMissiles() {
         missiles.removeAll(
             missiles.stream().filter(missile ->
-                missile.getPos().x > MvcGameConfig.SCREEN_WIDTH || missile.getPos().y > MvcGameConfig.SCREEN_HEIGHT
+                missile.position.x > MvcGameConfig.SCREEN_WIDTH || missile.position.y > MvcGameConfig.SCREEN_HEIGHT
             ).toList()
         );
 
@@ -133,4 +134,24 @@ public class GameModel {
     public void toggleShootingMode() {
         cannon.toggleShootingMode();
     }
+
+
+    private static class Memento {
+        private Vector2 cannonPosition;
+
+    }
+
+    public Object createMemento() {
+        Memento gameModelSnapshot = new Memento();
+        gameModelSnapshot.cannonPosition = cannon.position.clone();
+        return gameModelSnapshot;
+    }
+
+    public void setMemento(Object memento) {
+        Memento gameModelSnapshot = (Memento) memento;
+        cannon.position = gameModelSnapshot.cannonPosition;
+        gameObjectMovedEvent.invoke();
+    }
+
+
 }
