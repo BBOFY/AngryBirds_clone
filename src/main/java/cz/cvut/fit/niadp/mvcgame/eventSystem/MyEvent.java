@@ -1,21 +1,32 @@
 package cz.cvut.fit.niadp.mvcgame.eventSystem;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Event, that can store methods with no arguments
  */
 public class MyEvent {
-    private final Set<IListener> subscribers;
+    private final List<IListener> subscribers;
     public MyEvent() {
-        subscribers = new HashSet<>();
+        subscribers = new ArrayList<>();
     }
     public void addListener(IListener listener) {
+        System.out.println(listener);
+        for (IListener subscriber : subscribers) {
+            if (subscriber == listener) {
+                return;
+            }
+        }
         subscribers.add(listener);
     }
     public void removeListener(IListener listener) {
-        subscribers.remove(listener);
+        System.out.println(listener);
+        for (int i = 0; i < subscribers.size(); ++i) {
+            if (subscribers.get(i) == listener) {
+                subscribers.remove(i);
+                break;
+            }
+        }
     }
     public void invoke() {
         subscribers.forEach(IListener::call);

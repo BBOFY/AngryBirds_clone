@@ -16,8 +16,8 @@ public class MvcGame {
 
     public void init() {
         this.model = GameModel.getInst();
-        this.view = new GameView(model);
-        this.controller = this.view.getController();
+        this.controller = GameController.getInst();
+        this.view = GameView.getInst();
     }
 
     public void processPressedKeys(List<String> pressedKeysCodes) {

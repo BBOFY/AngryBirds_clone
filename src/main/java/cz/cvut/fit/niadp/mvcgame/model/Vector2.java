@@ -1,8 +1,8 @@
 package cz.cvut.fit.niadp.mvcgame.model;
 
-import cz.cvut.fit.niadp.mvcgame.prototype.IClonable;
+import cz.cvut.fit.niadp.mvcgame.prototype.ICloneable;
 
-public class Vector2 implements IClonable {
+public class Vector2 implements ICloneable<Vector2> {
     public double x = 0;
     public double y = 0;
 

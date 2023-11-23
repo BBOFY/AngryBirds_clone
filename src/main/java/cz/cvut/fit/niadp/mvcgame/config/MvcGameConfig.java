@@ -1,10 +1,9 @@
 package cz.cvut.fit.niadp.mvcgame.config;
 
+import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 
 public class MvcGameConfig {
-
-    public static final int MOVE_STEP = 10;
     public static final int SCREEN_WIDTH = 1600;
     public static final int SCREEN_HEIGHT = 900;
     public static final String GAME_TITLE = "The NI-ADP MvcGame";
@@ -16,11 +15,13 @@ public class MvcGameConfig {
     public static final String W_KEY = "W";
     public static final String S_KEY = "S";
     public static final String SHOOT_KEY = "SPACE";
+    public static final String SECONDARY_ACTION_KEY = "ENTER";
     public static final String TOGGLE_MOVING_STRATEGY_KEY = "M";
     public static final String TOGGLE_SHOOTING_MODE_KEY = "N";
     public static final String EXIT_KEY = "ESCAPE";
 
-    public static final Vector2 INIT_CANNON_POSITION = new Vector2(10, SCREEN_HEIGHT /2);
+    public static final Vector2 INIT_CANNON_POSITION = new Vector2(10, SCREEN_HEIGHT / 2.0);
+    public static final double MOVE_STEP = 10;
     public static final double ANGLE_STEP = Math.PI / 18;
     public static final int POWER_STEP = 1;
     public static final int INIT_POWER = 10;

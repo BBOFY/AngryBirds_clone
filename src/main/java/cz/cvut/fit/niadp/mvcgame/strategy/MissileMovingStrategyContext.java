@@ -12,6 +12,7 @@ public class MissileMovingStrategyContext {
     public MissileMovingStrategyContext() {
         this.movingStrategies.add(new SimpleMovingStrategy());
         this.movingStrategies.add(new RealisticMovingStrategy());
+        this.movingStrategies.add(new FallingMovingStrategy());
         movingStrategy = movingStrategies.get(0);
     }
 

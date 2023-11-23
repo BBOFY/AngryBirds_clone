@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.controller;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent;
 import cz.cvut.fit.niadp.mvcgame.memento.CareTaker;
 import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 
@@ -8,11 +9,23 @@ import java.util.List;
 
 public class GameController {
 
+    public static MyEvent secondaryActionEvent = new MyEvent();
+
+    private static GameController curr;
     private final GameModel model;
 
-    public GameController(GameModel model) {
-        this.model = model;
+    private GameController() {
+        this.model = GameModel.getInst();
     }
+
+    public static GameController getInst() {
+        if (curr == null) {
+            curr = new GameController();
+        }
+        return curr;
+    }
+
+
 
     public void processPressedKeys(List<String> pressedKeysCodes) {
         for(String code : pressedKeysCodes) {
@@ -37,6 +50,9 @@ public class GameController {
                     break;
                 case MvcGameConfig.SHOOT_KEY:
                     model.cannonShoot();
+                    break;
+                case MvcGameConfig.SECONDARY_ACTION_KEY:
+                    secondaryActionEvent.invoke();
                     break;
                 case MvcGameConfig.TOGGLE_MOVING_STRATEGY_KEY:
                     model.getMovingStrategyContext().toggleMovingStrategy();

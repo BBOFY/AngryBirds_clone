@@ -19,15 +19,24 @@ public class GameView {
     private final AudioPlayer audioPlayer;
     private AbstractGraphicsContextWrapper gc = NullGraphicsContextWrapper.getCurr();
 
-    public GameView(GameModel model) {
-        this.model = model;
-        this.controller = new GameController(this.model);
-        this.renderer = new GameObjectsRenderer();
-        this.audioPlayer = new AudioPlayer();
+    private static GameView curr;
+
+    public GameView() {
+        model = GameModel.getInst();
+        controller = GameController.getInst();
+        renderer = new GameObjectsRenderer();
+        audioPlayer = new AudioPlayer();
 
         model.gameObjectMovedEvent.addListener(this::onObjectMoved);
         model.cannonMovedEvent.addListener(this::onCannonMoved);
         model.missileLaunchedEvent.addListener(this::onMissileLaunched);
+    }
+
+    public static GameView getInst() {
+        if (curr == null) {
+            curr = new GameView();
+        }
+        return curr;
     }
 
     public GameController getController() {
