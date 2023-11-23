@@ -11,7 +11,6 @@ public class MyEvent {
         subscribers = new ArrayList<>();
     }
     public void addListener(IListener listener) {
-        System.out.println(listener);
         for (IListener subscriber : subscribers) {
             if (subscriber == listener) {
                 return;
@@ -20,7 +19,6 @@ public class MyEvent {
         subscribers.add(listener);
     }
     public void removeListener(IListener listener) {
-        System.out.println(listener);
         for (int i = 0; i < subscribers.size(); ++i) {
             if (subscribers.get(i) == listener) {
                 subscribers.remove(i);
@@ -29,7 +27,9 @@ public class MyEvent {
         }
     }
     public void invoke() {
-        subscribers.forEach(IListener::call);
+        for (int i = 0; i < subscribers.size(); ++i) {
+            subscribers.get(i).call();
+        }
     }
 
 }

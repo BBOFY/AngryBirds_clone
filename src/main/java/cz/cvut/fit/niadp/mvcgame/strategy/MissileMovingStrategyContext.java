@@ -10,9 +10,10 @@ public class MissileMovingStrategyContext {
     private int movingStrategySelector = 0;
 
     public MissileMovingStrategyContext() {
-        this.movingStrategies.add(new SimpleMovingStrategy());
-        this.movingStrategies.add(new RealisticMovingStrategy());
-        this.movingStrategies.add(new FallingMovingStrategy());
+//        this.movingStrategies.add(new SimpleMovingStrategy());
+//        this.movingStrategies.add(new RealisticMovingStrategy());
+//        this.movingStrategies.add(new FallingMovingStrategy());
+        this.movingStrategies.add(new SplitMovingStrategy());
         movingStrategy = movingStrategies.get(0);
     }
 

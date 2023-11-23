@@ -42,6 +42,8 @@ public class FallingMovingStrategy implements IMovingStrategy {
     @Override
     public FallingMovingStrategy clone() {
         FallingMovingStrategy newStrategy = new FallingMovingStrategy();
+        newStrategy.triggered = triggered;
+        newStrategy.triggerTime = triggerTime;
         GameController.secondaryActionEvent.addListener(newStrategy::triggerFunctionality);
 
         return newStrategy;
