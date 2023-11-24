@@ -26,6 +26,11 @@ public final class NullGraphicsContextWrapper extends AbstractGraphicsContextWra
     }
 
     @Override
+    public void drawImage(String imagePath, Vector2 imagePosition, double angle) {
+        System.err.println("Method drawImage is not implemented. Check graphics context initialization.");
+    }
+
+    @Override
     public void playSound(String audioPath, Vector2 soundOrigin) {
         System.err.println("Method playSound is not implemented. Check graphics context initialization.");
     }

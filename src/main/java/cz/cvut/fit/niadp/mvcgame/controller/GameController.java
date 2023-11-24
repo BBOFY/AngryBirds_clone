@@ -10,6 +10,8 @@ import java.util.List;
 public class GameController {
 
     public static MyEvent secondaryActionEvent = new MyEvent();
+    public static MyEvent incShotsEvent = new MyEvent();
+    public static MyEvent decShotsEvent = new MyEvent();
 
     private static GameController curr;
     private final GameModel model;
@@ -59,6 +61,12 @@ public class GameController {
                     break;
                 case MvcGameConfig.TOGGLE_SHOOTING_MODE_KEY:
                     model.toggleShootingMode();
+                    break;
+                case MvcGameConfig.INC_SHOTS_KEY:
+                    incShotsEvent.invoke();
+                    break;
+                case MvcGameConfig.DEC_SHOTS_KEY:
+                    decShotsEvent.invoke();
                     break;
                 case MvcGameConfig.SAVE_SNAPSHOT_KEY:
                     CareTaker.createMemento();

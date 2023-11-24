@@ -20,6 +20,6 @@ public class DoubleShotMode implements IShootingMode {
 
     @Override
     public IShootingMode nextState() {
-        return AbsCannon.SINGLE_MODE;
+        return AbsCannon.DYNAMIC_MODE;
     }
 }

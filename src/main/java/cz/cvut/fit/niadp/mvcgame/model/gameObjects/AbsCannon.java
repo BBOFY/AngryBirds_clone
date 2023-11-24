@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.model.gameObjects;
 
 import cz.cvut.fit.niadp.mvcgame.state.DoubleShotMode;
+import cz.cvut.fit.niadp.mvcgame.state.DynamicShootingMode;
 import cz.cvut.fit.niadp.mvcgame.state.IShootingMode;
 import cz.cvut.fit.niadp.mvcgame.state.SingleShotMode;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.IAudioVisitable;
@@ -14,6 +15,7 @@ public abstract class AbsCannon extends GameObject implements IAudioVisitable {
     protected IShootingMode shootingMode;
     public static IShootingMode SINGLE_MODE = new SingleShotMode();
     public static IShootingMode DOUBLE_MODE = new DoubleShotMode();
+    public static IShootingMode DYNAMIC_MODE = new DynamicShootingMode();
 
     protected int power;
     protected double angle;
@@ -31,6 +33,10 @@ public abstract class AbsCannon extends GameObject implements IAudioVisitable {
     public abstract List<AbsMissile> shoot();
 
     public abstract void toggleShootingMode();
+
+    public double getAngle() {
+        return angle;
+    }
 
     @Override
     public void acceptVisitor(IGameObjectsVisitor visitor) {

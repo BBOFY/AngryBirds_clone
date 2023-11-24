@@ -1,20 +1,18 @@
 package cz.cvut.fit.niadp.mvcgame.nullPattern;
 
-import cz.cvut.fit.niadp.MvcGameJavaFxLauncher;
 import cz.cvut.fit.niadp.mvcgame.MvcGame;
-import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 
 public class GraphicsContextWrapper extends AbstractGraphicsContextWrapper {
     private final GraphicsContext gc;
@@ -43,6 +41,20 @@ public class GraphicsContextWrapper extends AbstractGraphicsContextWrapper {
     @Override
     public void drawImage(String imagePath, Vector2 imagePosition) {
         gc.drawImage(new Image(imagePath), imagePosition.x, imagePosition.y);
+    }
+
+    @Override
+    public void drawImage(String imagePath, Vector2 imagePosition, double angle) {
+        Image image = new Image(imagePath);
+        gc.save(); // saves the current state on stack, including the current transform
+        rotate(gc, Math.toDegrees(angle), imagePosition.x + image.getWidth() / 2, imagePosition.y + image.getHeight() / 2);
+        gc.drawImage(image, imagePosition.x, imagePosition.y);
+        gc.restore(); // back to original state (before rotation)
+    }
+
+    private void rotate(GraphicsContext gc, double angle, double px, double py) {
+        Rotate r = new Rotate(angle, px, py);
+        gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
 
     /**

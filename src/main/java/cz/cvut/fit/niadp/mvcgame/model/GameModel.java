@@ -53,40 +53,37 @@ public class GameModel {
 
     public void moveCannonUp() {
         cannon.moveUp();
-        gameObjectMovedEvent.invoke();
         cannonMovedEvent.invoke(cannon);
     }
 
     public void moveCannonDown() {
         cannon.moveDown();
-        gameObjectMovedEvent.invoke();
         cannonMovedEvent.invoke(cannon);
     }
 
     public void cannonShoot() {
-        missiles.addAll(cannon.shoot());
-        gameObjectMovedEvent.invoke();
+        var newRockets = cannon.shoot();
+        if (newRockets.isEmpty()) {
+            return;
+        }
+        missiles.addAll(newRockets);
         missileLaunchedEvent.invoke(missiles.get(0));
     }
 
     public void aimCannonUp() {
         this.cannon.aimUp();
-        gameObjectMovedEvent.invoke();
     }
 
     public void aimCannonDown() {
         this.cannon.aimDown();
-        gameObjectMovedEvent.invoke();
     }
 
     public void cannonPowerUp() {
         this.cannon.powerUp();
-        gameObjectMovedEvent.invoke();
     }
 
     public void cannonPowerDown() {
         this.cannon.powerDown();
-        gameObjectMovedEvent.invoke();
     }
 
     public void update() {

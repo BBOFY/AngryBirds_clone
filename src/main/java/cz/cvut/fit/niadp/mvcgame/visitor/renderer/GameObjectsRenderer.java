@@ -17,7 +17,7 @@ public class GameObjectsRenderer implements IGameObjectsVisitor {
 
     @Override
     public void renderVisitCannon(AbsCannon cannon) {
-        gc.drawImage(MvcGameConfig.CANNON_IMAGE_RESOURCE, cannon.position);
+        gc.drawImage(MvcGameConfig.CANNON_IMAGE_RESOURCE, cannon.position, cannon.getAngle());
     }
 
     @Override
