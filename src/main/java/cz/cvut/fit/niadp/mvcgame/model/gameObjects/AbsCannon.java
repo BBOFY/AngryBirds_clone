@@ -24,7 +24,9 @@ public abstract class AbsCannon extends GameObject implements IAudioVisitable {
     public abstract void moveDown();
 
     public abstract void aimUp();
+    public abstract void aimUp(double angle);
     public abstract void aimDown();
+    public abstract void aimDown(double angle);
 
     public abstract void powerUp();
     public abstract void powerDown();

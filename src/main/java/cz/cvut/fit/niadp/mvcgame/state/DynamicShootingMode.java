@@ -21,28 +21,27 @@ public class DynamicShootingMode implements IShootingMode {
     @Override
     public void shoot(AbsCannon cannon) {
 
-        // upper missiles
-        for (int i = 0; i < numOfShots / 2; ++i) {
-            cannon.aimUp();
-            cannon.addMissileToBatch();
-        }
-        for (int i = 0; i < numOfShots / 2; ++i) {
-            cannon.aimDown();
-        }
-
-        // middle missile
-        if (numOfShots % 2 == 1) {
-            cannon.addMissileToBatch();
-        }
-
-        // lower missiles
-        for (int i = 0; i < numOfShots / 2; ++i) {
-            cannon.aimDown();
-            cannon.addMissileToBatch();
-        }
-        for (int i = 0; i < numOfShots / 2; ++i) {
+        // Aim cannon all the way up
+        for (int i = 0; i < numOfShots/2; ++i) {
             cannon.aimUp();
         }
+        // Correction for even number of missiles to fill the gap
+        if (numOfShots % 2 == 0) {
+            cannon.aimDown(MvcGameConfig.ANGLE_STEP/2.0);
+        }
+        // Aim down while shooting
+        for (int i = 0; i < numOfShots; ++i) {
+            cannon.addMissileToBatch();
+            cannon.aimDown();
+        }
+        // Restore to the starting cannon angle
+        for (int i = 0; i < numOfShots/2; ++i) {
+            cannon.aimUp();
+        }
+        if (numOfShots % 2 == 0) {
+            cannon.aimDown(MvcGameConfig.ANGLE_STEP/2.0);
+        }
+        cannon.aimUp();
 
     }
 

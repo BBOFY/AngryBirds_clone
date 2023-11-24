@@ -41,8 +41,17 @@ public class CannonA extends AbsCannon {
     }
 
     @Override
+    public void aimUp(double angle) {
+        this.angle -= angle;
+    }
+
+    @Override
     public void aimDown() {
         angle += MvcGameConfig.ANGLE_STEP;
+    }
+    @Override
+    public void aimDown(double angle) {
+        this.angle += angle;
     }
 
     @Override
