@@ -14,9 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class GameModel {
+public class GameModel implements IGameModel {
 
     public static double delta = 0;
+
+    public static GameModel getInst() {
+        if (GameModel.inst == null) {
+            GameModel.inst = new GameModel();
+        }
+        return GameModel.inst;
+    }
 
     public final MyEvent gameObjectMovedEvent;
     public final MyEvent_1<AbsCannon> cannonMovedEvent;
@@ -25,18 +32,11 @@ public class GameModel {
     private static GameModel inst;
     private final AbsCannon cannon;
 
-    private MissileMovingStrategyContext missileMovingStrategyContext;
+    private final MissileMovingStrategyContext missileMovingStrategyContext;
 
     private final List<AbsMissile> missiles;
 
     private IGameObjectFactory gameObjectFactory;
-
-    public static GameModel getInst() {
-        if (inst == null) {
-            inst = new GameModel();
-        }
-        return inst;
-    }
 
     private GameModel() {
         this.missiles = new ArrayList<>();
@@ -47,20 +47,21 @@ public class GameModel {
         this.missileLaunchedEvent = new MyEvent_1<>();
 
         this.missileMovingStrategyContext = new MissileMovingStrategyContext();
-
-
     }
 
+    @Override
     public void moveCannonUp() {
         cannon.moveUp();
         cannonMovedEvent.invoke(cannon);
     }
 
+    @Override
     public void moveCannonDown() {
         cannon.moveDown();
         cannonMovedEvent.invoke(cannon);
     }
 
+    @Override
     public void cannonShoot() {
         var newRockets = cannon.shoot();
         if (newRockets.isEmpty()) {
@@ -70,22 +71,27 @@ public class GameModel {
         missileLaunchedEvent.invoke(missiles.get(0));
     }
 
+    @Override
     public void aimCannonUp() {
         this.cannon.aimUp();
     }
 
+    @Override
     public void aimCannonDown() {
         this.cannon.aimDown();
     }
 
+    @Override
     public void cannonPowerUp() {
         this.cannon.powerUp();
     }
 
+    @Override
     public void cannonPowerDown() {
         this.cannon.powerDown();
     }
 
+    @Override
     public void update() {
         moveMissiles();
         destroyMissiles();
@@ -107,18 +113,22 @@ public class GameModel {
         missiles.forEach(AbsMissile::move);
     }
 
+    @Override
     public List<AbsMissile> getMissiles() {
         return missiles;
     }
 
+    @Override
     public List<? extends GameObject> getGameObjects() {
         return Stream.concat(Stream.of(cannon), missiles.stream()).toList();
     }
 
+    @Override
     public MissileMovingStrategyContext getMovingStrategyContext() {
         return missileMovingStrategyContext;
     }
 
+    @Override
     public void toggleShootingMode() {
         cannon.toggleShootingMode();
     }
@@ -128,12 +138,14 @@ public class GameModel {
 
     }
 
+    @Override
     public Object createMemento() {
         Memento gameModelSnapshot = new Memento();
         gameModelSnapshot.cannonPosition = cannon.position.clone();
         return gameModelSnapshot;
     }
 
+    @Override
     public void setMemento(Object memento) {
         Memento gameModelSnapshot = (Memento) memento;
         cannon.position = gameModelSnapshot.cannonPosition;

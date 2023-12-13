@@ -6,16 +6,18 @@ import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 // in the future, use Bridge to remove this dependency
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.model.GameModel;
+import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.AbstractGraphicsContextWrapper;
+import cz.cvut.fit.niadp.mvcgame.proxy.GameModelProxy;
 import cz.cvut.fit.niadp.mvcgame.view.GameView;
 
 public class MvcGame {
-    private GameModel model;
+    private IGameModel model;
     private GameView view;
     private GameController controller;
 
     public void init() {
-        this.model = GameModel.getInst();
+        this.model = new GameModelProxy(GameModel.getInst());
         this.controller = GameController.getInst();
         this.view = GameView.getInst();
     }
