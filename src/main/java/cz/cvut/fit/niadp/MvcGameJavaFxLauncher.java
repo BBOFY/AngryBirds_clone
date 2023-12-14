@@ -31,6 +31,20 @@ public class MvcGameJavaFxLauncher extends Application {
 
         IGameVisuals gameGraphics = new GameVisuals(new JavaFxVisuals(gc));
 
+        ArrayList<String> pressedKeysCodes = getPressedKeyCodes(gc);
+
+        theMvcGame.setGraphicsContext(gameGraphics);
+        // the game-loop
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+                theMvcGame.processPressedKeys(pressedKeysCodes);
+                theMvcGame.updateModel();
+            }
+        }.start();
+        stage.show();
+    }
+
+    private static ArrayList<String> getPressedKeyCodes(GraphicsContextWrapper gc) {
         Scene theScene = gc.getScene();
 
         ArrayList<String> pressedKeysCodes = new ArrayList<>();
@@ -49,16 +63,7 @@ public class MvcGameJavaFxLauncher extends Application {
                     pressedKeysCodes.remove( code );
                 }
         );
-
-        theMvcGame.setGraphicsContext(gameGraphics);
-        // the game-loop
-        new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-                theMvcGame.processPressedKeys(pressedKeysCodes);
-                theMvcGame.updateModel();
-            }
-        }.start();
-        stage.show();
+        return pressedKeysCodes;
     }
 
     public static void main(String[] args) {
