@@ -2,7 +2,9 @@ package cz.cvut.fit.niadp.mvcgame.view;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.model.GameModel;
+import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.AbstractGraphicsContextWrapper;
@@ -12,31 +14,22 @@ import cz.cvut.fit.niadp.mvcgame.visitor.renderer.GameObjectsRenderer;
 
 public class GameView {
 
-    private final GameModel model;
+    private final IGameModel model;
     private final GameController controller;
     private final GameObjectsRenderer renderer;
 
     private final AudioPlayer audioPlayer;
     private AbstractGraphicsContextWrapper gc = NullGraphicsContextWrapper.getCurr();
 
-    private static GameView curr;
-
-    public GameView() {
-        model = GameModel.getInst();
-        controller = GameController.getInst();
+    public GameView(IGameModel model) {
+        this.model = model;
+        controller = new GameController(model);
         renderer = new GameObjectsRenderer();
         audioPlayer = new AudioPlayer();
 
-        model.gameObjectMovedEvent.addListener(this::onObjectMoved);
-        model.cannonMovedEvent.addListener(this::onCannonMoved);
-        model.missileLaunchedEvent.addListener(this::onMissileLaunched);
-    }
-
-    public static GameView getInst() {
-        if (curr == null) {
-            curr = new GameView();
-        }
-        return curr;
+        EventHolder.gameObjectMovedEvent.addListener(this::onObjectMoved);
+        EventHolder.cannonMovedEvent.addListener(this::onCannonMoved);
+        EventHolder.missileLaunchedEvent.addListener(this::onMissileLaunched);
     }
 
     public GameController getController() {

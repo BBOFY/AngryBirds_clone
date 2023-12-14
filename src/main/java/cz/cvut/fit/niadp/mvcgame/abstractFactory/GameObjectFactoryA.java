@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.abstractFactory;
 
 import cz.cvut.fit.niadp.mvcgame.model.GameModel;
+import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.CannonA;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.MissileA;
@@ -9,11 +10,17 @@ import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
 public class GameObjectFactoryA implements IGameObjectFactory {
     private static IGameObjectFactory inst;
 
+    private IGameModel model;
+
     public static IGameObjectFactory getInstance() {
         if (inst == null) {
             inst = new GameObjectFactoryA();
         }
         return inst;
+    }
+
+    public void init(IGameModel model) {
+        this.model = model;
     }
 
     private GameObjectFactoryA() {}
@@ -25,7 +32,7 @@ public class GameObjectFactoryA implements IGameObjectFactory {
 
     @Override
     public MissileA createMissile(Vector2 position, double angle, double velocity) {
-        return new MissileA(position, angle, velocity, GameModel.getInst().getMovingStrategyContext().getStrategy().clone());
+        return new MissileA(position, angle, velocity, model.getMovingStrategyContext().getStrategy().clone());
     }
 
     @Override

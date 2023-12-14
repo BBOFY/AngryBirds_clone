@@ -1,22 +1,35 @@
 package cz.cvut.fit.niadp.mvcgame.memento;
 
-import cz.cvut.fit.niadp.mvcgame.model.GameModel;
+import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 
 import java.util.Stack;
 
 public class CareTaker {
+    private static CareTaker inst = null;
+    private IGameModel model;
     private static final Stack<Object> mementos = new Stack<>();
 
     private CareTaker() {}
 
-    public static void createMemento() {
-        mementos.add(GameModel.getInst().createMemento());
+    public void createMemento() {
+        mementos.add(model.createMemento());
     }
 
-    public static void setMemento() {
+    public void setMemento() {
         if (!mementos.empty()) {
-            GameModel.getInst().setMemento(mementos.pop());
+            model.setMemento(mementos.pop());
         }
+    }
+
+    public static CareTaker getInstance() {
+        if (inst == null) {
+            inst = new CareTaker();
+        }
+        return inst;
+    }
+
+    public void setModel (IGameModel model) {
+        this.model = model;
     }
 
 }

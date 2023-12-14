@@ -3,6 +3,7 @@ package cz.cvut.fit.niadp.mvcgame.model;
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.GameObjectFactoryA;
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.IGameObjectFactory;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent_1;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
@@ -25,10 +26,6 @@ public class GameModel implements IGameModel {
         return GameModel.inst;
     }
 
-    public final MyEvent gameObjectMovedEvent;
-    public final MyEvent_1<AbsCannon> cannonMovedEvent;
-    public final MyEvent_1<AbsMissile> missileLaunchedEvent;
-
     private static GameModel inst;
     private final AbsCannon cannon;
 
@@ -41,10 +38,8 @@ public class GameModel implements IGameModel {
     private GameModel() {
         this.missiles = new ArrayList<>();
         this.gameObjectFactory = GameObjectFactoryA.getInstance();
+        this.gameObjectFactory.init(this);
         this.cannon = gameObjectFactory.createCannon(MvcGameConfig.INIT_CANNON_POSITION);
-        this.gameObjectMovedEvent = new MyEvent();
-        this.cannonMovedEvent = new MyEvent_1<>();
-        this.missileLaunchedEvent = new MyEvent_1<>();
 
         this.missileMovingStrategyContext = new MissileMovingStrategyContext();
     }
@@ -52,13 +47,13 @@ public class GameModel implements IGameModel {
     @Override
     public void moveCannonUp() {
         cannon.moveUp();
-        cannonMovedEvent.invoke(cannon);
+        EventHolder.cannonMovedEvent.invoke(cannon);
     }
 
     @Override
     public void moveCannonDown() {
         cannon.moveDown();
-        cannonMovedEvent.invoke(cannon);
+        EventHolder.cannonMovedEvent.invoke(cannon);
     }
 
     @Override
@@ -68,7 +63,7 @@ public class GameModel implements IGameModel {
             return;
         }
         missiles.addAll(newRockets);
-        missileLaunchedEvent.invoke(missiles.get(0));
+        EventHolder.missileLaunchedEvent.invoke(missiles.get(0));
     }
 
     @Override
@@ -95,7 +90,7 @@ public class GameModel implements IGameModel {
     public void update() {
         moveMissiles();
         destroyMissiles();
-        gameObjectMovedEvent.invoke();
+        EventHolder.gameObjectMovedEvent.invoke();
     }
 
     private void destroyMissiles() {
@@ -149,7 +144,7 @@ public class GameModel implements IGameModel {
     public void setMemento(Object memento) {
         Memento gameModelSnapshot = (Memento) memento;
         cannon.position = gameModelSnapshot.cannonPosition;
-        gameObjectMovedEvent.invoke();
+        EventHolder.gameObjectMovedEvent.invoke();
     }
 
 

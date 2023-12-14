@@ -2,6 +2,7 @@ package cz.cvut.fit.niadp.mvcgame.state;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 
 public class DynamicShootingMode implements IShootingMode {
@@ -9,8 +10,8 @@ public class DynamicShootingMode implements IShootingMode {
     private int numOfShots = 1;
 
     public DynamicShootingMode() {
-        GameController.incShotsEvent.addListener(this::incShots);
-        GameController.decShotsEvent.addListener(this::decShots);
+        EventHolder.incShotsEvent.addListener(this::incShots);
+        EventHolder.decShotsEvent.addListener(this::decShots);
     }
 
     @Override

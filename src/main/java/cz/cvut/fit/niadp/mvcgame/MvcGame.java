@@ -12,14 +12,15 @@ import cz.cvut.fit.niadp.mvcgame.proxy.GameModelProxy;
 import cz.cvut.fit.niadp.mvcgame.view.GameView;
 
 public class MvcGame {
+
     private IGameModel model;
     private GameView view;
     private GameController controller;
 
     public void init() {
         this.model = new GameModelProxy(GameModel.getInst());
-        this.controller = GameController.getInst();
-        this.view = GameView.getInst();
+        this.view = new GameView(model);
+        this.controller = view.getController();
     }
 
     public void processPressedKeys(List<String> pressedKeysCodes) {

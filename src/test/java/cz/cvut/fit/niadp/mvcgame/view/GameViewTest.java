@@ -8,7 +8,7 @@ public class GameViewTest {
 
     @Test
     public void renderNullObjectTest() {
-        GameView view = GameView.getInst();
+        GameView view = new GameView(GameModel.getInst());
         Assert.assertNotNull(view);
         view.onObjectMoved();
     }

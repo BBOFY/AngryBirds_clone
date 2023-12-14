@@ -2,6 +2,7 @@ package cz.cvut.fit.niadp.mvcgame.strategy;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 
@@ -44,7 +45,7 @@ public class FallingMovingStrategy implements IMovingStrategy {
         FallingMovingStrategy newStrategy = new FallingMovingStrategy();
         newStrategy.triggered = triggered;
         newStrategy.triggerTime = triggerTime;
-        GameController.secondaryActionEvent.addListener(newStrategy::triggerFunctionality);
+        EventHolder.secondaryActionEvent.addListener(newStrategy::triggerFunctionality);
 
         return newStrategy;
     }
