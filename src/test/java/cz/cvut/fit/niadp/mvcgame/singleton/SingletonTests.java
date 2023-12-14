@@ -1,9 +1,11 @@
-package cz.cvut.fit.niadp.mvcgame.abstractFactory;
+package cz.cvut.fit.niadp.mvcgame.singleton;
 
+import cz.cvut.fit.niadp.mvcgame.abstractFactory.GameObjectFactoryA;
+import cz.cvut.fit.niadp.mvcgame.abstractFactory.IGameObjectFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class GameObjectsFactoryATest {
+public class SingletonTests {
 
     @Test
     public void singletonTest() {
