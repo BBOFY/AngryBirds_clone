@@ -35,8 +35,8 @@ public class SplitMovingStrategy implements IMovingStrategy {
             missile.getInitSpeed(),
             this
         );
-        GameModel.getInst().getMissiles().add(missileUp);
-        GameModel.getInst().getMissiles().add(missileDown);
+        EventHolder.addMissileEvent.invoke(missileUp);
+        EventHolder.addMissileEvent.invoke(missileDown);
     }
 
     @Override

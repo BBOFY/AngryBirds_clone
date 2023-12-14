@@ -16,6 +16,9 @@ public class EventHolder {
     public static final MyEvent incShotsEvent = new MyEvent();
     public static final MyEvent decShotsEvent = new MyEvent();
 
+    // For communication
+    public static final MyEvent_1<AbsMissile> addMissileEvent = new MyEvent_1<>();
+
 
 
 

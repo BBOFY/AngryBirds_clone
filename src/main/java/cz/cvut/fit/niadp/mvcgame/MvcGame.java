@@ -18,7 +18,7 @@ public class MvcGame {
     private GameController controller;
 
     public void init() {
-        this.model = new GameModelProxy(GameModel.getInst());
+        this.model = new GameModelProxy(new GameModel());
         this.view = new GameView(model);
         this.controller = view.getController();
     }

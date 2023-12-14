@@ -16,17 +16,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class GameModel implements IGameModel {
-
-    public static double delta = 0;
-
-    public static GameModel getInst() {
-        if (GameModel.inst == null) {
-            GameModel.inst = new GameModel();
-        }
-        return GameModel.inst;
-    }
-
-    private static GameModel inst;
     private final AbsCannon cannon;
 
     private final MissileMovingStrategyContext missileMovingStrategyContext;
@@ -35,13 +24,15 @@ public class GameModel implements IGameModel {
 
     private IGameObjectFactory gameObjectFactory;
 
-    private GameModel() {
+    public GameModel() {
         this.missiles = new ArrayList<>();
         this.gameObjectFactory = GameObjectFactoryA.getInstance();
         this.gameObjectFactory.init(this);
         this.cannon = gameObjectFactory.createCannon(MvcGameConfig.INIT_CANNON_POSITION);
 
         this.missileMovingStrategyContext = new MissileMovingStrategyContext();
+
+        EventHolder.addMissileEvent.addListener(this::addMissile);
     }
 
     @Override
@@ -111,6 +102,10 @@ public class GameModel implements IGameModel {
     @Override
     public List<AbsMissile> getMissiles() {
         return missiles;
+    }
+
+    private void addMissile(AbsMissile missile) {
+        missiles.add(missile);
     }
 
     @Override

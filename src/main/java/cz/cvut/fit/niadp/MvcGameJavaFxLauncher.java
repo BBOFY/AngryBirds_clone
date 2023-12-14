@@ -56,7 +56,6 @@ public class MvcGameJavaFxLauncher extends Application {
         // the game-loop
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                GameModel.delta = ChronoUnit.SECONDS.between(previousFrameTimestamp, LocalDateTime.now());
                 theMvcGame.processPressedKeys(pressedKeysCodes);
                 theMvcGame.updateModel();
                 previousFrameTimestamp = LocalDateTime.now();
