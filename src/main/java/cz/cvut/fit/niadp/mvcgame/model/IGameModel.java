@@ -1,5 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.model;
 
+import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
@@ -35,4 +36,7 @@ public interface IGameModel {
     Object createMemento();
 
     void setMemento(Object memento);
+
+    void registerCommand(AbstractGameCommand cmd);
+    void undoLastCommand();
 }

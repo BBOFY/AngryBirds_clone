@@ -1,5 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.proxy;
 
+import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
@@ -83,5 +84,15 @@ public class GameModelProxy implements IGameModel {
     @Override
     public void setMemento(Object memento) {
         subject.setMemento(memento);
+    }
+
+    @Override
+    public void registerCommand(AbstractGameCommand cmd) {
+        subject.registerCommand(cmd);
+    }
+
+    @Override
+    public void undoLastCommand() {
+        subject.undoLastCommand();
     }
 }

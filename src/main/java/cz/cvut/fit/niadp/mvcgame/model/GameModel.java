@@ -2,6 +2,7 @@ package cz.cvut.fit.niadp.mvcgame.model;
 
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.GameObjectFactoryA;
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.IGameObjectFactory;
+import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent;
@@ -13,6 +14,9 @@ import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.stream.Stream;
 
 public class GameModel implements IGameModel {
@@ -23,6 +27,9 @@ public class GameModel implements IGameModel {
     private final List<AbsMissile> missiles;
 
     private IGameObjectFactory gameObjectFactory;
+
+    private final List<AbstractGameCommand> waitingCmds = new ArrayList<>();
+    private final Stack<AbstractGameCommand> executedCmds = new Stack<>();
 
     public GameModel() {
         this.missiles = new ArrayList<>();
@@ -79,9 +86,19 @@ public class GameModel implements IGameModel {
 
     @Override
     public void update() {
+        runCommands();
+
         moveMissiles();
         destroyMissiles();
         EventHolder.gameObjectMovedEvent.invoke();
+    }
+
+    private void runCommands() {
+        for (var c : waitingCmds) {
+            c.doExecute();
+            executedCmds.push(c);
+        }
+        waitingCmds.clear();
     }
 
     private void destroyMissiles() {
@@ -140,6 +157,19 @@ public class GameModel implements IGameModel {
         Memento gameModelSnapshot = (Memento) memento;
         cannon.position = gameModelSnapshot.cannonPosition;
         EventHolder.gameObjectMovedEvent.invoke();
+    }
+
+
+
+    @Override
+    public void registerCommand(AbstractGameCommand cmd) {
+        waitingCmds.add(cmd);
+    }
+
+    @Override
+    public void undoLastCommand() {
+        if (executedCmds.empty()) return;
+        executedCmds.pop().unExecute();
     }
 
 
