@@ -1,5 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.controller;
 
+import cz.cvut.fit.niadp.mvcgame.command.MoveCannonDownCmd;
+import cz.cvut.fit.niadp.mvcgame.command.MoveCannonUpCmd;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent;
@@ -21,10 +23,10 @@ public class GameController {
         for(String code : pressedKeysCodes) {
             switch(code) {
                 case MvcGameConfig.UP_KEY:
-                    model.moveCannonUp();
+                    model.registerCommand(new MoveCannonUpCmd(model));
                     break;
                 case MvcGameConfig.DOWN_KEY:
-                    model.moveCannonDown();
+                    model.registerCommand(new MoveCannonDownCmd(model));
                     break;
                 case MvcGameConfig.LEFT_KEY:
                     model.aimCannonUp();
@@ -56,11 +58,8 @@ public class GameController {
                 case MvcGameConfig.DEC_SHOTS_KEY:
                     EventHolder.decShotsEvent.invoke();
                     break;
-                case MvcGameConfig.SAVE_SNAPSHOT_KEY:
-                    CareTaker.getInstance().createMemento();
-                    break;
-                case MvcGameConfig.LOAD_SNAPSHOT_KEY:
-                    CareTaker.getInstance().setMemento();
+                case MvcGameConfig.UNDO_LAST_CMD_KEY:
+                    model.undoLastCommand();
                     break;
                 case MvcGameConfig.EXIT_KEY:
                     System.exit(0);

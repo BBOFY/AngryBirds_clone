@@ -2,11 +2,9 @@ package cz.cvut.fit.niadp.mvcgame.model;
 
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.GameObjectFactoryA;
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.IGameObjectFactory;
-import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCommand;
+import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCmd;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent_1;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
@@ -14,9 +12,7 @@ import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.stream.Stream;
 
 public class GameModel implements IGameModel {
@@ -26,10 +22,10 @@ public class GameModel implements IGameModel {
 
     private final List<AbsMissile> missiles;
 
-    private IGameObjectFactory gameObjectFactory;
+    private final IGameObjectFactory gameObjectFactory;
 
-    private final List<AbstractGameCommand> waitingCmds = new ArrayList<>();
-    private final Stack<AbstractGameCommand> executedCmds = new Stack<>();
+    private final List<AbstractGameCmd> waitingCmds = new ArrayList<>();
+    private final Stack<AbstractGameCmd> executedCmds = new Stack<>();
 
     public GameModel() {
         this.missiles = new ArrayList<>();
@@ -162,7 +158,7 @@ public class GameModel implements IGameModel {
 
 
     @Override
-    public void registerCommand(AbstractGameCommand cmd) {
+    public void registerCommand(AbstractGameCmd cmd) {
         waitingCmds.add(cmd);
     }
 
