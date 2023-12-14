@@ -1,15 +1,14 @@
 package cz.cvut.fit.niadp;
 
-import cz.cvut.fit.niadp.mvcgame.model.GameModel;
+import cz.cvut.fit.niadp.mvcgame.bridge.GameVisuals;
+import cz.cvut.fit.niadp.mvcgame.bridge.IGameVisuals;
+import cz.cvut.fit.niadp.mvcgame.bridge.JavaFxVisuals;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.GraphicsContextWrapper;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import cz.cvut.fit.niadp.mvcgame.MvcGame;
@@ -17,7 +16,6 @@ import cz.cvut.fit.niadp.mvcgame.MvcGame;
 public class MvcGameJavaFxLauncher extends Application {
 
     private static final MvcGame theMvcGame = new MvcGame();
-    private static LocalDateTime previousFrameTimestamp;
 
     @Override
     public void init() {
@@ -31,7 +29,7 @@ public class MvcGameJavaFxLauncher extends Application {
                 stage
         );
 
-        previousFrameTimestamp = LocalDateTime.now();
+        IGameVisuals gameGraphics = new GameVisuals(new JavaFxVisuals(gc));
 
         Scene theScene = gc.getScene();
 
@@ -52,13 +50,12 @@ public class MvcGameJavaFxLauncher extends Application {
                 }
         );
 
-        theMvcGame.setGraphicsContext(gc);
+        theMvcGame.setGraphicsContext(gameGraphics);
         // the game-loop
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 theMvcGame.processPressedKeys(pressedKeysCodes);
                 theMvcGame.updateModel();
-                previousFrameTimestamp = LocalDateTime.now();
             }
         }.start();
         stage.show();

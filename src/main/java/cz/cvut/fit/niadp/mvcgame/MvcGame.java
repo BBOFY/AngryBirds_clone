@@ -2,12 +2,12 @@ package cz.cvut.fit.niadp.mvcgame;
 
 import java.util.List;
 
+import cz.cvut.fit.niadp.mvcgame.bridge.IGameVisuals;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 // in the future, use Bridge to remove this dependency
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
-import cz.cvut.fit.niadp.mvcgame.nullPattern.AbstractGraphicsContextWrapper;
 import cz.cvut.fit.niadp.mvcgame.proxy.GameModelProxy;
 import cz.cvut.fit.niadp.mvcgame.view.GameView;
 
@@ -39,8 +39,8 @@ public class MvcGame {
         return  MvcGameConfig.SCREEN_HEIGHT;
     }
 
-    public void setGraphicsContext(AbstractGraphicsContextWrapper gc) {
-        this.view.setGraphicsContext(gc);
+    public void setGraphicsContext(IGameVisuals gv) {
+        this.view.setGraphicsContext(gv);
     }
 
     public void updateModel() {

@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 public class GraphicsContextWrapper extends AbstractGraphicsContextWrapper {
     private final GraphicsContext gc;
-
     private final Scene theScene;
 
     public GraphicsContextWrapper(MvcGame theMvcGame, Stage stage) {
@@ -30,7 +29,6 @@ public class GraphicsContextWrapper extends AbstractGraphicsContextWrapper {
         Canvas canvas = new Canvas( winWidth, winHeight );
         root.getChildren().add( canvas );
         this.gc = canvas.getGraphicsContext2D();
-
     }
 
     @Override
@@ -65,6 +63,16 @@ public class GraphicsContextWrapper extends AbstractGraphicsContextWrapper {
         Media media = new Media(getClass().getResource(audioPath).toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
+    }
+
+    @Override
+    public void fillText(String text, Vector2 pos) {
+        gc.fillText(text, pos.x, pos.y);
+    }
+
+    @Override
+    public void strokeLine(Vector2 from, Vector2 to) {
+        gc.strokeLine(from.x, from.y, to.x, to.y);
     }
 
     public Scene getScene() {
