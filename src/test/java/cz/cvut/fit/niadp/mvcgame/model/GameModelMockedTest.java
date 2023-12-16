@@ -2,20 +2,13 @@ package cz.cvut.fit.niadp.mvcgame.model;
 
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.GameObjectFactoryA;
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.IGameObjectFactory;
-import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
-import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
-import cz.cvut.fit.niadp.mvcgame.strategy.SimpleMovingStrategy;
 import mockit.Mock;
 import mockit.MockUp;
 import mockit.Mocked;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameModelMockedTest {
     private static final Vector2 CANNON_TEST_POSITION = new Vector2(555, 666);
