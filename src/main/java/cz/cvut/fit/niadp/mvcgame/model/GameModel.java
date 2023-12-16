@@ -5,6 +5,7 @@ import cz.cvut.fit.niadp.mvcgame.abstractFactory.IGameObjectFactory;
 import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCmd;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
@@ -35,7 +36,7 @@ public class GameModel implements IGameModel {
 
         this.missileMovingStrategyContext = new MissileMovingStrategyContext();
 
-        EventHolder.addMissileEvent.addListener(this::addMissile);
+        EventHolder.addMissileEvent.addListener(addMissileEO);
     }
 
     @Override
@@ -117,6 +118,7 @@ public class GameModel implements IGameModel {
         return missiles;
     }
 
+    private final EventObject_1<AbsMissile> addMissileEO = new EventObject_1<>(this::addMissile);
     private void addMissile(AbsMissile missile) {
         missiles.add(missile);
     }

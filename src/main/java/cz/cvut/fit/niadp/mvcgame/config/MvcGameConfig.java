@@ -4,8 +4,8 @@ import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 
 public class MvcGameConfig {
-    public static final int SCREEN_WIDTH = 1600;
-    public static final int SCREEN_HEIGHT = 900;
+    public static final int SCREEN_WIDTH = 1000;
+    public static final int SCREEN_HEIGHT = 700;
     public static final String GAME_TITLE = "The NI-ADP MvcGame";
 
     public static final String UP_KEY = "UP";

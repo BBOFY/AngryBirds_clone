@@ -3,6 +3,7 @@ package cz.cvut.fit.niadp.mvcgame.strategy;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 
@@ -14,6 +15,7 @@ public class FallingMovingStrategy implements IMovingStrategy {
     private boolean triggered = false;
     private LocalDateTime triggerTime;
 
+    private final EventObject triggerFunctionalityEO = new EventObject(this::triggerFunctionality);
     private void triggerFunctionality() {
         if (triggered) {
             return;
@@ -45,7 +47,7 @@ public class FallingMovingStrategy implements IMovingStrategy {
         FallingMovingStrategy newStrategy = new FallingMovingStrategy();
         newStrategy.triggered = triggered;
         newStrategy.triggerTime = triggerTime;
-        EventHolder.secondaryActionEvent.addListener(newStrategy::triggerFunctionality);
+        EventHolder.secondaryActionEvent.addListener(newStrategy.triggerFunctionalityEO);
 
         return newStrategy;
     }
