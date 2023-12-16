@@ -14,7 +14,7 @@ public class MissileMovingStrategyContext {
         this.movingStrategies.add(new RealisticMovingStrategy());
         this.movingStrategies.add(new FallingMovingStrategy());
         this.movingStrategies.add(new SplitMovingStrategy());
-        movingStrategy = movingStrategies.get(0);
+        movingStrategy = movingStrategies.getFirst();
     }
 
     public IMovingStrategy getStrategy() {
