@@ -10,6 +10,7 @@ import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
+import cz.cvut.fit.niadp.mvcgame.visitor.collisions.CollisionsChecker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ public class GameModel implements IGameModel {
     private final List<AbstractGameCmd> waitingCmds = new ArrayList<>();
     private final Stack<AbstractGameCmd> executedCmds = new Stack<>();
 
+    private final CollisionsChecker collisionsChecker;
+
     public GameModel() {
         this.missiles = new ArrayList<>();
         this.gameObjectFactory = GameObjectFactoryA.getInstance();
@@ -35,6 +38,8 @@ public class GameModel implements IGameModel {
         this.cannon = gameObjectFactory.createCannon(MvcGameConfig.INIT_CANNON_POSITION);
 
         this.missileMovingStrategyContext = new MissileMovingStrategyContext();
+
+        this.collisionsChecker = new CollisionsChecker();
 
         EventHolder.addMissileEvent.addListener(addMissileEO);
     }
@@ -86,8 +91,15 @@ public class GameModel implements IGameModel {
         runCommands();
 
         moveMissiles();
+        checkCollisions();
         destroyMissiles();
         EventHolder.gameObjectMovedEvent.invoke();
+    }
+
+    private void checkCollisions() {
+
+        System.err.println("Collisions not implemented -- from GameModel");
+
     }
 
     private void runCommands() {

@@ -1,6 +1,5 @@
 package cz.cvut.fit.niadp.mvcgame.config;
 
-import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 
 public class MvcGameConfig {
@@ -43,6 +42,11 @@ public class MvcGameConfig {
     public static final String INC_SHOTS_KEY = "Q";
     public static final String DEC_SHOTS_KEY = "E";
     public static final String UNDO_LAST_CMD_KEY = "BACK_SPACE";
+
+    public static final String LIGHT_ENEMY_A_SPRITE_PATH = "/images/enemy1.png";
+    public static final String MEDIUM_ENEMY_A_SPRITE_PATH = "/images/enemy2.png";
+    public static final String HEAVY_ENEMY_A_SPRITE_PATH = "/images/enemy3.png";
+    public static final String DEAD_ENEMY_A_SPRITE_PATH = "/images/enemyDead.png";
 
     private MvcGameConfig(){
 
