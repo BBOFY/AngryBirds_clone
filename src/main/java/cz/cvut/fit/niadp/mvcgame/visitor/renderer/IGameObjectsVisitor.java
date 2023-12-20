@@ -10,6 +10,6 @@ public interface IGameObjectsVisitor {
     void renderVisitMissile(AbsMissile missile);
     // todo: visit collisions, game info, enemy
 
-    void renderVisitEnemy(Enemy enemy, String spritePath);
+    void renderVisitEnemy(Enemy enemy, String spritePath, int health);
 
 }

@@ -6,6 +6,7 @@ import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
+import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.AudioPlayer;
@@ -42,6 +43,8 @@ public class GameView {
     private void render() {
         gv.clear();
         model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(renderer));
+
+        gv.drawText("Hello", new Vector2(1, 1));
     }
 
     public void setGraphicsContext(IGameVisuals gv) {

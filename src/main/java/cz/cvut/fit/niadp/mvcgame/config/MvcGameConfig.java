@@ -7,6 +7,9 @@ public class MvcGameConfig {
     public static final int SCREEN_HEIGHT = 700;
     public static final String GAME_TITLE = "The NI-ADP MvcGame";
 
+    public static final int ENEMY_SPRITE_WIDTH = 30;
+    public static final int ENEMY_SPRITE_HEIGHT = 26;
+
     public static final String UP_KEY = "UP";
     public static final String DOWN_KEY = "DOWN";
     public static final String LEFT_KEY = "LEFT";
@@ -43,7 +46,7 @@ public class MvcGameConfig {
     public static final String DEC_SHOTS_KEY = "E";
     public static final String UNDO_LAST_CMD_KEY = "BACK_SPACE";
 
-    public static final String LIGHT_ENEMY_A_SPRITE_PATH = "/images/enemy1.png";
+    public static final String LIGHT_ENEMY_A_SPRITE_PATH = "/images/enemy1_org.png";
     public static final String MEDIUM_ENEMY_A_SPRITE_PATH = "/images/enemy2.png";
     public static final String HEAVY_ENEMY_A_SPRITE_PATH = "/images/enemy3.png";
     public static final String DEAD_ENEMY_A_SPRITE_PATH = "/images/enemyDead.png";
