@@ -5,13 +5,13 @@ import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollisionVisitable;
 import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollisionVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
-public class AbsEnemy extends GameObject implements ICollisionVisitable {
+public class Enemy extends GameObject implements ICollisionVisitable {
 
     private double rotation;
     private int health;
     private String spritePath;
 
-    public AbsEnemy(Vector2 position, double rotation, int initHealth, String spritePath) {
+    public Enemy(Vector2 position, double rotation, int initHealth, String spritePath) {
         this.position = position;
         this.rotation = rotation;
         this.health = initHealth;
@@ -25,7 +25,7 @@ public class AbsEnemy extends GameObject implements ICollisionVisitable {
 
     @Override
     public void acceptVisitor(IGameObjectsVisitor visitor) {
-
+        visitor.renderVisitEnemy(this, spritePath);
     }
 
     @Override

@@ -2,18 +2,18 @@ package cz.cvut.fit.niadp.mvcgame.model;
 
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.GameObjectFactoryA;
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.IGameObjectFactory;
+import cz.cvut.fit.niadp.mvcgame.builder.IEnemyBuilder;
 import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCmd;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
-import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
-import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
-import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
 import cz.cvut.fit.niadp.mvcgame.visitor.collisions.CollisionsChecker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 import java.util.stream.Stream;
 
@@ -23,6 +23,8 @@ public class GameModel implements IGameModel {
     private final MissileMovingStrategyContext missileMovingStrategyContext;
 
     private final List<AbsMissile> missiles;
+    private final List<Enemy> enemies;
+    private static EnemyType[] enemyTypes = {EnemyType.LIGHT, EnemyType.MEDIUM, EnemyType.HEAVY};
 
     private final IGameObjectFactory gameObjectFactory;
 
@@ -35,13 +37,40 @@ public class GameModel implements IGameModel {
         this.missiles = new ArrayList<>();
         this.gameObjectFactory = GameObjectFactoryA.getInstance();
         this.gameObjectFactory.init(this);
+
         this.cannon = gameObjectFactory.createCannon(MvcGameConfig.INIT_CANNON_POSITION);
+        this.enemies = createEnemies(this.gameObjectFactory);
 
         this.missileMovingStrategyContext = new MissileMovingStrategyContext();
-
         this.collisionsChecker = new CollisionsChecker();
 
         EventHolder.addMissileEvent.addListener(addMissileEO);
+    }
+
+    private List<Enemy> createEnemies(IGameObjectFactory factory) {
+        IEnemyBuilder enemyBuilder = factory.createEnemyBuilder();
+        List<Enemy> newEnemies = new ArrayList<>();
+        Random r = new Random();
+
+        double maxEnemyPosX = MvcGameConfig.SCREEN_WIDTH * 0.9;
+        double maxEnemyPosY = MvcGameConfig.SCREEN_HEIGHT * 0.95;
+        double minEnemyPosX = MvcGameConfig.SCREEN_WIDTH * 0.25;
+        double minEnemyPosY = MvcGameConfig.SCREEN_HEIGHT * 0.1;
+
+        for (int i = 0; i < MvcGameConfig.NUMBER_OF_ENEMIES; ++i) {
+            Vector2 pos = new Vector2(
+                    r.nextDouble(maxEnemyPosX - minEnemyPosX) + minEnemyPosX,
+                    r.nextDouble(maxEnemyPosY - minEnemyPosY) + minEnemyPosY
+                    );
+            enemyBuilder
+                    .setPosition(pos)
+                    .setRotation(r.nextDouble(2*Math.PI))
+                    .setType(enemyTypes[r.nextInt(0, enemyTypes.length)]);
+            newEnemies.add(enemyBuilder.build());
+            enemyBuilder.reset();
+        }
+
+        return newEnemies;
     }
 
     @Override
@@ -91,7 +120,7 @@ public class GameModel implements IGameModel {
         runCommands();
 
         moveMissiles();
-        checkCollisions();
+//        checkCollisions();
         destroyMissiles();
         EventHolder.gameObjectMovedEvent.invoke();
     }
@@ -137,7 +166,7 @@ public class GameModel implements IGameModel {
 
     @Override
     public List<? extends GameObject> getGameObjects() {
-        return Stream.concat(Stream.of(cannon), missiles.stream()).toList();
+        return Stream.concat(enemies.stream(), Stream.concat(Stream.of(cannon), missiles.stream())).toList();
     }
 
     @Override

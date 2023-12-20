@@ -3,8 +3,10 @@ package cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family;
 import cz.cvut.fit.niadp.mvcgame.builder.IEnemyBuilder;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
-import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsEnemy;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Enemy;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.EnemyType;
+
+import java.security.InvalidParameterException;
 
 public class EnemyBuilderA implements IEnemyBuilder {
 
@@ -14,8 +16,8 @@ public class EnemyBuilderA implements IEnemyBuilder {
     private String spritePath = "";
 
     @Override
-    public AbsEnemy build() {
-        return new EnemyA(position, rotation, health, spritePath);
+    public Enemy build() {
+        return new Enemy(position, rotation, health, spritePath);
     }
 
     @Override
@@ -33,10 +35,7 @@ public class EnemyBuilderA implements IEnemyBuilder {
                 spritePath = MvcGameConfig.HEAVY_ENEMY_A_SPRITE_PATH;
                 health = 3;
             }
-            case DEAD -> {
-                spritePath = MvcGameConfig.DEAD_ENEMY_A_SPRITE_PATH;
-                health = 0;
-            }
+            case DEAD -> throw new InvalidParameterException("Newly created enemy should not be dead.");
         }
         return this;
     }
@@ -51,6 +50,14 @@ public class EnemyBuilderA implements IEnemyBuilder {
     public IEnemyBuilder setRotation(double rotation) {
         this.rotation = rotation;
         return this;
+    }
+
+    @Override
+    public void reset() {
+        position = new Vector2(0, 0);
+        rotation = 0;
+        health = 0;
+        spritePath = "";
     }
 
 }

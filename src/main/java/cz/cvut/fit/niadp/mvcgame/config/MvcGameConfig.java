@@ -47,6 +47,7 @@ public class MvcGameConfig {
     public static final String MEDIUM_ENEMY_A_SPRITE_PATH = "/images/enemy2.png";
     public static final String HEAVY_ENEMY_A_SPRITE_PATH = "/images/enemy3.png";
     public static final String DEAD_ENEMY_A_SPRITE_PATH = "/images/enemyDead.png";
+    public static final int NUMBER_OF_ENEMIES = 10;
 
     private MvcGameConfig(){
 
