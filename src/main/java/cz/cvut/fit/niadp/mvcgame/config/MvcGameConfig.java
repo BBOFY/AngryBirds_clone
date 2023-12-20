@@ -39,7 +39,7 @@ public class MvcGameConfig {
     public static final String CANNON_MOVE_AUDIO_RESOURCE = "/audio/cannonMove.mp3";
     public static final long MISSILE_LIFETIME_MILLS = 10000;
     public static final int MIN_AMOUNT_SHOTS = 1;
-    public static final int MAX_AMOUNT_SHOTS = 9;
+    public static final int MAX_AMOUNT_SHOTS = 5;
     public static final String INC_SHOTS_KEY = "Q";
     public static final String DEC_SHOTS_KEY = "E";
     public static final String UNDO_LAST_CMD_KEY = "BACK_SPACE";
