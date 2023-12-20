@@ -10,6 +10,7 @@ import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.AudioPlayer;
+import cz.cvut.fit.niadp.mvcgame.visitor.gui.GuiRenderer;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.GameObjectsRenderer;
 
 public class GameView {
@@ -17,6 +18,7 @@ public class GameView {
     private final IGameModel model;
     private final GameController controller;
     private final GameObjectsRenderer renderer;
+    private final GuiRenderer guiRenderer;
 
     private final AudioPlayer audioPlayer;
     private IGameVisuals gv;
@@ -25,6 +27,7 @@ public class GameView {
         this.model = model;
         controller = new GameController(model);
         renderer = new GameObjectsRenderer();
+        guiRenderer = new GuiRenderer();
         audioPlayer = new AudioPlayer();
 
         EventHolder.gameObjectMovedEvent.addListener(onObjectMovedEO);
@@ -50,6 +53,7 @@ public class GameView {
     public void setGraphicsContext(IGameVisuals gv) {
         this.gv = gv;
         renderer.setGraphicContext(gv);
+        guiRenderer.setGraphicContext(gv);
         audioPlayer.setGraphicContext(gv);
         render();
     }

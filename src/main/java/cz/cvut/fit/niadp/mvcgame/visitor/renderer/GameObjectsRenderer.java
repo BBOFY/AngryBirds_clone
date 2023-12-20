@@ -27,7 +27,7 @@ public class GameObjectsRenderer implements IGameObjectsVisitor {
     }
 
     @Override
-    public void renderVisitEnemy(Enemy enemy, String spritePath, int health) {
+    public void renderVisitEnemy(Enemy enemy, String spritePath) {
         gv.drawImage(spritePath, enemy.position);
     }
 }

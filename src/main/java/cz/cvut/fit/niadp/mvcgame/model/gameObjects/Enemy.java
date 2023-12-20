@@ -28,7 +28,7 @@ public class Enemy extends GameObject implements ICollisionVisitable {
 
     @Override
     public void acceptVisitor(IGameObjectsVisitor visitor) {
-        visitor.renderVisitEnemy(this, spritePath, health);
+        visitor.renderVisitEnemy(this, spritePath);
     }
 
     @Override
