@@ -3,6 +3,7 @@ package cz.cvut.fit.niadp.mvcgame.proxy;
 import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCmd;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Enemy;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
 
@@ -94,5 +95,10 @@ public class GameModelProxy implements IGameModel {
     @Override
     public void undoLastCommand() {
         subject.undoLastCommand();
+    }
+
+    @Override
+    public List<Enemy> getEnemies() {
+        return subject.getEnemies();
     }
 }

@@ -4,6 +4,7 @@ import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollisionVisitable;
 import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollisionVisitor;
+import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
 public class Enemy extends GameObject implements ICollisionVisitable {
@@ -37,5 +38,10 @@ public class Enemy extends GameObject implements ICollisionVisitable {
 
     public boolean isDead() {
         return isDead;
+    }
+
+    @Override
+    public void acceptVisitor(IGuiVisitor visitor) {
+        visitor.guiVisitEnemy(this, health);
     }
 }

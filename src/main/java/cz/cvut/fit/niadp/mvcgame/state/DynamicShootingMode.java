@@ -65,4 +65,8 @@ public class DynamicShootingMode implements IShootingMode {
             numOfShots--;
         }
     }
+
+    public int getNumOfShots() {
+        return numOfShots;
+    }
 }

@@ -4,6 +4,7 @@ import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.IAudioVisitable;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.IAudioVisitor;
+import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
 public abstract class AbsMissile extends LifetimeLimitedGameObject implements IAudioVisitable {
@@ -35,5 +36,10 @@ public abstract class AbsMissile extends LifetimeLimitedGameObject implements IA
     @Override
     public void acceptVisitor(IAudioVisitor visitor) {
         visitor.audioVisitMissileShoot(this);
+    }
+
+    @Override
+    public void acceptVisitor(IGuiVisitor visitor) {
+
     }
 }

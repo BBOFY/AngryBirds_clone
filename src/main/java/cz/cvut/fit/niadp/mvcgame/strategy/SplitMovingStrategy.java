@@ -63,4 +63,8 @@ public class SplitMovingStrategy implements IMovingStrategy {
         return newStrategy;
     }
 
+    @Override
+    public String getName() {
+        return "Split";
+    }
 }

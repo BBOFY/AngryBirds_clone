@@ -19,4 +19,9 @@ public class SimpleMovingStrategy implements IMovingStrategy {
     public SimpleMovingStrategy clone() {
         return new SimpleMovingStrategy();
     }
+
+    @Override
+    public String getName() {
+        return "Simple";
+    }
 }

@@ -5,6 +5,7 @@ import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Enemy;
+import cz.cvut.fit.niadp.mvcgame.state.DynamicShootingMode;
 import cz.cvut.fit.niadp.mvcgame.state.IShootingMode;
 
 public class GuiRenderer implements IGuiVisitor {
@@ -24,21 +25,28 @@ public class GuiRenderer implements IGuiVisitor {
 
     @Override
     public void guiVisitCannon(AbsCannon cannon, IShootingMode shootingMode) {
-        // power
-        // angle
-        // current shooting mode
+        infoText += "Power: " + cannon.getPower() + "\n";
+        infoText += String.format("Angle: %.2f\n", Math.toDegrees(cannon.getAngle()));
+        infoText += "Mode: " + shootingMode.getName() + "\n";
+        if (shootingMode instanceof DynamicShootingMode) {
+            infoText += "\tMissiles: " + ((DynamicShootingMode) shootingMode).getNumOfShots() + "\n";
+        }
     }
 
     @Override
     public void guiVisitModel(IGameModel model) {
-        // n of active missiles
+        infoText += "Active missiles: "
+                + model.getMissiles().size() + "\n";
+        infoText += "Missile type: "
+                + model.getMovingStrategyContext().getStrategy().getName() + "\n";
         // n of remaining missiles
         // n of enemies
-        // type of current missile type
+        infoText += "Remaining enemies: " + model.getEnemies().size() + "\n";
     }
 
     @Override
     public void renderInfo() {
         gv.drawText(infoText, new Vector2(0, 0));
+        infoText = "";
     }
 }

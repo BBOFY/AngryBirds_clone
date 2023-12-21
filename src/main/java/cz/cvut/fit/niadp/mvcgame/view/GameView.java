@@ -11,6 +11,8 @@ import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.AudioPlayer;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.GuiRenderer;
+import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitable;
+import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.GameObjectsRenderer;
 
 public class GameView {
@@ -46,8 +48,9 @@ public class GameView {
     private void render() {
         gv.clear();
         model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(renderer));
-
-        gv.drawText("Hello", new Vector2(1, 1));
+        model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(guiRenderer));
+        guiRenderer.guiVisitModel(model);
+        guiRenderer.renderInfo();
     }
 
     public void setGraphicsContext(IGameVisuals gv) {
@@ -58,10 +61,6 @@ public class GameView {
         render();
     }
 
-    public void onObjectMoved() {
-        render();
-    }
-
     public void onCannonMoved(AbsCannon cannon) {
         cannon.acceptVisitor(audioPlayer);
     }
@@ -69,5 +68,6 @@ public class GameView {
     public void onMissileLaunched(AbsMissile missile) {
         missile.acceptVisitor(audioPlayer);
     }
+
 
 }

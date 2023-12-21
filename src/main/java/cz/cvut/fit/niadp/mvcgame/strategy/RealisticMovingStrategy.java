@@ -21,4 +21,9 @@ public class RealisticMovingStrategy implements IMovingStrategy {
     public RealisticMovingStrategy clone() {
         return new RealisticMovingStrategy();
     }
+
+    @Override
+    public String getName() {
+        return "Realistic";
+    }
 }

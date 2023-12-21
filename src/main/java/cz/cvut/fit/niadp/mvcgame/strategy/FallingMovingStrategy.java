@@ -51,4 +51,9 @@ public class FallingMovingStrategy implements IMovingStrategy {
 
         return newStrategy;
     }
+
+    @Override
+    public String getName() {
+        return "Falling";
+    }
 }

@@ -211,5 +211,10 @@ public class GameModel implements IGameModel {
         executedCmds.pop().unExecute();
     }
 
+    @Override
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
 
 }
