@@ -18,16 +18,16 @@ public class GameObjectsRenderer implements IGameObjectsVisitor {
 
     @Override
     public void renderVisitCannon(AbsCannon cannon) {
-        gv.drawImage(MvcGameConfig.CANNON_IMAGE_RESOURCE, cannon.position, cannon.getAngle());
+        gv.drawImage(MvcGameConfig.CANNON_IMAGE_RESOURCE, cannon.position, cannon.getAngle(), Vector2.NEG_INF);
     }
 
     @Override
     public void renderVisitMissile(AbsMissile missile) {
-        gv.drawImage(MvcGameConfig.MISSILE_IMAGE_RESOURCE, missile.position);
+        gv.drawImage(MvcGameConfig.MISSILE_IMAGE_RESOURCE, missile.position, 0, Vector2.NEG_INF);
     }
 
     @Override
     public void renderVisitEnemy(Enemy enemy, String spritePath) {
-        gv.drawImage(spritePath, enemy.position);
+        gv.drawImage(spritePath, enemy.position, 0, Vector2.NEG_INF);
     }
 }

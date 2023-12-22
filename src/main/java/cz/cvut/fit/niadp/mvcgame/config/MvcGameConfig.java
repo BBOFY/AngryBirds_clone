@@ -24,7 +24,11 @@ public class MvcGameConfig {
 
     public static final Vector2 INIT_CANNON_POSITION = new Vector2(10, SCREEN_HEIGHT / 2.0);
     public static final double MOVE_STEP = 10;
-    public static final double ANGLE_STEP = Math.toRadians(10);
+    public static final double CANNON_UPPER_BOUND = SCREEN_HEIGHT * 0.125;
+    public static final double CANNON_LOWER_BOUND = SCREEN_HEIGHT * 0.875;
+    public static final double ANGLE_STEP = Math.toRadians(5);
+    public static final double MAX_CANNON_INCLINATION = Math.toRadians(-80);
+    public static final double MAX_CANNON_DEPRESSION = Math.toRadians(80);
     public static final int POWER_STEP = 1;
     public static final int INIT_POWER = 10;
 
@@ -35,10 +39,11 @@ public class MvcGameConfig {
 
     public static final String CANNON_IMAGE_RESOURCE = "/images/cannon.png";
     public static final String MISSILE_IMAGE_RESOURCE = "/images/missile.png";
-
+    public static final String BACKGROUND_IMG_RESOURCE = "/images/back.jpg";
 
     public static final String CANNON_FIRE_AUDIO_RESOURCE = "/audio/cannonShoot.mp3";
     public static final String CANNON_MOVE_AUDIO_RESOURCE = "/audio/cannonMove.mp3";
+
     public static final long MISSILE_LIFETIME_MILLS = 10000;
     public static final int MIN_AMOUNT_SHOTS = 1;
     public static final int MAX_AMOUNT_SHOTS = 5;

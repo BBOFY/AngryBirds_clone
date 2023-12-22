@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.view;
 
 import cz.cvut.fit.niadp.mvcgame.bridge.IGameVisuals;
+import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject;
@@ -47,6 +48,7 @@ public class GameView {
 
     private void render() {
         gv.clear();
+//        gv.drawImage(MvcGameConfig.BACKGROUND_IMG_RESOURCE, new Vector2(0, 0), 0, new Vector2(MvcGameConfig.SCREEN_WIDTH, MvcGameConfig.SCREEN_HEIGHT));
         model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(renderer));
         model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(guiRenderer));
         guiRenderer.guiVisitModel(model);

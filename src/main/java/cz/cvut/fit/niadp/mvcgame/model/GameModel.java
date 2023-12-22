@@ -52,15 +52,15 @@ public class GameModel implements IGameModel {
         List<Enemy> newEnemies = new ArrayList<>();
         Random r = new Random();
 
-        double maxEnemyPosX = MvcGameConfig.SCREEN_WIDTH * 0.9;
-        double maxEnemyPosY = MvcGameConfig.SCREEN_HEIGHT * 0.95;
-        double minEnemyPosX = MvcGameConfig.SCREEN_WIDTH * 0.25;
+        double maxEnemyPosX = MvcGameConfig.SCREEN_WIDTH * 0.95;
+        double maxEnemyPosY = MvcGameConfig.SCREEN_HEIGHT * 0.75;
+        double minEnemyPosX = MvcGameConfig.SCREEN_WIDTH * 0.1;
         double minEnemyPosY = MvcGameConfig.SCREEN_HEIGHT * 0.1;
 
         for (int i = 0; i < MvcGameConfig.NUMBER_OF_ENEMIES; ++i) {
             Vector2 pos = new Vector2(
-                    r.nextDouble(maxEnemyPosX - minEnemyPosX) + minEnemyPosX,
-                    r.nextDouble(maxEnemyPosY - minEnemyPosY) + minEnemyPosY
+                    r.nextDouble(minEnemyPosX, maxEnemyPosX),
+                    r.nextDouble(minEnemyPosY, maxEnemyPosY)
                     );
             enemyBuilder
                     .setPosition(pos)

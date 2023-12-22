@@ -27,4 +27,6 @@ public class Vector2 implements ICloneable<Vector2> {
     public Vector2 clone() {
         return new Vector2(x, y);
     }
+
+    public static Vector2 NEG_INF = new Vector2(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
 }

@@ -38,20 +38,32 @@ public class CannonA extends AbsCannon {
     @Override
     public void aimUp() {
         angle -= MvcGameConfig.ANGLE_STEP;
+        if (angle < MvcGameConfig.MAX_CANNON_INCLINATION) {
+            angle = MvcGameConfig.MAX_CANNON_INCLINATION;
+        }
     }
 
     @Override
     public void aimUp(double angle) {
         this.angle -= angle;
+        if (angle > MvcGameConfig.MAX_CANNON_INCLINATION) {
+            this.angle = MvcGameConfig.MAX_CANNON_INCLINATION;
+        }
     }
 
     @Override
     public void aimDown() {
         angle += MvcGameConfig.ANGLE_STEP;
+        if (angle > MvcGameConfig.MAX_CANNON_DEPRESSION) {
+            angle = MvcGameConfig.MAX_CANNON_DEPRESSION;
+        }
     }
     @Override
     public void aimDown(double angle) {
         this.angle += angle;
+        if (angle > MvcGameConfig.MAX_CANNON_DEPRESSION) {
+            this.angle = MvcGameConfig.MAX_CANNON_DEPRESSION;
+        }
     }
 
     @Override

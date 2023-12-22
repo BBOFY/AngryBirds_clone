@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.nullPattern;
 
 import cz.cvut.fit.niadp.mvcgame.MvcGame;
+import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -24,10 +25,13 @@ public class GraphicsContextWrapper extends AbstractGraphicsContextWrapper {
         int winHeight = theMvcGame.getWindowHeight();
         stage.setTitle( winTitle );
         Group root = new Group();
+        root.getChildren().addAll(new ImageView(new Image(MvcGameConfig.BACKGROUND_IMG_RESOURCE, MvcGameConfig.SCREEN_WIDTH, MvcGameConfig.SCREEN_HEIGHT, false, false)));
         this.theScene = new Scene(root);
         stage.setScene( theScene );
+
         Canvas canvas = new Canvas( winWidth, winHeight );
         root.getChildren().add( canvas );
+
         this.gc = canvas.getGraphicsContext2D();
     }
 
@@ -37,13 +41,14 @@ public class GraphicsContextWrapper extends AbstractGraphicsContextWrapper {
     }
 
     @Override
-    public void drawImage(String imagePath, Vector2 imagePosition) {
-        gc.drawImage(new Image(imagePath), imagePosition.x, imagePosition.y);
-    }
-
-    @Override
-    public void drawImage(String imagePath, Vector2 imagePosition, double angle) {
-        Image image = new Image(imagePath);
+    public void drawImage(String imagePath, Vector2 imagePosition, double angle, Vector2 size) {
+        Image image;
+        if (size.x < 0 || size.y < 0) {
+            image = new Image(imagePath);
+        }
+        else {
+            image = new Image(imagePath, size.x, size.y, false, false);
+        }
         gc.save(); // saves the current state on stack, including the current transform
         rotate(gc, Math.toDegrees(angle), imagePosition.x + image.getWidth() / 2, imagePosition.y + image.getHeight() / 2);
         gc.drawImage(image, imagePosition.x, imagePosition.y);

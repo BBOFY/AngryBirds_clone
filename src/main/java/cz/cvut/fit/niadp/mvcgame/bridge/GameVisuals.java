@@ -11,13 +11,8 @@ public class GameVisuals implements IGameVisuals {
     }
 
     @Override
-    public void drawImage(String path, Vector2 position) {
-        implementor.drawImage(path, position);
-    }
-
-    @Override
-    public void drawImage(String path, Vector2 position, double angle) {
-        implementor.drawImage(path, position, angle);
+    public void drawImage(String path, Vector2 position, double angle, Vector2 scale) {
+        implementor.drawImage(path, position, angle, scale);
     }
 
     @Override

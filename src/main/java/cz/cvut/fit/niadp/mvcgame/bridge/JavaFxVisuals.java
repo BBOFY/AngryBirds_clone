@@ -13,13 +13,8 @@ public class JavaFxVisuals implements IGameVisualsImplementor {
     }
 
     @Override
-    public void drawImage(String imagePath, Vector2 imagePos) {
-        gc.drawImage(imagePath, imagePos);
-    }
-
-    @Override
-    public void drawImage(String imagePath, Vector2 imagePos, double angle) {
-        gc.drawImage(imagePath, imagePos, angle);
+    public void drawImage(String imagePath, Vector2 imagePos, double angle, Vector2 size) {
+        gc.drawImage(imagePath, imagePos, angle, size);
     }
 
     @Override

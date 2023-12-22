@@ -46,7 +46,7 @@ public class GuiRenderer implements IGuiVisitor {
 
     @Override
     public void renderInfo() {
-        gv.drawText(infoText, new Vector2(0, 0));
+        gv.drawText(infoText, new Vector2(0, 15));
         infoText = "";
     }
 }

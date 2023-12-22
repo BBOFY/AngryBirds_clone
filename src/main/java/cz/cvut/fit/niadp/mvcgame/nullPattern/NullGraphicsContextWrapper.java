@@ -21,12 +21,7 @@ public final class NullGraphicsContextWrapper extends AbstractGraphicsContextWra
     }
 
     @Override
-    public void drawImage(String imagePath, Vector2 imagePosition) {
-        System.err.println("Method drawImage is not implemented. Check graphics context initialization.");
-    }
-
-    @Override
-    public void drawImage(String imagePath, Vector2 imagePosition, double angle) {
+    public void drawImage(String imagePath, Vector2 imagePosition, double angle, Vector2 size) {
         System.err.println("Method drawImage is not implemented. Check graphics context initialization.");
     }
 
