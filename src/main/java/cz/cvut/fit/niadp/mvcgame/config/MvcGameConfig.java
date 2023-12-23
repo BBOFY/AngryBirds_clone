@@ -55,7 +55,15 @@ public class MvcGameConfig {
     public static final String MEDIUM_ENEMY_A_SPRITE_PATH = "/images/enemy2.png";
     public static final String HEAVY_ENEMY_A_SPRITE_PATH = "/images/enemy3.png";
     public static final String DEAD_ENEMY_A_SPRITE_PATH = "/images/enemyDead.png";
+    public static final String OBSTACLE_PATH = "/images/bound.png";
     public static final int NUMBER_OF_ENEMIES = 10;
+
+
+
+    public static final byte CANNON_LAYER_BIT = 1;
+    public static final byte MISSILE_LAYER_BIT = 1 << 1;
+    public static final byte ENEMY_LAYER_BIT = 1 << 2;
+    public static final byte OBSTACLE_LAYER_BIT = 1 << 3;
 
     private MvcGameConfig(){
 

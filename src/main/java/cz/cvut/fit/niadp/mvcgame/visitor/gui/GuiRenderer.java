@@ -40,7 +40,6 @@ public class GuiRenderer implements IGuiVisitor {
         infoText += "Missile type: "
                 + model.getMovingStrategyContext().getStrategy().getName() + "\n";
         // n of remaining missiles
-        // n of enemies
         infoText += "Remaining enemies: " + model.getEnemies().size() + "\n";
     }
 

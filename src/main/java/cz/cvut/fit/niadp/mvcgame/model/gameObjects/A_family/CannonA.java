@@ -27,11 +27,19 @@ public class CannonA extends AbsCannon {
 
     @Override
     public void moveUp() {
+        if (position.y - MvcGameConfig.MOVE_STEP <= MvcGameConfig.CANNON_UPPER_BOUND) {
+            position.y = MvcGameConfig.CANNON_UPPER_BOUND;
+            return;
+        }
         this.move(new Vector2(0, -MvcGameConfig.MOVE_STEP));
     }
 
     @Override
     public void moveDown() {
+        if (position.y + MvcGameConfig.MOVE_STEP >= MvcGameConfig.CANNON_LOWER_BOUND) {
+            position.y = MvcGameConfig.CANNON_LOWER_BOUND;
+            return;
+        }
         this.move(new Vector2(0, MvcGameConfig.MOVE_STEP));
     }
 

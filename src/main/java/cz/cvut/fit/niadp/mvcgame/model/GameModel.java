@@ -9,7 +9,6 @@ import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
-import cz.cvut.fit.niadp.mvcgame.visitor.collisions.CollisionsChecker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +30,6 @@ public class GameModel implements IGameModel {
     private final List<AbstractGameCmd> waitingCmds = new ArrayList<>();
     private final Stack<AbstractGameCmd> executedCmds = new Stack<>();
 
-    private final CollisionsChecker collisionsChecker;
-
     public GameModel() {
         this.missiles = new ArrayList<>();
         this.gameObjectFactory = GameObjectFactoryA.getInstance();
@@ -42,7 +39,6 @@ public class GameModel implements IGameModel {
         this.enemies = createEnemies(this.gameObjectFactory);
 
         this.missileMovingStrategyContext = new MissileMovingStrategyContext();
-        this.collisionsChecker = new CollisionsChecker();
 
         EventHolder.addMissileEvent.addListener(addMissileEO);
     }

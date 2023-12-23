@@ -48,7 +48,7 @@ public class GameView {
 
     private void render() {
         gv.clear();
-//        gv.drawImage(MvcGameConfig.BACKGROUND_IMG_RESOURCE, new Vector2(0, 0), 0, new Vector2(MvcGameConfig.SCREEN_WIDTH, MvcGameConfig.SCREEN_HEIGHT));
+        showCannonBounds();
         model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(renderer));
         model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(guiRenderer));
         guiRenderer.guiVisitModel(model);
@@ -63,6 +63,7 @@ public class GameView {
         render();
     }
 
+
     public void onCannonMoved(AbsCannon cannon) {
         cannon.acceptVisitor(audioPlayer);
     }
@@ -71,5 +72,8 @@ public class GameView {
         missile.acceptVisitor(audioPlayer);
     }
 
-
+    private void showCannonBounds() {
+        gv.drawImage(MvcGameConfig.OBSTACLE_PATH, new Vector2(10, MvcGameConfig.CANNON_UPPER_BOUND), 0, Vector2.NEG_INF);
+        gv.drawImage(MvcGameConfig.OBSTACLE_PATH, new Vector2(10, MvcGameConfig.CANNON_LOWER_BOUND), 0, Vector2.NEG_INF);
+    }
 }
