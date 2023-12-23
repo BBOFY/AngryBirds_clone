@@ -5,12 +5,15 @@ import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidableAABB;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CannonA extends AbsCannon {
+public class CannonA extends AbsCannon implements ICollidableAABB {
 
+    private boolean moveEnabled = true;
+    private boolean colliderEnabled = true;
     private final IGameObjectFactory gameObjectFactory;
 
     private final List<AbsMissile> missilesBatch = new ArrayList<>();
@@ -27,20 +30,27 @@ public class CannonA extends AbsCannon {
 
     @Override
     public void moveUp() {
-        if (position.y - MvcGameConfig.MOVE_STEP <= MvcGameConfig.CANNON_UPPER_BOUND) {
-            position.y = MvcGameConfig.CANNON_UPPER_BOUND;
-            return;
+//        if (position.y - MvcGameConfig.MOVE_STEP <= MvcGameConfig.CANNON_UPPER_BOUND) {
+//            position.y = MvcGameConfig.CANNON_UPPER_BOUND;
+//            return;
+//        }
+        if (moveEnabled) {
+            this.move(new Vector2(0, -MvcGameConfig.MOVE_STEP));
         }
-        this.move(new Vector2(0, -MvcGameConfig.MOVE_STEP));
+        this.move(new Vector2(0, -0.01));
+        moveEnabled = true;
     }
 
     @Override
     public void moveDown() {
-        if (position.y + MvcGameConfig.MOVE_STEP >= MvcGameConfig.CANNON_LOWER_BOUND) {
-            position.y = MvcGameConfig.CANNON_LOWER_BOUND;
-            return;
+//        if (position.y + MvcGameConfig.MOVE_STEP >= MvcGameConfig.CANNON_LOWER_BOUND) {
+//            position.y = MvcGameConfig.CANNON_LOWER_BOUND;
+//            return;
+//        }
+        if (moveEnabled) {
+            this.move(new Vector2(0, MvcGameConfig.MOVE_STEP));
         }
-        this.move(new Vector2(0, MvcGameConfig.MOVE_STEP));
+        this.move(new Vector2(0, 0.01));
     }
 
     @Override
@@ -101,4 +111,32 @@ public class CannonA extends AbsCannon {
         shootingMode = shootingMode.nextState();
     }
 
+    @Override
+    public Vector2 getPos() {
+        return position;
+    }
+
+    @Override
+    public byte getLayer() {
+        return MvcGameConfig.CANNON_LAYER_BIT;
+    }
+
+    @Override
+    public byte getMask() {
+        return MvcGameConfig.OBSTACLE_LAYER_BIT;    }
+
+    @Override
+    public boolean isEnabled() {
+        return colliderEnabled;
+    }
+
+    @Override
+    public void react() {
+        moveEnabled = false;
+    }
+
+    @Override
+    public Vector2 getSize() {
+        return MvcGameConfig.CANNON_SPRITE_SIZE;
+    }
 }

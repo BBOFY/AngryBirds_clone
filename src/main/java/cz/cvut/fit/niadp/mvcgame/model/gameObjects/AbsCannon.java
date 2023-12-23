@@ -6,12 +6,13 @@ import cz.cvut.fit.niadp.mvcgame.state.IShootingMode;
 import cz.cvut.fit.niadp.mvcgame.state.SingleShotMode;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.IAudioVisitable;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.IAudioVisitor;
+import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidable;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
 import java.util.List;
 
-public abstract class AbsCannon extends GameObject implements IAudioVisitable {
+public abstract class AbsCannon extends GameObject implements IAudioVisitable, ICollidable {
 
     protected IShootingMode shootingMode;
     public static IShootingMode SINGLE_MODE = new SingleShotMode();

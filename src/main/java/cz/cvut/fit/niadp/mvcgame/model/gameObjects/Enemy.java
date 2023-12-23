@@ -54,7 +54,7 @@ public class Enemy extends GameObject implements ICollidableCircle {
 
     @Override
     public byte getMask() {
-        return 0;
+        return MvcGameConfig.MISSILE_LAYER_BIT;
     }
 
     @Override

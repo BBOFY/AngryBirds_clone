@@ -2,7 +2,7 @@ package cz.cvut.fit.niadp.mvcgame.chain;
 
 import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidable;
 
-public class Handler_checkLayes extends AbsCollisionHandler {
+public class Handler_checkLayers extends AbsCollisionHandler {
     @Override
     public boolean handleCollision(ICollidable a, ICollidable b) {
 

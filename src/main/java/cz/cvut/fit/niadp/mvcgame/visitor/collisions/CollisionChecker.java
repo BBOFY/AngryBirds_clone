@@ -12,7 +12,7 @@ public class CollisionChecker {
 
     public CollisionChecker() {
         chainChecker = new Handler_checkEnables();
-        chainChecker.setNext(new Handler_checkLayes())
+        chainChecker.setNext(new Handler_checkLayers())
                 .setNext(new Handler_Circles())
                 .setNext(new Handler_CircleAABB())
                 .setNext(new Handler_AABBs());
@@ -21,9 +21,11 @@ public class CollisionChecker {
     public void addCollider(ICollidable collider) {
         colliders.add(collider);
     }
+    public void removeCollider(ICollidable collider) {
+        colliders.remove(collider);
+    }
 
     public void checkCollisions() {
-
         for (var c : colliders) {
             if (!c.isEnabled()) continue;
             for (var other : colliders) {

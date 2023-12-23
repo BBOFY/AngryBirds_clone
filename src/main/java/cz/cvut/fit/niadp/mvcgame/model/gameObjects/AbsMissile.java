@@ -4,10 +4,11 @@ import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.IAudioVisitable;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.IAudioVisitor;
+import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidable;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
-public abstract class AbsMissile extends LifetimeLimitedGameObject implements IAudioVisitable {
+public abstract class AbsMissile extends LifetimeLimitedGameObject implements IAudioVisitable, ICollidable {
 
     private double initAngle;
     private double initSpeed;

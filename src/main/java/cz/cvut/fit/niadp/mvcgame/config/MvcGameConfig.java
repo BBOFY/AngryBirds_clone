@@ -64,6 +64,8 @@ public class MvcGameConfig {
     public static final byte MISSILE_LAYER_BIT = 1 << 1;
     public static final byte ENEMY_LAYER_BIT = 1 << 2;
     public static final byte OBSTACLE_LAYER_BIT = 1 << 3;
+    public static final Vector2 CANNON_SPRITE_SIZE = new Vector2(25, 69);
+    public static final Vector2 OBSTACLE_SPRITE_SIZE = new Vector2(30, 30);
 
     private MvcGameConfig(){
 

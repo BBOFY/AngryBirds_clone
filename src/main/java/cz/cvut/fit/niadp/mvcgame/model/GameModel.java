@@ -9,6 +9,7 @@ import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
+import cz.cvut.fit.niadp.mvcgame.visitor.collisions.CollisionChecker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.stream.Stream;
 public class GameModel implements IGameModel {
     private final AbsCannon cannon;
 
+    private final CollisionChecker collisionChecker;
     private final MissileMovingStrategyContext missileMovingStrategyContext;
 
     private final List<AbsMissile> missiles;
@@ -34,6 +36,8 @@ public class GameModel implements IGameModel {
         this.missiles = new ArrayList<>();
         this.gameObjectFactory = GameObjectFactoryA.getInstance();
         this.gameObjectFactory.init(this);
+
+        this.collisionChecker = new CollisionChecker();
 
         this.cannon = gameObjectFactory.createCannon(MvcGameConfig.INIT_CANNON_POSITION);
         this.enemies = createEnemies(this.gameObjectFactory);
@@ -62,7 +66,9 @@ public class GameModel implements IGameModel {
                     .setPosition(pos)
                     .setRotation(r.nextDouble(2*Math.PI))
                     .setType(enemyTypes[r.nextInt(0, enemyTypes.length)]);
-            newEnemies.add(enemyBuilder.build());
+            Enemy enemy = enemyBuilder.build();
+            newEnemies.add(enemy);
+            collisionChecker.addCollider(enemy);
             enemyBuilder.reset();
         }
 
@@ -88,6 +94,7 @@ public class GameModel implements IGameModel {
             return;
         }
         missiles.addAll(newRockets);
+        newRockets.forEach(collisionChecker::addCollider);
         EventHolder.missileLaunchedEvent.invoke(missiles.get(0));
     }
 
@@ -116,15 +123,9 @@ public class GameModel implements IGameModel {
         runCommands();
 
         moveMissiles();
-//        checkCollisions();
+        collisionChecker.checkCollisions();
         destroyMissiles();
         EventHolder.gameObjectMovedEvent.invoke();
-    }
-
-    private void checkCollisions() {
-
-        System.err.println("Collisions not implemented -- from GameModel");
-
     }
 
     private void runCommands() {
@@ -136,14 +137,14 @@ public class GameModel implements IGameModel {
     }
 
     private void destroyMissiles() {
-        missiles.removeAll(
-            missiles.stream().filter(missile ->
-                missile.position.x > MvcGameConfig.SCREEN_WIDTH || missile.position.y > MvcGameConfig.SCREEN_HEIGHT
-                || missile.position.x < 0 || missile.position.y < 0
-                    || missile.getAge() > MvcGameConfig.MISSILE_LIFETIME_MILLS
-            ).toList()
-        );
-
+        var toRemove = missiles.stream().filter(missile ->
+                !missile.isEnabled()
+                || (missile.position.x > MvcGameConfig.SCREEN_WIDTH || missile.position.y > MvcGameConfig.SCREEN_HEIGHT
+                        || missile.position.x < 0 || missile.position.y < 0
+                        || missile.getAge() > MvcGameConfig.MISSILE_LIFETIME_MILLS)
+        ).toList();
+        missiles.removeAll(toRemove);
+        toRemove.forEach(collisionChecker::removeCollider);
     }
 
     private void moveMissiles() {
@@ -158,6 +159,7 @@ public class GameModel implements IGameModel {
     private final EventObject_1<AbsMissile> addMissileEO = new EventObject_1<>(this::addMissile);
     private void addMissile(AbsMissile missile) {
         missiles.add(missile);
+        collisionChecker.addCollider(missile);
     }
 
     @Override
