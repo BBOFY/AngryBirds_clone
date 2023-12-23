@@ -24,8 +24,8 @@ public class MvcGameConfig {
 
     public static final Vector2 INIT_CANNON_POSITION = new Vector2(10, SCREEN_HEIGHT / 2.0);
     public static final double MOVE_STEP = 10;
-    public static final double CANNON_UPPER_BOUND = SCREEN_HEIGHT * 0.125;
-    public static final double CANNON_LOWER_BOUND = SCREEN_HEIGHT * 0.875;
+    public static final Vector2 CANNON_UPPER_BOUND = new Vector2(10, SCREEN_HEIGHT * 0.125);
+    public static final Vector2 CANNON_LOWER_BOUND = new Vector2(10, SCREEN_HEIGHT * 0.875);
     public static final double ANGLE_STEP = Math.toRadians(5);
     public static final double MAX_CANNON_INCLINATION = Math.toRadians(-80);
     public static final double MAX_CANNON_DEPRESSION = Math.toRadians(80);

@@ -7,6 +7,8 @@ import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.CannonA;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.EnemyBuilderA;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.MissileA;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.ObstacleA;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsObstacle;
 import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
 
 public class GameObjectFactoryA implements IGameObjectFactory {
@@ -45,5 +47,10 @@ public class GameObjectFactoryA implements IGameObjectFactory {
     @Override
     public IEnemyBuilder createEnemyBuilder() {
         return new EnemyBuilderA();
+    }
+
+    @Override
+    public AbsObstacle createObstacles(Vector2 position) {
+        return new ObstacleA(position);
     }
 }

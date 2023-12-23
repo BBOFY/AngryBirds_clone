@@ -11,10 +11,7 @@ import cz.cvut.fit.niadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
 import cz.cvut.fit.niadp.mvcgame.visitor.collisions.CollisionChecker;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class GameModel implements IGameModel {
@@ -24,6 +21,7 @@ public class GameModel implements IGameModel {
     private final MissileMovingStrategyContext missileMovingStrategyContext;
 
     private final List<AbsMissile> missiles;
+    private final List<AbsObstacle> obstacles;
     private final List<Enemy> enemies;
     private static EnemyType[] enemyTypes = {EnemyType.LIGHT, EnemyType.MEDIUM, EnemyType.HEAVY};
 
@@ -41,10 +39,20 @@ public class GameModel implements IGameModel {
 
         this.cannon = gameObjectFactory.createCannon(MvcGameConfig.INIT_CANNON_POSITION);
         this.enemies = createEnemies(this.gameObjectFactory);
+        this.obstacles = createObstacles(this.gameObjectFactory);
 
         this.missileMovingStrategyContext = new MissileMovingStrategyContext();
 
+        collisionChecker.addCollider(cannon);
+
         EventHolder.addMissileEvent.addListener(addMissileEO);
+    }
+
+    private List<AbsObstacle> createObstacles(IGameObjectFactory factory) {
+        List<AbsObstacle> newObstacles = new ArrayList<>();
+        newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_UPPER_BOUND));
+        newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_LOWER_BOUND));
+        return newObstacles;
     }
 
     private List<Enemy> createEnemies(IGameObjectFactory factory) {
@@ -129,20 +137,19 @@ public class GameModel implements IGameModel {
     }
 
     private void destroyObjects() {
-        var toRemove = enemies.stream().filter(enemy ->
-                enemy.needToRemove()).toList();
+        var toRemove = enemies.stream().filter(GameObject::needToRemove).toList();
         enemies.removeAll(toRemove);
         toRemove.forEach(collisionChecker::removeCollider);
         destroyMissiles();
     }
 
     private void destroyMissiles() {
-        var toRemove = missiles.stream().filter(missile ->
-                missile.needToRemove()
-                || (missile.position.x > MvcGameConfig.SCREEN_WIDTH || missile.position.y > MvcGameConfig.SCREEN_HEIGHT
+        var toRemove = new ArrayList<>(missiles.stream().filter(GameObject::needToRemove).toList());
+        toRemove.addAll(missiles.stream().filter(missile ->
+                (missile.position.x > MvcGameConfig.SCREEN_WIDTH || missile.position.y > MvcGameConfig.SCREEN_HEIGHT
                         || missile.position.x < 0 || missile.position.y < 0
                         || missile.getAge() > MvcGameConfig.MISSILE_LIFETIME_MILLS)
-        ).toList();
+        ).toList());
         missiles.removeAll(toRemove);
         toRemove.forEach(collisionChecker::removeCollider);
     }
@@ -172,7 +179,9 @@ public class GameModel implements IGameModel {
 
     @Override
     public List<? extends GameObject> getGameObjects() {
-        return Stream.concat(enemies.stream(), Stream.concat(Stream.of(cannon), missiles.stream())).toList();
+        return Stream.of(
+                enemies, missiles, obstacles, Collections.singletonList(cannon)
+        ).flatMap(Collection::stream).toList();
     }
 
     @Override

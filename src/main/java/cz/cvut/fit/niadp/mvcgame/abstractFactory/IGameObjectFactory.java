@@ -5,6 +5,7 @@ import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsObstacle;
 import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
 
 public interface IGameObjectFactory {
@@ -14,6 +15,8 @@ public interface IGameObjectFactory {
     AbsMissile createMissile(Vector2 position, double angle, double velocity, IMovingStrategy strategy);
 
     IEnemyBuilder createEnemyBuilder();
+
+    AbsObstacle createObstacles(Vector2 position);
 
 
     // TODO: other game object, albeit this is not very "game dev" style

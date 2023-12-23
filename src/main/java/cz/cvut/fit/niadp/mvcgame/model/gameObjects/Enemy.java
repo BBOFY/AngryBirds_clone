@@ -2,14 +2,12 @@ package cz.cvut.fit.niadp.mvcgame.model.gameObjects;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
-import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidable;
 import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidableCircle;
-import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollisionVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
 public class Enemy extends GameObject implements ICollidableCircle {
-    private boolean colliderEnabled = true;
+    private boolean isColliderEnabled = true;
 
     private double rotation;
     private Vector2 colliderCenter;
@@ -60,7 +58,7 @@ public class Enemy extends GameObject implements ICollidableCircle {
 
     @Override
     public boolean isColliderEnabled() {
-        return colliderEnabled;
+        return isColliderEnabled;
     }
 
     @Override

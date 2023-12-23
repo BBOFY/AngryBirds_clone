@@ -13,7 +13,6 @@ import java.util.List;
 public class CannonA extends AbsCannon implements ICollidableAABB {
 
     private boolean moveEnabled = true;
-    private boolean colliderEnabled = true;
     private final IGameObjectFactory gameObjectFactory;
 
     private final List<AbsMissile> missilesBatch = new ArrayList<>();
@@ -123,11 +122,7 @@ public class CannonA extends AbsCannon implements ICollidableAABB {
 
     @Override
     public byte getMask() {
-        return MvcGameConfig.OBSTACLE_LAYER_BIT;    }
-
-    @Override
-    public boolean isColliderEnabled() {
-        return colliderEnabled;
+        return MvcGameConfig.OBSTACLE_LAYER_BIT;
     }
 
     @Override

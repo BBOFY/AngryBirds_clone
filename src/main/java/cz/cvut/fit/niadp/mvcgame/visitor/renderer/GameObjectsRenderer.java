@@ -5,6 +5,7 @@ import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsObstacle;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Enemy;
 
 public class GameObjectsRenderer implements IGameObjectsVisitor {
@@ -29,5 +30,10 @@ public class GameObjectsRenderer implements IGameObjectsVisitor {
     @Override
     public void renderVisitEnemy(Enemy enemy, String spritePath) {
         gv.drawImage(spritePath, enemy.position, 0, Vector2.NEG_INF);
+    }
+
+    @Override
+    public void renderVisitObstacle(AbsObstacle obstacle) {
+        gv.drawImage(MvcGameConfig.OBSTACLE_PATH, obstacle.position, 0, Vector2.NEG_INF);
     }
 }
