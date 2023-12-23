@@ -27,7 +27,7 @@ public class CollisionChecker {
 
     public void checkCollisions() {
         for (var c : colliders) {
-            if (!c.isEnabled()) continue;
+            if (!c.isColliderEnabled()) continue;
             for (var other : colliders) {
                 if (c == other) continue;
                 if (checkCollision(c, other)) c.react();

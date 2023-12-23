@@ -54,7 +54,6 @@ public class GameView {
         model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(guiRenderer));
         guiRenderer.guiVisitModel(model);
         guiRenderer.renderInfo();
-        gv.drawLine((((ICollidableCircle)model.getGameObjects().get(0))).getCenter(), ((ICollidableCircle)(model.getGameObjects().get(1))).getCenter());
     }
 
     public void setGraphicsContext(IGameVisuals gv) {

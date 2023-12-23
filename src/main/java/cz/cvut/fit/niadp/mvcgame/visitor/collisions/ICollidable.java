@@ -7,7 +7,7 @@ public interface ICollidable {
     Vector2 getPos();
     byte getLayer();
     byte getMask();
-    boolean isEnabled();
+    boolean isColliderEnabled();
     void react();
 
 }

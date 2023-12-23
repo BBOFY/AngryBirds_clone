@@ -124,8 +124,27 @@ public class GameModel implements IGameModel {
 
         moveMissiles();
         collisionChecker.checkCollisions();
-        destroyMissiles();
+        destroyObjects();
         EventHolder.gameObjectMovedEvent.invoke();
+    }
+
+    private void destroyObjects() {
+        var toRemove = enemies.stream().filter(enemy ->
+                enemy.needToRemove()).toList();
+        enemies.removeAll(toRemove);
+        toRemove.forEach(collisionChecker::removeCollider);
+        destroyMissiles();
+    }
+
+    private void destroyMissiles() {
+        var toRemove = missiles.stream().filter(missile ->
+                missile.needToRemove()
+                || (missile.position.x > MvcGameConfig.SCREEN_WIDTH || missile.position.y > MvcGameConfig.SCREEN_HEIGHT
+                        || missile.position.x < 0 || missile.position.y < 0
+                        || missile.getAge() > MvcGameConfig.MISSILE_LIFETIME_MILLS)
+        ).toList();
+        missiles.removeAll(toRemove);
+        toRemove.forEach(collisionChecker::removeCollider);
     }
 
     private void runCommands() {
@@ -134,17 +153,6 @@ public class GameModel implements IGameModel {
             executedCmds.push(c);
         }
         waitingCmds.clear();
-    }
-
-    private void destroyMissiles() {
-        var toRemove = missiles.stream().filter(missile ->
-                !missile.isEnabled()
-                || (missile.position.x > MvcGameConfig.SCREEN_WIDTH || missile.position.y > MvcGameConfig.SCREEN_HEIGHT
-                        || missile.position.x < 0 || missile.position.y < 0
-                        || missile.getAge() > MvcGameConfig.MISSILE_LIFETIME_MILLS)
-        ).toList();
-        missiles.removeAll(toRemove);
-        toRemove.forEach(collisionChecker::removeCollider);
     }
 
     private void moveMissiles() {

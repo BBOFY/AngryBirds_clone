@@ -47,7 +47,7 @@ public class MissileA extends AbsMissile implements ICollidableCircle {
     }
 
     @Override
-    public boolean isEnabled() {
+    public boolean isColliderEnabled() {
         return colliderEnabled;
     }
 

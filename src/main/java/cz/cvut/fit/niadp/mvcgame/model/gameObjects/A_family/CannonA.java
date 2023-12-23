@@ -126,7 +126,7 @@ public class CannonA extends AbsCannon implements ICollidableAABB {
         return MvcGameConfig.OBSTACLE_LAYER_BIT;    }
 
     @Override
-    public boolean isEnabled() {
+    public boolean isColliderEnabled() {
         return colliderEnabled;
     }
 
