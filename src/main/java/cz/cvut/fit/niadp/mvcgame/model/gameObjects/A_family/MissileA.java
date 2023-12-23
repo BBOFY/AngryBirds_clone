@@ -10,6 +10,8 @@ import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidableCircle;
 import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollisionVisitor;
 
 public class MissileA extends AbsMissile implements ICollidableCircle {
+    private final Vector2 colliderCenter;
+    private final double colliderRadius;
     private boolean colliderEnabled = true;
 
     private final IMovingStrategy movingStrategy;
@@ -17,6 +19,11 @@ public class MissileA extends AbsMissile implements ICollidableCircle {
     public MissileA(Vector2 initPosition, double initAngle, double initSpeed, IMovingStrategy movingStrategy) {
         super(initPosition, initAngle, initSpeed);
         this.movingStrategy = movingStrategy;
+        colliderCenter = new Vector2(
+                position.x + MvcGameConfig.ENEMY_SPRITE_WIDTH / 2.0,
+                position.y + MvcGameConfig.ENEMY_SPRITE_HEIGHT / 2.0
+        );
+        colliderRadius = (MvcGameConfig.ENEMY_SPRITE_WIDTH + MvcGameConfig.ENEMY_SPRITE_HEIGHT) / 4.0;
     }
 
     @Override
@@ -52,6 +59,11 @@ public class MissileA extends AbsMissile implements ICollidableCircle {
 
     @Override
     public double getRadius() {
-        return (MvcGameConfig.ENEMY_SPRITE_WIDTH + MvcGameConfig.ENEMY_SPRITE_HEIGHT) / 4.0;
+        return colliderRadius;
+    }
+
+    @Override
+    public Vector2 getCenter() {
+        return colliderCenter;
     }
 }

@@ -11,6 +11,7 @@ import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.AudioPlayer;
+import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidableCircle;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.GuiRenderer;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitable;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
@@ -53,6 +54,7 @@ public class GameView {
         model.getGameObjects().forEach(gameObject -> gameObject.acceptVisitor(guiRenderer));
         guiRenderer.guiVisitModel(model);
         guiRenderer.renderInfo();
+        gv.drawLine((((ICollidableCircle)model.getGameObjects().get(0))).getCenter(), ((ICollidableCircle)(model.getGameObjects().get(1))).getCenter());
     }
 
     public void setGraphicsContext(IGameVisuals gv) {

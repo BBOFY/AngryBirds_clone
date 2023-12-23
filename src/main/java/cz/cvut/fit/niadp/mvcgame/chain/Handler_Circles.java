@@ -7,7 +7,7 @@ public class Handler_Circles extends AbsCollisionHandler {
     @Override
     public boolean handleCollision(ICollidable a, ICollidable b) {
         if (a instanceof ICollidableCircle a1 && b instanceof ICollidableCircle b1) {
-            return a.getPos().getDistanceFrom_Cubed(b.getPos()) <= (a1.getRadius() + b1.getRadius());
+            return a.getPos().getDistanceFrom_Cubed(b.getPos()) <= (Math.pow(a1.getRadius() + b1.getRadius(), 2));
         }
 
         return handleNext(a, b);

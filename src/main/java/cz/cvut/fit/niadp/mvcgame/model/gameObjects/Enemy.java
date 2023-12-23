@@ -9,11 +9,11 @@ import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
 public class Enemy extends GameObject implements ICollidableCircle {
-
-    private boolean isDead = false;
     private boolean colliderEnabled = true;
 
     private double rotation;
+    private Vector2 colliderCenter;
+    private double colliderRadius;
     private int health;
     private String spritePath;
 
@@ -22,6 +22,11 @@ public class Enemy extends GameObject implements ICollidableCircle {
         this.rotation = rotation;
         this.health = initHealth;
         this.spritePath = spritePath;
+        colliderCenter = new Vector2(
+                position.x + MvcGameConfig.ENEMY_SPRITE_WIDTH / 2.0,
+                position.y + MvcGameConfig.ENEMY_SPRITE_HEIGHT / 2.0
+        );
+        colliderRadius = (MvcGameConfig.ENEMY_SPRITE_WIDTH + MvcGameConfig.ENEMY_SPRITE_HEIGHT) / 4.0;
     }
 
     @Override
@@ -31,10 +36,6 @@ public class Enemy extends GameObject implements ICollidableCircle {
 
     @Override
     public void move(Vector2 vector) {
-    }
-
-    public boolean isDead() {
-        return isDead;
     }
 
     @Override
@@ -70,6 +71,11 @@ public class Enemy extends GameObject implements ICollidableCircle {
 
     @Override
     public double getRadius() {
-        return (MvcGameConfig.ENEMY_SPRITE_WIDTH + MvcGameConfig.ENEMY_SPRITE_HEIGHT) / 4.0;
+        return colliderRadius;
+    }
+
+    @Override
+    public Vector2 getCenter() {
+        return colliderCenter;
     }
 }

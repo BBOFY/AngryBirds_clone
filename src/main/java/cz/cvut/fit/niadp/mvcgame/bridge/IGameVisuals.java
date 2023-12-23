@@ -11,4 +11,5 @@ public interface IGameVisuals {
 
     void playSound(String audioPath, Vector2 soundOrigin);
 
+    void drawLine(Vector2 from, Vector2 to);
 }

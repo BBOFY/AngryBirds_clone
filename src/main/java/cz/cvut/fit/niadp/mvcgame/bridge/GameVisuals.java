@@ -37,4 +37,9 @@ public class GameVisuals implements IGameVisuals {
     public void playSound(String audioPath, Vector2 soundOrigin) {
         implementor.playSound(audioPath, soundOrigin);
     }
+
+    @Override
+    public void drawLine(Vector2 from, Vector2 to) {
+        this.implementor.drawLine(from, to);
+    }
 }
