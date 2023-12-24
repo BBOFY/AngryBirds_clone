@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CannonA extends AbsCannon implements ICollidableAABB {
-
-    private boolean moveEnabled = true;
     private final IGameObjectFactory gameObjectFactory;
 
     private final List<AbsMissile> missilesBatch = new ArrayList<>();
@@ -112,12 +110,8 @@ public class CannonA extends AbsCannon implements ICollidableAABB {
 
     @Override
     public void react() {
-        moveEnabled = false;
-
         double upperPos = MvcGameConfig.CANNON_UPPER_BOUND.y + MvcGameConfig.OBSTACLE_SPRITE_SIZE.y;
         double lowerPos = MvcGameConfig.CANNON_LOWER_BOUND.y - MvcGameConfig.CANNON_SPRITE_SIZE.y;
-
-        Vector2 closer;
 
         if (Math.abs(upperPos - position.y) < Math.abs(lowerPos - position.y)) {
             position = new Vector2(position.x, upperPos);
