@@ -11,4 +11,9 @@ public class UndoLastCommandCmd extends AbstractGameCmd {
     protected void execute() {
         subject.undoLastCommand();
     }
+
+    @Override
+    public void doExecute() {
+        execute();
+    }
 }

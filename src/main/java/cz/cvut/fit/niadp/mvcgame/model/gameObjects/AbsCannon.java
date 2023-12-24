@@ -1,5 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.model.gameObjects;
 
+import cz.cvut.fit.niadp.mvcgame.prototype.ICloneable;
 import cz.cvut.fit.niadp.mvcgame.state.DoubleShotMode;
 import cz.cvut.fit.niadp.mvcgame.state.DynamicShootingMode;
 import cz.cvut.fit.niadp.mvcgame.state.IShootingMode;
@@ -12,7 +13,7 @@ import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
 import java.util.List;
 
-public abstract class AbsCannon extends GameObject implements IAudioVisitable, ICollidable {
+public abstract class AbsCannon extends GameObject implements IAudioVisitable, ICollidable, ICloneable<AbsCannon> {
 
     protected boolean isColliderEnabled = true;
     protected IShootingMode shootingMode;
@@ -66,4 +67,7 @@ public abstract class AbsCannon extends GameObject implements IAudioVisitable, I
     public boolean isColliderEnabled() {
         return isColliderEnabled;
     }
+
+    @Override
+    public abstract AbsCannon clone();
 }

@@ -7,6 +7,7 @@ import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCmd;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
+import cz.cvut.fit.niadp.mvcgame.memento.CareTaker;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.CollisionChecker;
@@ -15,14 +16,14 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class GameModel implements IGameModel {
-    private final AbsCannon cannon;
+    private AbsCannon cannon;
 
     private final CollisionChecker collisionChecker;
     private final MissileMovingStrategyContext missileMovingStrategyContext;
 
     private final List<AbsMissile> missiles;
-    private final List<AbsObstacle> obstacles;
-    private final List<Enemy> enemies;
+    private List<AbsObstacle> obstacles;
+    private List<Enemy> enemies;
     private static EnemyType[] enemyTypes = {EnemyType.LIGHT, EnemyType.MEDIUM, EnemyType.HEAVY};
 
     private final IGameObjectFactory gameObjectFactory;
@@ -46,6 +47,8 @@ public class GameModel implements IGameModel {
         collisionChecker.addCollider(cannon);
 
         EventHolder.addMissileEvent.addListener(addMissileEO);
+
+        CareTaker.getInstance().setModel(this);
     }
 
     private List<AbsObstacle> createObstacles(IGameObjectFactory factory) {
@@ -195,22 +198,34 @@ public class GameModel implements IGameModel {
     }
 
     private static class Memento {
-        private Vector2 cannonPosition;
+        private AbsCannon cannon;
+        private List<Enemy> enemies;
+        private List<AbsObstacle> obstacles;
 
     }
 
     @Override
     public Object createMemento() {
         Memento gameModelSnapshot = new Memento();
-        gameModelSnapshot.cannonPosition = cannon.position.clone();
+        gameModelSnapshot.cannon = cannon.clone();
+        List<Enemy> newEnemies = new ArrayList<>();
+        enemies.forEach(e -> newEnemies.add(e.clone()));
+        gameModelSnapshot.enemies = newEnemies;
+        gameModelSnapshot.obstacles = new ArrayList<>(obstacles);
         return gameModelSnapshot;
     }
 
     @Override
     public void setMemento(Object memento) {
         Memento gameModelSnapshot = (Memento) memento;
-        cannon.position = gameModelSnapshot.cannonPosition;
-        EventHolder.gameObjectMovedEvent.invoke();
+        collisionChecker.removeCollider(cannon);
+        enemies.forEach(collisionChecker::removeCollider);
+
+        cannon = gameModelSnapshot.cannon;
+        enemies = gameModelSnapshot.enemies;
+
+        collisionChecker.addCollider(cannon);
+        enemies.forEach(collisionChecker::addCollider);
     }
 
 

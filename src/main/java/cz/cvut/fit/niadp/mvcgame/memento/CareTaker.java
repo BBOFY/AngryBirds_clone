@@ -2,22 +2,29 @@ package cz.cvut.fit.niadp.mvcgame.memento;
 
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class CareTaker {
     private static CareTaker inst = null;
+    private static int capacity = 10;
     private IGameModel model;
-    private static final Stack<Object> mementos = new Stack<>();
+    private static final List<Object> mementos = new ArrayList<>();
 
     private CareTaker() {}
 
     public void createMemento() {
-        mementos.add(model.createMemento());
+        if (mementos.size() >= capacity) {
+            mementos.removeFirst();
+        }
+        mementos.addLast(model.createMemento());
     }
 
     public void setMemento() {
-        if (!mementos.empty()) {
-            model.setMemento(mementos.pop());
+        if (!mementos.isEmpty()) {
+            model.setMemento(mementos.getLast());
+            mementos.removeLast();
         }
     }
 

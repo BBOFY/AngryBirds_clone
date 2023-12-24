@@ -126,4 +126,15 @@ public class CannonA extends AbsCannon implements ICollidableAABB {
     public Vector2 getSize() {
         return MvcGameConfig.CANNON_SPRITE_SIZE;
     }
+
+    @Override
+    public CannonA clone() {
+        CannonA newCannon = new CannonA(position.clone(), gameObjectFactory);
+        newCannon.toRemove = toRemove;
+        newCannon.angle = angle;
+        newCannon.power = power;
+        newCannon.isColliderEnabled = isColliderEnabled;
+        newCannon.shootingMode = shootingMode;
+        return newCannon;
+    }
 }

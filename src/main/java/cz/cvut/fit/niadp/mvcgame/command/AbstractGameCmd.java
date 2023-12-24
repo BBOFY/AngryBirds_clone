@@ -1,5 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.command;
 
+import cz.cvut.fit.niadp.mvcgame.memento.CareTaker;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 
 public abstract class AbstractGameCmd {
@@ -13,12 +14,12 @@ public abstract class AbstractGameCmd {
     protected abstract void execute();
 
     public void doExecute() {
-        memento = subject.createMemento();
+        CareTaker.getInstance().createMemento();
         execute();
     }
 
     public void unExecute() {
-        subject.setMemento(memento);
+        CareTaker.getInstance().setMemento();
     }
 
 }

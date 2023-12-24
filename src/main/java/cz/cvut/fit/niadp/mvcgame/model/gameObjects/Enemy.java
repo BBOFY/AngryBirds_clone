@@ -3,10 +3,11 @@ package cz.cvut.fit.niadp.mvcgame.model.gameObjects;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidableCircle;
+import cz.cvut.fit.niadp.mvcgame.prototype.ICloneable;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
-public class Enemy extends GameObject implements ICollidableCircle {
+public class Enemy extends GameObject implements ICollidableCircle, ICloneable<Enemy> {
     private boolean isColliderEnabled = true;
 
     private double rotation;
@@ -75,5 +76,15 @@ public class Enemy extends GameObject implements ICollidableCircle {
     @Override
     public Vector2 getCenter() {
         return colliderCenter;
+    }
+
+    @Override
+    public Enemy clone() {
+        Enemy newEnemy = new Enemy(position.clone(), rotation, health, spritePath);
+        newEnemy.toRemove = toRemove;
+        newEnemy.colliderCenter = colliderCenter.clone();
+        newEnemy.isColliderEnabled = isColliderEnabled;
+        newEnemy.colliderRadius = colliderRadius;
+        return newEnemy;
     }
 }
