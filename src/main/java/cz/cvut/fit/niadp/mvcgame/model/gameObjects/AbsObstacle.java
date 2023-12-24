@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.model.gameObjects;
 
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidable;
+import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.prototype.ICloneable;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
@@ -26,6 +27,14 @@ public abstract class AbsObstacle extends GameObject implements ICollidable, ICl
 
     @Override
     public void move(Vector2 vector) {
+
+        if (position.x < 0 || position.x >= MvcGameConfig.SCREEN_WIDTH) {
+            velocity.x *= -1;
+        }
+        if (position.y < 0 || position.y >= MvcGameConfig.SCREEN_HEIGHT) {
+            velocity.y *= -1;
+        }
+
         position.add(velocity);
     }
 

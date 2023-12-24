@@ -13,12 +13,6 @@ public interface IGameObjectFactory {
     AbsCannon createCannon(Vector2 position);
     AbsMissile createMissile(Vector2 position, double angle, double velocity);
     AbsMissile createMissile(Vector2 position, double angle, double velocity, IMovingStrategy strategy);
-
     IEnemyBuilder createEnemyBuilder();
-
-    AbsObstacle createObstacles(Vector2 position, Vector2 velocity);
-
-
-    // TODO: other game object, albeit this is not very "game dev" style
-
+    AbsObstacle createObstacle(Vector2 position, Vector2 velocity);
 }

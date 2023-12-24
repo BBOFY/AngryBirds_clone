@@ -53,9 +53,34 @@ public class GameModel implements IGameModel {
 
     private List<AbsObstacle> createObstacles(IGameObjectFactory factory) {
         List<AbsObstacle> newObstacles = new ArrayList<>();
-        newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_UPPER_BOUND, Vector2.ZERO));
-        newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_LOWER_BOUND, Vector2.ZERO));
+        newObstacles.add(factory.createObstacle(MvcGameConfig.CANNON_UPPER_BOUND, Vector2.ZERO));
+        newObstacles.add(factory.createObstacle(MvcGameConfig.CANNON_LOWER_BOUND, Vector2.ZERO));
+
+        newObstacles.addAll(addMovableObstacles(
+                new Vector2(100, 0),
+                new Vector2(1, 3),
+                new Vector2(0, 8))
+        );
+
         newObstacles.forEach(collisionChecker::addCollider);
+        return newObstacles;
+    }
+
+    private List<AbsObstacle> addMovableObstacles(Vector2 pos, Vector2 size, Vector2 velocity) {
+        List<AbsObstacle> newObstacles = new ArrayList<>();
+
+        for (int x = 0; x < size.x; ++x) {
+            for (int y = 0; y < size.y; ++y) {
+                newObstacles.add(gameObjectFactory.createObstacle(
+                        new Vector2(
+                                pos.x + MvcGameConfig.OBSTACLE_SPRITE_SIZE.x * x,
+                                pos.y + MvcGameConfig.OBSTACLE_SPRITE_SIZE.y * y
+                        ),
+                        velocity.clone()
+                ));
+            }
+        }
+
         return newObstacles;
     }
 

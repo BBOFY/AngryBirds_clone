@@ -50,7 +50,7 @@ public class GameObjectFactoryA implements IGameObjectFactory {
     }
 
     @Override
-    public AbsObstacle createObstacles(Vector2 position, Vector2 velocity) {
+    public AbsObstacle createObstacle(Vector2 position, Vector2 velocity) {
         return new ObstacleA(position, velocity);
     }
 }
