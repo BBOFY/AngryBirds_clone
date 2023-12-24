@@ -85,12 +85,12 @@ public class CannonA extends AbsCannon implements ICollidableAABB {
 
     @Override
     public void powerUp() {
-        power = Math.min(power += MvcGameConfig.POWER_STEP, MvcGameConfig.MAX_CANNON_POWER);
+        power = Math.min(power + MvcGameConfig.POWER_STEP, MvcGameConfig.MAX_CANNON_POWER);
     }
 
     @Override
     public void powerDown() {
-        power = Math.max(power -= MvcGameConfig.POWER_STEP, MvcGameConfig.MIN_CANNON_POWER);
+        power = Math.max(power - MvcGameConfig.POWER_STEP, MvcGameConfig.MIN_CANNON_POWER);
     }
 
     @Override
@@ -127,6 +127,7 @@ public class CannonA extends AbsCannon implements ICollidableAABB {
 
     @Override
     public void react() {
+        System.err.println("HEY");
         moveEnabled = false;
     }
 

@@ -52,6 +52,7 @@ public class GameModel implements IGameModel {
         List<AbsObstacle> newObstacles = new ArrayList<>();
         newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_UPPER_BOUND));
         newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_LOWER_BOUND));
+        newObstacles.forEach(collisionChecker::addCollider);
         return newObstacles;
     }
 
@@ -128,11 +129,10 @@ public class GameModel implements IGameModel {
 
     @Override
     public void update() {
-        runCommands();
-
-        moveMissiles();
         collisionChecker.checkCollisions();
         destroyObjects();
+        moveMissiles();
+        runCommands();
         EventHolder.gameObjectMovedEvent.invoke();
     }
 
