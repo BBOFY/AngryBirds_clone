@@ -1,20 +1,15 @@
 package cz.cvut.fit.niadp.mvcgame.view;
 
 import cz.cvut.fit.niadp.mvcgame.bridge.IGameVisuals;
-import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
-import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.AudioPlayer;
-import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidableCircle;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.GuiRenderer;
-import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitable;
-import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.GameObjectsRenderer;
 
 public class GameView {

@@ -9,7 +9,7 @@ import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
-import cz.cvut.fit.niadp.mvcgame.visitor.collisions.CollisionChecker;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.CollisionChecker;
 
 import java.util.*;
 import java.util.stream.Stream;

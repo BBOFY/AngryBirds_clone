@@ -1,6 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.chain;
 
-import cz.cvut.fit.niadp.mvcgame.visitor.collisions.ICollidable;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidable;
 
 public class Handler_checkEnables extends AbsCollisionHandler {
     @Override
