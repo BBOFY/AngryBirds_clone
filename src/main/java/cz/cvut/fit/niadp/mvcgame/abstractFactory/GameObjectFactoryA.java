@@ -1,7 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.abstractFactory;
 
 import cz.cvut.fit.niadp.mvcgame.builder.IEnemyBuilder;
-import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.CannonA;
@@ -9,7 +8,7 @@ import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.EnemyBuilderA;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.MissileA;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.ObstacleA;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsObstacle;
-import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
+import cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy.IMovingStrategy;
 
 public class GameObjectFactoryA implements IGameObjectFactory {
     private static IGameObjectFactory inst;

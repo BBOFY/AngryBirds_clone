@@ -26,12 +26,14 @@ public class CollisionChecker {
     }
 
     public void checkCollisions() {
-        for (var c : colliders) {
+
+        List<ICollidable> toCheck = new ArrayList<>(colliders);
+
+        for (var c : toCheck) {
             if (!c.isColliderEnabled()) continue;
-            for (var other : colliders) {
+            for (var other : toCheck) {
                 if (c == other) continue;
                 if (checkCollision(c, other)) c.react();
-
             }
         }
 

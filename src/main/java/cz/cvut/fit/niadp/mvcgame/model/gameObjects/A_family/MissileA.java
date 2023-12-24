@@ -3,7 +3,7 @@ package cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
-import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
+import cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy.IMovingStrategy;
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidableCircle;
 
 public class MissileA extends AbsMissile implements ICollidableCircle {

@@ -5,7 +5,7 @@ import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Enemy;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
-import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
+import cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy.MissileMovingStrategyContext;
 
 import java.util.List;
 

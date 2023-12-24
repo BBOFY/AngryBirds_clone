@@ -1,7 +1,6 @@
-package cz.cvut.fit.niadp.mvcgame.strategy;
+package cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
-import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;

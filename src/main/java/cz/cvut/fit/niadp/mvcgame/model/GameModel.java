@@ -9,7 +9,7 @@ import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
 import cz.cvut.fit.niadp.mvcgame.memento.CareTaker;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.*;
-import cz.cvut.fit.niadp.mvcgame.strategy.MissileMovingStrategyContext;
+import cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy.MissileMovingStrategyContext;
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.CollisionChecker;
 
 import java.util.*;
@@ -47,6 +47,7 @@ public class GameModel implements IGameModel {
         collisionChecker.addCollider(cannon);
 
         EventHolder.addMissileEvent.addListener(addMissileEO);
+        EventHolder.addObstacleEvent.addListener(addObstacleEO);
 
         CareTaker.getInstance().setModel(this);
     }
@@ -103,6 +104,14 @@ public class GameModel implements IGameModel {
                     .setPosition(pos)
                     .setRotation(r.nextDouble(2*Math.PI))
                     .setType(enemyTypes[r.nextInt(0, enemyTypes.length)]);
+
+            if (r.nextBoolean()) {
+                enemyBuilder.setNothingStrategy();
+            }
+            else {
+                enemyBuilder.setObstacleStrategy();
+            }
+
             Enemy enemy = enemyBuilder.build();
             newEnemies.add(enemy);
             collisionChecker.addCollider(enemy);
@@ -208,6 +217,12 @@ public class GameModel implements IGameModel {
     private void addMissile(AbsMissile missile) {
         missiles.add(missile);
         collisionChecker.addCollider(missile);
+    }
+
+    private final EventObject_1<AbsObstacle> addObstacleEO = new EventObject_1<>(this::addObstacle);
+    private void addObstacle(AbsObstacle obstacle) {
+        obstacles.add(obstacle);
+        collisionChecker.addCollider(obstacle);
     }
 
     @Override

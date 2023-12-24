@@ -1,4 +1,4 @@
-package cz.cvut.fit.niadp.mvcgame.strategy;
+package cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

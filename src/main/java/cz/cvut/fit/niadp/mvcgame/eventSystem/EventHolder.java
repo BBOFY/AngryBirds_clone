@@ -2,6 +2,7 @@ package cz.cvut.fit.niadp.mvcgame.eventSystem;
 
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsObstacle;
 
 public class EventHolder {
 
@@ -20,6 +21,7 @@ public class EventHolder {
     public static final MyEvent_1<AbsMissile> addMissileEvent = new MyEvent_1<>();
 
 
+    public static final MyEvent_1<AbsObstacle> addObstacleEvent = new MyEvent_1<>();
 
 
 }

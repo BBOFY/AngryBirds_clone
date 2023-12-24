@@ -4,11 +4,14 @@ import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidableCircle;
 import cz.cvut.fit.niadp.mvcgame.prototype.ICloneable;
+import cz.cvut.fit.niadp.mvcgame.strategy.onDeathStrategy.IOnDeathStrategy;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 
 public class Enemy extends GameObject implements ICollidableCircle, ICloneable<Enemy> {
     private boolean isColliderEnabled = true;
+
+    private IOnDeathStrategy onDeathStrategy;
 
     private double rotation;
     private Vector2 colliderCenter;
@@ -16,11 +19,12 @@ public class Enemy extends GameObject implements ICollidableCircle, ICloneable<E
     private int health;
     private String spritePath;
 
-    public Enemy(Vector2 position, double rotation, int initHealth, String spritePath) {
+    public Enemy(Vector2 position, double rotation, int initHealth, String spritePath, IOnDeathStrategy strategy) {
         this.position = position;
         this.rotation = rotation;
         this.health = initHealth;
         this.spritePath = spritePath;
+        this.onDeathStrategy = strategy;
         colliderCenter = new Vector2(
                 position.x + MvcGameConfig.ENEMY_SPRITE_WIDTH / 2.0,
                 position.y + MvcGameConfig.ENEMY_SPRITE_HEIGHT / 2.0
@@ -65,7 +69,10 @@ public class Enemy extends GameObject implements ICollidableCircle, ICloneable<E
     @Override
     public void react() {
         health--;
-        if (health <= 0) toRemove = true;
+        if (health <= 0) {
+            toRemove = true;
+            onDeathStrategy.doSomething(this);
+        }
     }
 
     @Override
@@ -80,7 +87,7 @@ public class Enemy extends GameObject implements ICollidableCircle, ICloneable<E
 
     @Override
     public Enemy clone() {
-        Enemy newEnemy = new Enemy(position.clone(), rotation, health, spritePath);
+        Enemy newEnemy = new Enemy(position.clone(), rotation, health, spritePath, onDeathStrategy);
         newEnemy.toRemove = toRemove;
         newEnemy.colliderCenter = colliderCenter.clone();
         newEnemy.isColliderEnabled = isColliderEnabled;

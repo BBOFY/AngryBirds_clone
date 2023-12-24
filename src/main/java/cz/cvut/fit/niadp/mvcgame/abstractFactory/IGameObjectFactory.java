@@ -6,7 +6,7 @@ import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsObstacle;
-import cz.cvut.fit.niadp.mvcgame.strategy.IMovingStrategy;
+import cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy.IMovingStrategy;
 
 public interface IGameObjectFactory {
     void init(IGameModel model);

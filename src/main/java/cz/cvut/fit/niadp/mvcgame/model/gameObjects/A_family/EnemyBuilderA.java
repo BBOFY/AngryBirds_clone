@@ -5,6 +5,9 @@ import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Enemy;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.EnemyType;
+import cz.cvut.fit.niadp.mvcgame.strategy.onDeathStrategy.CreateObstacleDeathStrategy;
+import cz.cvut.fit.niadp.mvcgame.strategy.onDeathStrategy.IOnDeathStrategy;
+import cz.cvut.fit.niadp.mvcgame.strategy.onDeathStrategy.NothingDeathStrategy;
 
 import java.security.InvalidParameterException;
 
@@ -15,9 +18,14 @@ public class EnemyBuilderA implements IEnemyBuilder {
     private int health = 0;
     private String spritePath = "";
 
+    private static IOnDeathStrategy nothingStrategy = new NothingDeathStrategy();
+    private static IOnDeathStrategy obstacleStrategy = new CreateObstacleDeathStrategy();
+
+    private IOnDeathStrategy strategy = nothingStrategy;
+
     @Override
     public Enemy build() {
-        return new Enemy(position, rotation, health, spritePath);
+        return new Enemy(position, rotation, health, spritePath, strategy);
     }
 
     @Override
@@ -53,11 +61,24 @@ public class EnemyBuilderA implements IEnemyBuilder {
     }
 
     @Override
+    public IEnemyBuilder setNothingStrategy() {
+        this.strategy = nothingStrategy;
+        return this;
+    }
+
+    @Override
+    public IEnemyBuilder setObstacleStrategy() {
+        this.strategy = obstacleStrategy;
+        return this;
+    }
+
+    @Override
     public void reset() {
         position = new Vector2(0, 0);
         rotation = 0;
         health = 0;
         spritePath = "";
+        strategy = nothingStrategy;
     }
 
 }
