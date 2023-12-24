@@ -7,8 +7,8 @@ import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidableAABB;
 
 public class ObstacleA extends AbsObstacle implements ICollidableAABB {
 
-    public ObstacleA(Vector2 position) {
-        this.position = position;
+    public ObstacleA(Vector2 position, Vector2 velocity) {
+        super(position, velocity);
     }
 
     @Override
@@ -27,13 +27,18 @@ public class ObstacleA extends AbsObstacle implements ICollidableAABB {
     }
 
     @Override
-    public void react() {
-
-    }
+    public void react() {}
 
     @Override
     public Vector2 getSize() {
         return MvcGameConfig.OBSTACLE_SPRITE_SIZE;
     }
 
+    @Override
+    public ObstacleA clone() {
+        ObstacleA newObstacle = new ObstacleA(position.clone(), velocity.clone());
+        newObstacle.toRemove = toRemove;
+        newObstacle.isColliderEnabled = isColliderEnabled;
+        return newObstacle;
+    }
 }

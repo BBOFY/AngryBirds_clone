@@ -16,7 +16,7 @@ public interface IGameObjectFactory {
 
     IEnemyBuilder createEnemyBuilder();
 
-    AbsObstacle createObstacles(Vector2 position);
+    AbsObstacle createObstacles(Vector2 position, Vector2 velocity);
 
 
     // TODO: other game object, albeit this is not very "game dev" style

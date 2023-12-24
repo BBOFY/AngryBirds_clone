@@ -53,8 +53,8 @@ public class GameModel implements IGameModel {
 
     private List<AbsObstacle> createObstacles(IGameObjectFactory factory) {
         List<AbsObstacle> newObstacles = new ArrayList<>();
-        newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_UPPER_BOUND));
-        newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_LOWER_BOUND));
+        newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_UPPER_BOUND, Vector2.ZERO));
+        newObstacles.add(factory.createObstacles(MvcGameConfig.CANNON_LOWER_BOUND, Vector2.ZERO));
         newObstacles.forEach(collisionChecker::addCollider);
         return newObstacles;
     }
@@ -134,9 +134,14 @@ public class GameModel implements IGameModel {
     public void update() {
         collisionChecker.checkCollisions();
         destroyObjects();
+        moveObstacles();
         moveMissiles();
         runCommands();
         EventHolder.gameObjectMovedEvent.invoke();
+    }
+
+    private void moveObstacles() {
+        obstacles.forEach(o -> o.move(null));
     }
 
     private void destroyObjects() {
@@ -208,10 +213,15 @@ public class GameModel implements IGameModel {
     public Object createMemento() {
         Memento gameModelSnapshot = new Memento();
         gameModelSnapshot.cannon = cannon.clone();
+
         List<Enemy> newEnemies = new ArrayList<>();
         enemies.forEach(e -> newEnemies.add(e.clone()));
         gameModelSnapshot.enemies = newEnemies;
-        gameModelSnapshot.obstacles = new ArrayList<>(obstacles);
+
+        List<AbsObstacle> newObstacles = new ArrayList<>();
+        obstacles.forEach(o -> newObstacles.add(o.clone()));
+        gameModelSnapshot.obstacles = newObstacles;
+
         return gameModelSnapshot;
     }
 
@@ -220,12 +230,15 @@ public class GameModel implements IGameModel {
         Memento gameModelSnapshot = (Memento) memento;
         collisionChecker.removeCollider(cannon);
         enemies.forEach(collisionChecker::removeCollider);
+        obstacles.forEach(collisionChecker::removeCollider);
 
         cannon = gameModelSnapshot.cannon;
         enemies = gameModelSnapshot.enemies;
+        obstacles = gameModelSnapshot.obstacles;
 
         collisionChecker.addCollider(cannon);
         enemies.forEach(collisionChecker::addCollider);
+        obstacles.forEach(collisionChecker::addCollider);
     }
 
 

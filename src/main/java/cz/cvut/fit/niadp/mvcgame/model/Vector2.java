@@ -30,6 +30,7 @@ public class Vector2 implements ICloneable<Vector2> {
 
     public static Vector2 NEG_INF = new Vector2(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
     public static Vector2 ZERO = new Vector2(0, 0);
+    public static final Vector2 ONE = new Vector2(1, 1);
 
     public double getDistanceFrom_Cubed(Vector2 other) {
         return Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2);
