@@ -14,7 +14,7 @@ import java.util.List;
 
 public abstract class AbsCannon extends GameObject implements IAudioVisitable, ICollidable {
 
-    private boolean isColliderEnabled = true;
+    protected boolean isColliderEnabled = true;
     protected IShootingMode shootingMode;
     public static IShootingMode SINGLE_MODE = new SingleShotMode();
     public static IShootingMode DOUBLE_MODE = new DoubleShotMode();

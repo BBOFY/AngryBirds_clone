@@ -10,7 +10,8 @@ public class Handler_CircleAABB extends AbsCollisionHandler {
     @Override
     public boolean handleCollision(ICollidable circle, ICollidable aabb) {
         if (circle instanceof ICollidableCircle c && aabb instanceof ICollidableAABB a) {
-            throw new RuntimeException("Not Implemented: Circle -- AABB");
+            System.err.println("Not Implemented: Circle -- AABB");
+            return false;
         }
 
         return handleNext(circle, aabb);

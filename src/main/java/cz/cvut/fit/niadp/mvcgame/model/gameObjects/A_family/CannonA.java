@@ -29,27 +29,12 @@ public class CannonA extends AbsCannon implements ICollidableAABB {
 
     @Override
     public void moveUp() {
-//        if (position.y - MvcGameConfig.MOVE_STEP <= MvcGameConfig.CANNON_UPPER_BOUND) {
-//            position.y = MvcGameConfig.CANNON_UPPER_BOUND;
-//            return;
-//        }
-        if (moveEnabled) {
-            this.move(new Vector2(0, -MvcGameConfig.MOVE_STEP));
-        }
-        this.move(new Vector2(0, -0.01));
-        moveEnabled = true;
+        this.move(new Vector2(0, -MvcGameConfig.MOVE_STEP));
     }
 
     @Override
     public void moveDown() {
-//        if (position.y + MvcGameConfig.MOVE_STEP >= MvcGameConfig.CANNON_LOWER_BOUND) {
-//            position.y = MvcGameConfig.CANNON_LOWER_BOUND;
-//            return;
-//        }
-        if (moveEnabled) {
-            this.move(new Vector2(0, MvcGameConfig.MOVE_STEP));
-        }
-        this.move(new Vector2(0, 0.01));
+        this.move(new Vector2(0, MvcGameConfig.MOVE_STEP));
     }
 
     @Override
@@ -127,8 +112,20 @@ public class CannonA extends AbsCannon implements ICollidableAABB {
 
     @Override
     public void react() {
-        System.err.println("HEY");
         moveEnabled = false;
+
+        double upperPos = MvcGameConfig.CANNON_UPPER_BOUND.y + MvcGameConfig.OBSTACLE_SPRITE_SIZE.y;
+        double lowerPos = MvcGameConfig.CANNON_LOWER_BOUND.y - MvcGameConfig.CANNON_SPRITE_SIZE.y;
+
+        Vector2 closer;
+
+        if (Math.abs(upperPos - position.y) < Math.abs(lowerPos - position.y)) {
+            position = new Vector2(position.x, upperPos);
+        }
+        else {
+            position = new Vector2(position.x, lowerPos);
+        }
+
     }
 
     @Override
