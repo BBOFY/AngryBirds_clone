@@ -2,7 +2,6 @@ package cz.cvut.fit.niadp.mvcgame.controller;
 
 import cz.cvut.fit.niadp.mvcgame.command.*;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 
 import java.util.List;
@@ -40,25 +39,25 @@ public class GameController {
                     model.registerCommand(new CannonShootCmd(model));
                     break;
                 case MvcGameConfig.SECONDARY_ACTION_KEY:
-                    EventHolder.secondaryActionEvent.invoke();
+                    model.registerCommand(new SecondaryActionCmd(model));
                     break;
                 case MvcGameConfig.TOGGLE_MOVING_STRATEGY_KEY:
-                    model.getMovingStrategyContext().toggleMovingStrategy();
+                    model.registerCommand(new ToggleMovingStrategyCmd(model));
                     break;
                 case MvcGameConfig.TOGGLE_SHOOTING_MODE_KEY:
-                    model.toggleShootingMode();
+                    model.registerCommand(new ToggleShootingModeCmd(model));
                     break;
                 case MvcGameConfig.INC_SHOTS_KEY:
-                    EventHolder.incShotsEvent.invoke();
+                    model.registerCommand(new IncrementShotsCmd(model));
                     break;
                 case MvcGameConfig.DEC_SHOTS_KEY:
-                    EventHolder.decShotsEvent.invoke();
+                    model.registerCommand(new DecrementShotsCmd(model));
                     break;
                 case MvcGameConfig.UNDO_LAST_CMD_KEY:
-                    model.undoLastCommand();
+                    model.registerCommand(new UndoLastCommandCmd(model));
                     break;
                 case MvcGameConfig.EXIT_KEY:
-                    System.exit(0);
+                    model.registerCommand(new ExitGameCmd(model));
                     break;
                 default:
                     //nothing
