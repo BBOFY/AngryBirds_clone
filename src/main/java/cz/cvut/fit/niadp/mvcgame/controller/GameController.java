@@ -1,12 +1,8 @@
 package cz.cvut.fit.niadp.mvcgame.controller;
 
-import cz.cvut.fit.niadp.mvcgame.command.MoveCannonDownCmd;
-import cz.cvut.fit.niadp.mvcgame.command.MoveCannonUpCmd;
+import cz.cvut.fit.niadp.mvcgame.command.*;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent;
-import cz.cvut.fit.niadp.mvcgame.memento.CareTaker;
-import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 
 import java.util.List;
@@ -29,19 +25,19 @@ public class GameController {
                     model.registerCommand(new MoveCannonDownCmd(model));
                     break;
                 case MvcGameConfig.LEFT_KEY:
-                    model.aimCannonUp();
+                    model.registerCommand(new AimCannonUpCmd(model));
                     break;
                 case MvcGameConfig.RIGHT_KEY:
-                    model.aimCannonDown();
+                    model.registerCommand(new AimCannonDownCmd(model));
                     break;
                 case MvcGameConfig.W_KEY:
-                    model.cannonPowerUp();
+                    model.registerCommand(new CannonPowerUpCmd(model));
                     break;
                 case MvcGameConfig.S_KEY:
-                    model.cannonPowerDown();
+                    model.registerCommand(new CannonPowerDownCmd(model));
                     break;
                 case MvcGameConfig.SHOOT_KEY:
-                    model.cannonShoot();
+                    model.registerCommand(new CannonShootCmd(model));
                     break;
                 case MvcGameConfig.SECONDARY_ACTION_KEY:
                     EventHolder.secondaryActionEvent.invoke();
