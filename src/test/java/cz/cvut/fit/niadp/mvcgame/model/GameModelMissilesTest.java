@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.stream.IntStream;
 
-public class GameModelReflectionTest {
+public class GameModelMissilesTest {
     private static final int ITERATION_START_CONST = 1;
     private static final int MISSILE_COUNT = 50;
     private static final int MOVE_COUNT = 100000;

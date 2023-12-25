@@ -6,5 +6,5 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @SuiteDisplayName("GameModel suite")
-@Suite.SuiteClasses({GameModelBasicTest.class, GameModelMockedTest.class, GameModelReflectionTest.class})
+@Suite.SuiteClasses({GameModelBasicTest.class, GameModelMockedTest.class, GameModelMissilesTest.class})
 public class GameModelTestSuit { }
