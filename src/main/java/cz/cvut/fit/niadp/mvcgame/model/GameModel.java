@@ -165,6 +165,11 @@ public class GameModel implements IGameModel {
     }
 
     @Override
+    public AbsCannon getCannon() {
+        return cannon;
+    }
+
+    @Override
     public void update() {
         collisionChecker.checkCollisions();
         destroyObjects();
@@ -194,14 +199,6 @@ public class GameModel implements IGameModel {
         ).toList());
         missiles.removeAll(toRemove);
         toRemove.forEach(collisionChecker::removeCollider);
-    }
-
-    private void runCommands() {
-        for (var c : waitingCmds) {
-            c.doExecute();
-            executedCmds.push(c);
-        }
-        waitingCmds.clear();
     }
 
     private void moveMissiles() {
@@ -286,6 +283,14 @@ public class GameModel implements IGameModel {
     @Override
     public void registerCommand(AbstractGameCmd cmd) {
         waitingCmds.add(cmd);
+    }
+
+    private void runCommands() {
+        for (var c : waitingCmds) {
+            c.doExecute();
+            executedCmds.push(c);
+        }
+        waitingCmds.clear();
     }
 
     @Override

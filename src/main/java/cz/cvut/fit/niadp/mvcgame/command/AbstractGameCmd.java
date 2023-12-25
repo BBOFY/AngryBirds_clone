@@ -5,7 +5,6 @@ import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 
 public abstract class AbstractGameCmd {
     protected final IGameModel subject;
-    private Object memento;
 
     public AbstractGameCmd(IGameModel model) {
         subject = model;

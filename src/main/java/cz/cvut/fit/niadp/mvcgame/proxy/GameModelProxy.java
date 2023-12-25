@@ -2,6 +2,7 @@ package cz.cvut.fit.niadp.mvcgame.proxy;
 
 import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCmd;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Enemy;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
@@ -50,6 +51,11 @@ public class GameModelProxy implements IGameModel {
     @Override
     public void cannonPowerDown() {
         subject.cannonPowerDown();
+    }
+
+    @Override
+    public AbsCannon getCannon() {
+        return subject.getCannon();
     }
 
     @Override

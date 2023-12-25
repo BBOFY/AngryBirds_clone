@@ -1,10 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.model;
-import cz.cvut.fit.niadp.mvcgame.model.GameModel;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.stream.IntStream;
 
 public class GameModelReflectionTest {

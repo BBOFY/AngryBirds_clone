@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.model;
 
 import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCmd;
+import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Enemy;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.GameObject;
@@ -23,6 +24,8 @@ public interface IGameModel {
     void cannonPowerUp();
 
     void cannonPowerDown();
+
+    AbsCannon getCannon();
 
     void update();
 
