@@ -28,8 +28,7 @@ public class GameModelMockedTest {
         Assert.assertEquals(CANNON_TEST_POSITION.y, missile.position.y, 0);
     }
 
-
-    public void generalMockSetup() {
+    private void generalMockSetup() {
         new MockUp<GameModel>() {
             @Mock
             public MissileMovingStrategyContext getMovingStrategyContext() {
