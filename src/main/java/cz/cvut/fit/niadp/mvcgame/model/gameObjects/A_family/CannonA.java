@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family;
 
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.IGameObjectFactory;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableCircle;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;

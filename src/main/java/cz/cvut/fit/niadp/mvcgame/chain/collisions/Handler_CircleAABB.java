@@ -7,14 +7,14 @@ import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableCircle;
 public class Handler_CircleAABB extends AbsCollisionHandler {
     @Override
     public boolean handleCollision(ICollidable a, ICollidable b) {
-
-        if (a instanceof ICollidableCircle circle && b instanceof ICollidableAABB aabb) {
-            return checkCollision(circle, aabb);
-        }
-        if (b instanceof ICollidableCircle circle && a instanceof ICollidableAABB aabb) {
-            return checkCollision(circle, aabb);
-        }
         return handleNext(a, b);
+//        if (a instanceof ICollidableCircle circle && b instanceof ICollidableAABB aabb) {
+//            return checkCollision(circle, aabb);
+//        }
+//        if (b instanceof ICollidableCircle circle && a instanceof ICollidableAABB aabb) {
+//            return checkCollision(circle, aabb);
+//        }
+//        return handleNext(a, b);
     }
 
     private boolean checkCollision(ICollidableCircle circle, ICollidableAABB aabb) {

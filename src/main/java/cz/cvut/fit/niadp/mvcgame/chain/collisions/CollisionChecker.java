@@ -14,8 +14,8 @@ public class CollisionChecker {
         chainChecker = new Handler_checkEnables();
         chainChecker.setNext(new Handler_checkLayers())
                 .setNext(new Handler_Circles())
-                .setNext(new Handler_CircleAABB())
-                .setNext(new Handler_AABBs());
+                .setNext(new Handler_AABBs())
+                .setNext(new Handler_CircleAABB());
     }
 
     public void addCollider(ICollidable collider) {

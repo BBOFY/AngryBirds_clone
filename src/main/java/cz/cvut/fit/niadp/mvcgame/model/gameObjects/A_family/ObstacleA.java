@@ -1,11 +1,12 @@
 package cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family;
 
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableCircle;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsObstacle;
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableAABB;
 
-public class ObstacleA extends AbsObstacle implements ICollidableAABB {
+public class ObstacleA extends AbsObstacle implements ICollidableAABB, ICollidableCircle {
 
     public ObstacleA(Vector2 position, Vector2 velocity) {
         super(position, velocity);
@@ -40,5 +41,18 @@ public class ObstacleA extends AbsObstacle implements ICollidableAABB {
         newObstacle.toRemove = toRemove;
         newObstacle.isColliderEnabled = isColliderEnabled;
         return newObstacle;
+    }
+
+    @Override
+    public double getRadius() {
+        return MvcGameConfig.OBSTACLE_SPRITE_SIZE.x / 2.0;
+    }
+
+    @Override
+    public Vector2 getCenter() {
+        return new Vector2(
+            position.x + MvcGameConfig.OBSTACLE_SPRITE_SIZE.x / 2.0,
+            position.y + MvcGameConfig.OBSTACLE_SPRITE_SIZE.y / 2.0
+        );
     }
 }
