@@ -1,5 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.controller;
 
+import cz.cvut.fit.niadp.mvcgame.chain.cheats.CheatsChecker;
 import cz.cvut.fit.niadp.mvcgame.command.*;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
@@ -10,8 +11,11 @@ public class GameController {
 
     private final IGameModel model;
 
+    private final CheatsChecker cheatsChecker;
+
     public GameController(IGameModel model) {
         this.model = model;
+        cheatsChecker = new CheatsChecker();
     }
 
     public void processPressedKeys(List<String> pressedKeysCodes) {

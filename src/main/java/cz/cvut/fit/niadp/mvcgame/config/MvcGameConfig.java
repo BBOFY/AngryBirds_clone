@@ -67,6 +67,9 @@ public class MvcGameConfig {
     public static final Vector2 CANNON_SPRITE_SIZE = new Vector2(25, 69);
     public static final Vector2 OBSTACLE_SPRITE_SIZE = new Vector2(30, 30);
 
+
+    public static final String TOGGLE_SIMPLE_SHOOT_CHEAT = "toggle simple";
+
     private MvcGameConfig(){
 
     }

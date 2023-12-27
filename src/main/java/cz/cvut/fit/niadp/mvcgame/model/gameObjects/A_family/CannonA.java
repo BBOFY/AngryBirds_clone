@@ -5,7 +5,7 @@ import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
-import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidableAABB;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableAABB;
 
 import java.util.ArrayList;
 import java.util.List;

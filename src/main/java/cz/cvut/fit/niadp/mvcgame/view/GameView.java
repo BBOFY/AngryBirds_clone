@@ -1,6 +1,7 @@
 package cz.cvut.fit.niadp.mvcgame.view;
 
 import cz.cvut.fit.niadp.mvcgame.bridge.IGameVisuals;
+import cz.cvut.fit.niadp.mvcgame.chain.cheats.CheatsChecker;
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject;
@@ -11,6 +12,7 @@ import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.AudioPlayer;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.GuiRenderer;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.GameObjectsRenderer;
+import javafx.scene.control.TextInputDialog;
 
 public class GameView {
 
@@ -18,8 +20,10 @@ public class GameView {
     private final GameController controller;
     private final GameObjectsRenderer renderer;
     private final GuiRenderer guiRenderer;
-
     private final AudioPlayer audioPlayer;
+
+    private TextInputDialog inputDialog;
+
     private IGameVisuals gv;
 
     public GameView(IGameModel model) {

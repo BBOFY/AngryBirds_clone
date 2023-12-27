@@ -1,6 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.model.gameObjects;
 
-import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidable;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidable;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.prototype.ICloneable;

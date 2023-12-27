@@ -4,7 +4,7 @@ import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy.IMovingStrategy;
-import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidableCircle;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableCircle;
 
 public class MissileA extends AbsMissile implements ICollidableCircle {
     private final Vector2 colliderCenter;

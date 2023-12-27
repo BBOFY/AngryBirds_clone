@@ -1,8 +1,9 @@
-package cz.cvut.fit.niadp.mvcgame.chain;
+package cz.cvut.fit.niadp.mvcgame.chain.collisions;
 
-import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidable;
-import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidableAABB;
-import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidableCircle;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.AbsCollisionHandler;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidable;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableAABB;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableCircle;
 
 public class Handler_CircleAABB extends AbsCollisionHandler {
     @Override

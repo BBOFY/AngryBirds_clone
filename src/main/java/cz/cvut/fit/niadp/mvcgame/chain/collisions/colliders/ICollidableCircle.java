@@ -1,4 +1,4 @@
-package cz.cvut.fit.niadp.mvcgame.chain.collisions;
+package cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders;
 
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 

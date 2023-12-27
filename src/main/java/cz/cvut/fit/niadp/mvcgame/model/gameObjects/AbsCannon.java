@@ -7,7 +7,7 @@ import cz.cvut.fit.niadp.mvcgame.state.IShootingMode;
 import cz.cvut.fit.niadp.mvcgame.state.SingleShotMode;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.IAudioVisitable;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.IAudioVisitor;
-import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidable;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidable;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.IGameObjectsVisitor;
 

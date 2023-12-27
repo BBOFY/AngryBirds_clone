@@ -1,6 +1,6 @@
 package cz.cvut.fit.niadp.mvcgame.chain.collisions;
 
-import cz.cvut.fit.niadp.mvcgame.chain.*;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidable;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,7 @@ package cz.cvut.fit.niadp.mvcgame.model.gameObjects;
 
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
-import cz.cvut.fit.niadp.mvcgame.chain.collisions.ICollidableCircle;
+import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableCircle;
 import cz.cvut.fit.niadp.mvcgame.prototype.ICloneable;
 import cz.cvut.fit.niadp.mvcgame.strategy.onDeathStrategy.IOnDeathStrategy;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.IGuiVisitor;
