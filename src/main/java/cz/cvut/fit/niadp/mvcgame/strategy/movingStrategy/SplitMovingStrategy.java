@@ -3,7 +3,7 @@ package cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy;
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.GameObjectFactoryA;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEventObject;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 
@@ -13,7 +13,7 @@ public class SplitMovingStrategy implements IMovingStrategy {
 
     private AbsMissile missile;
 
-    private final EventObject triggerFunctionalityEO = new EventObject(this::triggerFunctionality);
+    private final MyEventObject triggerFunctionalityEO = new MyEventObject(this::triggerFunctionality);
     private void triggerFunctionality() {
 
         if (triggered) {

@@ -6,7 +6,8 @@ import cz.cvut.fit.niadp.mvcgame.builder.IEnemyBuilder;
 import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCmd;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEventObject;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEventObject_1;
 import cz.cvut.fit.niadp.mvcgame.memento.CareTaker;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy.MissileMovingStrategyContext;
@@ -17,6 +18,8 @@ import java.util.stream.Stream;
 
 public class GameModel implements IGameModel {
     private AbsCannon cannon;
+
+    private boolean debugMode = false;
 
     private final CollisionChecker collisionChecker;
     private final MissileMovingStrategyContext missileMovingStrategyContext;
@@ -48,6 +51,7 @@ public class GameModel implements IGameModel {
 
         EventHolder.addMissileEvent.addListener(addMissileEO);
         EventHolder.addObstacleEvent.addListener(addObstacleEO);
+        EventHolder.toggleDebugEvent.addListener(toggleDebugEO);
 
         CareTaker.getInstance().setModel(this);
     }
@@ -210,16 +214,21 @@ public class GameModel implements IGameModel {
         return missiles;
     }
 
-    private final EventObject_1<AbsMissile> addMissileEO = new EventObject_1<>(this::addMissile);
+    private final MyEventObject_1<AbsMissile> addMissileEO = new MyEventObject_1<>(this::addMissile);
     private void addMissile(AbsMissile missile) {
         missiles.add(missile);
         collisionChecker.addCollider(missile);
     }
 
-    private final EventObject_1<AbsObstacle> addObstacleEO = new EventObject_1<>(this::addObstacle);
+    private final MyEventObject_1<AbsObstacle> addObstacleEO = new MyEventObject_1<>(this::addObstacle);
     private void addObstacle(AbsObstacle obstacle) {
         obstacles.add(obstacle);
         collisionChecker.addCollider(obstacle);
+    }
+
+    private final MyEventObject toggleDebugEO = new MyEventObject(this::toggleDebug);
+    private void toggleDebug() {
+        debugMode = !debugMode;
     }
 
     @Override
@@ -278,14 +287,13 @@ public class GameModel implements IGameModel {
         obstacles.forEach(collisionChecker::addCollider);
     }
 
-
-
     @Override
     public void registerCommand(AbstractGameCmd cmd) {
         waitingCmds.add(cmd);
     }
 
     private void runCommands() {
+
         for (var c : waitingCmds) {
             c.doExecute();
             executedCmds.push(c);
@@ -304,5 +312,9 @@ public class GameModel implements IGameModel {
         return enemies;
     }
 
+    @Override
+    public boolean isInDebugMode() {
+        return debugMode;
+    }
 
 }

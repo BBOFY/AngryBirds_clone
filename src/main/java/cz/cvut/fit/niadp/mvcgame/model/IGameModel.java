@@ -45,4 +45,6 @@ public interface IGameModel {
     void undoLastCommand();
 
     List<Enemy> getEnemies();
+
+    boolean isInDebugMode();
 }

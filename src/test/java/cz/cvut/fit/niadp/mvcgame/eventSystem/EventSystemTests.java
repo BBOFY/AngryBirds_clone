@@ -11,7 +11,7 @@ public class EventSystemTests {
     public void testOneEvent() {
         testingValue = 0;
         MyEvent eventTestEvent = new MyEvent();
-        EventObject incValueEO = new EventObject(this::incValueByOne);
+        MyEventObject incValueEO = new MyEventObject(this::incValueByOne);
 
         Assert.assertEquals(0, testingValue);
         eventTestEvent.invoke();
@@ -31,8 +31,8 @@ public class EventSystemTests {
         testingValue = 0;
         int value = 5;
         MyEvent_1<Integer> eventTestEvent = new MyEvent_1<>();
-        EventObject_1<Integer> incValueEO_1 = new EventObject_1<>(this::incValue);
-        EventObject_1<Integer> incValueEO_2 = new EventObject_1<>(this::incValue);
+        MyEventObject_1<Integer> incValueEO_1 = new MyEventObject_1<>(this::incValue);
+        MyEventObject_1<Integer> incValueEO_2 = new MyEventObject_1<>(this::incValue);
 
         Assert.assertEquals(0, testingValue);
         eventTestEvent.invoke(value);
@@ -59,7 +59,7 @@ public class EventSystemTests {
     public void addingSameEvent() {
         testingValue = 0;
         MyEvent eventTestEvent = new MyEvent();
-        EventObject incValueEO = new EventObject(this::incValueByOne);
+        MyEventObject incValueEO = new MyEventObject(this::incValueByOne);
 
         Assert.assertEquals(0, testingValue);
         eventTestEvent.invoke();
@@ -80,7 +80,7 @@ public class EventSystemTests {
     public void removingSameEvent() {
         testingValue = 0;
         MyEvent eventTestEvent = new MyEvent();
-        EventObject incValueEO = new EventObject(this::incValueByOne);
+        MyEventObject incValueEO = new MyEventObject(this::incValueByOne);
 
         Assert.assertEquals(0, testingValue);
         eventTestEvent.invoke();
@@ -104,7 +104,7 @@ public class EventSystemTests {
         testingValue = 0;
         forNextTestEvent = new MyEvent();
         // This event should be delayed by one invoke call, since it adds listener to already invoked event.
-        EventObject addingAnotherEO = new EventObject(this::addingAnotherEventListener);
+        MyEventObject addingAnotherEO = new MyEventObject(this::addingAnotherEventListener);
 
         Assert.assertEquals(0, testingValue);
         forNextTestEvent.invoke();
@@ -132,7 +132,7 @@ public class EventSystemTests {
     }
 
     private void addingAnotherEventListener() {
-        EventObject incValueEO = new EventObject(this::incValueByOne);
+        MyEventObject incValueEO = new MyEventObject(this::incValueByOne);
         forNextTestEvent.addListener(incValueEO);
     }
 

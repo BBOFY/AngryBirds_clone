@@ -4,13 +4,15 @@ import cz.cvut.fit.niadp.mvcgame.chain.cheats.CheatsChecker;
 import cz.cvut.fit.niadp.mvcgame.command.*;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.util.List;
 
 public class GameController {
-
     private final IGameModel model;
-
+    private boolean enteringCheat = false;
     private final CheatsChecker cheatsChecker;
 
     public GameController(IGameModel model) {
@@ -19,6 +21,11 @@ public class GameController {
     }
 
     public void processPressedKeys(List<String> pressedKeysCodes) {
+
+        if (enteringCheat && !cheatsChecker.addKeysToCheat(pressedKeysCodes)) {
+            enteringCheat = false;
+        }
+
         for(String code : pressedKeysCodes) {
             switch(code) {
                 case MvcGameConfig.UP_KEY:
@@ -59,6 +66,9 @@ public class GameController {
                     break;
                 case MvcGameConfig.UNDO_LAST_CMD_KEY:
                     model.registerCommand(new UndoLastCommandCmd(model));
+                    break;
+                case MvcGameConfig.ENTER_CHEAT_KEY:
+                    enteringCheat = !enteringCheat;
                     break;
                 case MvcGameConfig.EXIT_KEY:
                     model.registerCommand(new ExitGameCmd(model));

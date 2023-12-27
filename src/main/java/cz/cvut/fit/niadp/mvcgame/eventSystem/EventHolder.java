@@ -24,4 +24,5 @@ public class EventHolder {
     public static final MyEvent_1<AbsObstacle> addObstacleEvent = new MyEvent_1<>();
 
 
+    public static final MyEvent toggleDebugEvent = new MyEvent();
 }

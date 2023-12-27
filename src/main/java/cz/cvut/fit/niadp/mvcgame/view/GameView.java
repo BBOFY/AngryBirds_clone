@@ -1,11 +1,10 @@
 package cz.cvut.fit.niadp.mvcgame.view;
 
 import cz.cvut.fit.niadp.mvcgame.bridge.IGameVisuals;
-import cz.cvut.fit.niadp.mvcgame.chain.cheats.CheatsChecker;
 import cz.cvut.fit.niadp.mvcgame.controller.GameController;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.EventObject_1;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEventObject;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEventObject_1;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
@@ -22,8 +21,6 @@ public class GameView {
     private final GuiRenderer guiRenderer;
     private final AudioPlayer audioPlayer;
 
-    private TextInputDialog inputDialog;
-
     private IGameVisuals gv;
 
     public GameView(IGameModel model) {
@@ -37,10 +34,9 @@ public class GameView {
         EventHolder.cannonMovedEvent.addListener(onCannonMovedEO);
         EventHolder.missileLaunchedEvent.addListener(onMissileLaunchedEO);
     }
-    
-    private final EventObject onObjectMovedEO = new EventObject(this::render);
-    private final EventObject_1<AbsCannon> onCannonMovedEO = new EventObject_1<>(this::onCannonMoved);
-    private final EventObject_1<AbsMissile> onMissileLaunchedEO = new EventObject_1<>(this::onMissileLaunched);
+    private final MyEventObject onObjectMovedEO = new MyEventObject(this::render);
+    private final MyEventObject_1<AbsCannon> onCannonMovedEO = new MyEventObject_1<>(this::onCannonMoved);
+    private final MyEventObject_1<AbsMissile> onMissileLaunchedEO = new MyEventObject_1<>(this::onMissileLaunched);
 
     public GameController getController() {
         return this.controller;

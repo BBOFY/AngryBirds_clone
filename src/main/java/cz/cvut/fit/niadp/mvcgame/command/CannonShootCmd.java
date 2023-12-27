@@ -9,6 +9,8 @@ public class CannonShootCmd extends AbstractGameCmd {
 
     @Override
     protected void execute() {
-        subject.cannonShoot();
+        if (subject.isInDebugMode() || subject.getMissiles().isEmpty()) {
+            subject.cannonShoot();
+        }
     }
 }

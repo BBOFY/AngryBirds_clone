@@ -6,19 +6,19 @@ import java.util.*;
  * Event, that can store methods with no arguments
  */
 public class MyEvent {
-    private final List<EventObject> subscribers;
+    private final List<MyEventObject> subscribers;
     public MyEvent() {
         subscribers = new ArrayList<>();
     }
-    public void addListener(EventObject listener) {
-        for (EventObject subscriber : subscribers) {
+    public void addListener(MyEventObject listener) {
+        for (MyEventObject subscriber : subscribers) {
             if (subscriber.id == listener.id) {
                 return;
             }
         }
         subscribers.add(listener);
     }
-    public void removeListener(EventObject listener) {
+    public void removeListener(MyEventObject listener) {
         for (int i = 0; i < subscribers.size(); ++i) {
             if (subscribers.get(i).id == listener.id) {
                 subscribers.remove(i);
@@ -27,8 +27,8 @@ public class MyEvent {
         }
     }
     public void invoke() {
-        List<EventObject> toIterate = new ArrayList<>(subscribers);
-        for (EventObject subscriber : toIterate) {
+        List<MyEventObject> toIterate = new ArrayList<>(subscribers);
+        for (MyEventObject subscriber : toIterate) {
             subscriber.call();
         }
     }

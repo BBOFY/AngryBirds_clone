@@ -107,4 +107,9 @@ public class GameModelProxy implements IGameModel {
     public List<Enemy> getEnemies() {
         return subject.getEnemies();
     }
+
+    @Override
+    public boolean isInDebugMode() {
+        return subject.isInDebugMode();
+    }
 }
