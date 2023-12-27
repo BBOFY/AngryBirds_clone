@@ -15,7 +15,7 @@ public class CheatsChecker {
     }
     private void runCheat() {
         handler.handleCheat(cheat);
-        System.out.println(cheat);
+        System.out.println("Entered cheat: " + cheat);
         cheat = "";
     }
 
