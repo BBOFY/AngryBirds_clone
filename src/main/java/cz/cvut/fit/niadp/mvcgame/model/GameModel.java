@@ -61,11 +61,11 @@ public class GameModel implements IGameModel {
         newObstacles.add(factory.createObstacle(MvcGameConfig.CANNON_UPPER_BOUND, Vector2.ZERO));
         newObstacles.add(factory.createObstacle(MvcGameConfig.CANNON_LOWER_BOUND, Vector2.ZERO));
 
-        newObstacles.addAll(addMovableObstacles(
-                new Vector2(100, 0),
-                new Vector2(1, 3),
-                new Vector2(0, 8))
-        );
+//        newObstacles.addAll(addMovableObstacles(
+//                new Vector2(100, 0),
+//                new Vector2(1, 3),
+//                new Vector2(0, 8))
+//        );
 
         newObstacles.forEach(collisionChecker::addCollider);
         return newObstacles;

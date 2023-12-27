@@ -61,6 +61,12 @@ public class EnemyBuilderA implements IEnemyBuilder {
     }
 
     @Override
+    public IEnemyBuilder setStrategy(IOnDeathStrategy strategy) {
+        this.strategy = strategy;
+        return this;
+    }
+
+    @Override
     public IEnemyBuilder setNothingStrategy() {
         this.strategy = nothingStrategy;
         return this;

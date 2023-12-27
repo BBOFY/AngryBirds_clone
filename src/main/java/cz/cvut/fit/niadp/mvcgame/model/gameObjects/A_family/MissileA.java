@@ -40,7 +40,7 @@ public class MissileA extends AbsMissile implements ICollidableCircle {
 
     @Override
     public byte getMask() {
-        return MvcGameConfig.ENEMY_LAYER_BIT /*| MvcGameConfig.OBSTACLE_LAYER_BIT*/;
+        return MvcGameConfig.ENEMY_LAYER_BIT | MvcGameConfig.OBSTACLE_LAYER_BIT;
     }
 
     @Override

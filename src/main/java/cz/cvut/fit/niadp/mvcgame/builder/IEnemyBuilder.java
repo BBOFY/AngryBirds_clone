@@ -10,6 +10,7 @@ public interface IEnemyBuilder {
     IEnemyBuilder setType(EnemyType type);
     IEnemyBuilder setPosition(Vector2 position);
     IEnemyBuilder setRotation(double rotation);
+    IEnemyBuilder setStrategy(IOnDeathStrategy strategy);
     IEnemyBuilder setNothingStrategy();
     IEnemyBuilder setObstacleStrategy();
     void reset();

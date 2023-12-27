@@ -39,7 +39,7 @@ public class CollisionChecker {
 
     }
 
-    public boolean checkCollision(ICollidable a, ICollidable b) {
+    private boolean checkCollision(ICollidable a, ICollidable b) {
         return chainChecker.handleCollision(a, b);
     }
 }
