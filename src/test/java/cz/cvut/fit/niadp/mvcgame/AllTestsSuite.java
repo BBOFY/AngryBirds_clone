@@ -10,6 +10,6 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @SuiteDisplayName("All tests suite")
-@Suite.SuiteClasses({GameModelTestSuit.class, SingletonTests.class, CareTakerTests.class, EventSystemTests.class})
+@Suite.SuiteClasses({GameModelTestSuit.class, SingletonTests.class, CareTakerTests.class, EventSystemTests.class, CareTakerTests.class})
 public class AllTestsSuite {
 }
