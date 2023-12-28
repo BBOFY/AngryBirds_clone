@@ -13,7 +13,9 @@ public abstract class AbstractGameCmd {
     protected abstract void execute();
 
     public void doExecute() {
-        CareTaker.getInstance().createMemento();
+        if (subject.isInDebugMode()) {
+            CareTaker.getInstance().createMemento();
+        }
         execute();
     }
 
