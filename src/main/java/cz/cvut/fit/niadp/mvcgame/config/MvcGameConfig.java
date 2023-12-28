@@ -44,6 +44,8 @@ public class MvcGameConfig {
     public static final String CANNON_FIRE_AUDIO_RESOURCE = "/audio/cannonShoot.mp3";
     public static final String CANNON_MOVE_AUDIO_RESOURCE = "/audio/cannonMove.mp3";
 
+    public static final String MISSILE_HIT_AUDIO_RESOURCE = "/audio/hit.wav";
+
     public static final long MISSILE_LIFETIME_MILLS = 10000;
     public static final int MIN_AMOUNT_SHOTS = 1;
     public static final int MAX_AMOUNT_SHOTS = 5;

@@ -11,7 +11,6 @@ import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.visitor.audio.AudioPlayer;
 import cz.cvut.fit.niadp.mvcgame.visitor.gui.GuiRenderer;
 import cz.cvut.fit.niadp.mvcgame.visitor.renderer.GameObjectsRenderer;
-import javafx.scene.control.TextInputDialog;
 
 public class GameView {
 
