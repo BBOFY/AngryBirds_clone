@@ -4,6 +4,7 @@ import cz.cvut.fit.niadp.mvcgame.abstractFactory.GameObjectFactoryA;
 import cz.cvut.fit.niadp.mvcgame.abstractFactory.IGameObjectFactory;
 import cz.cvut.fit.niadp.mvcgame.builder.IEnemyBuilder;
 import cz.cvut.fit.niadp.mvcgame.command.AbstractGameCmd;
+import cz.cvut.fit.niadp.mvcgame.command.ExitGameCmd;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEventObject;
@@ -20,6 +21,7 @@ public class GameModel implements IGameModel {
     private AbsCannon cannon;
 
     private boolean debugMode = false;
+    private boolean gameEnded = false;
 
     private final CollisionChecker collisionChecker;
     private final MissileMovingStrategyContext missileMovingStrategyContext;
@@ -52,6 +54,7 @@ public class GameModel implements IGameModel {
         EventHolder.addMissileEvent.addListener(addMissileEO);
         EventHolder.addObstacleEvent.addListener(addObstacleEO);
         EventHolder.toggleDebugEvent.addListener(toggleDebugEO);
+        EventHolder.anyKeyPressedEvent.addListener(gameEndedEO);
 
         CareTaker.getInstance().setModel(this);
     }
@@ -175,12 +178,23 @@ public class GameModel implements IGameModel {
 
     @Override
     public void update() {
+        gameEnded = false;
         collisionChecker.checkCollisions();
         destroyObjects();
         moveObstacles();
         moveMissiles();
         runCommands();
         EventHolder.gameObjectMovedEvent.invoke();
+        if (enemies.isEmpty()) {
+            gameEnded = true;
+        }
+    }
+
+    private final MyEventObject gameEndedEO = new MyEventObject(this::endGame);
+    private void endGame() {
+        if (gameEnded) {
+            registerCommand(new ExitGameCmd(this));
+        }
     }
 
     private void moveObstacles() {
@@ -315,6 +329,11 @@ public class GameModel implements IGameModel {
     @Override
     public boolean isInDebugMode() {
         return debugMode;
+    }
+
+    @Override
+    public boolean hasGameEnded() {
+        return gameEnded;
     }
 
 }

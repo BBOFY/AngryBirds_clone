@@ -10,41 +10,24 @@ import cz.cvut.fit.niadp.mvcgame.strategy.movingStrategy.MissileMovingStrategyCo
 import java.util.List;
 
 public interface IGameModel {
-
     void moveCannonUp();
-
     void moveCannonDown();
-
     void cannonShoot();
-
     void aimCannonUp();
-
     void aimCannonDown();
-
     void cannonPowerUp();
-
     void cannonPowerDown();
-
     AbsCannon getCannon();
-
     void update();
-
     List<AbsMissile> getMissiles();
-
     List<? extends GameObject> getGameObjects();
-
     MissileMovingStrategyContext getMovingStrategyContext();
-
     void toggleShootingMode();
-
     Object createMemento();
-
     void setMemento(Object memento);
-
     void registerCommand(AbstractGameCmd cmd);
     void undoLastCommand();
-
     List<Enemy> getEnemies();
-
     boolean isInDebugMode();
+    boolean hasGameEnded();
 }

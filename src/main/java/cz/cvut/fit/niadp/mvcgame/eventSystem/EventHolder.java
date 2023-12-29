@@ -26,5 +26,6 @@ public class EventHolder {
 
     public static final MyEvent toggleDebugEvent = new MyEvent();
     public static final MyEvent missileHitEvent = new MyEvent();
-    public static MyEvent toggleMuteEvent = new MyEvent();
+    public static final MyEvent toggleMuteEvent = new MyEvent();
+    public static final MyEvent anyKeyPressedEvent = new MyEvent();
 }

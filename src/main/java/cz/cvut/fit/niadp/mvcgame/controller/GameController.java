@@ -3,9 +3,11 @@ package cz.cvut.fit.niadp.mvcgame.controller;
 import cz.cvut.fit.niadp.mvcgame.chain.cheats.CheatsChecker;
 import cz.cvut.fit.niadp.mvcgame.command.*;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GameController {
     private final IGameModel model;
@@ -18,6 +20,10 @@ public class GameController {
     }
 
     public void processPressedKeys(List<String> pressedKeysCodes) {
+
+        if (!pressedKeysCodes.isEmpty() && !Objects.equals(pressedKeysCodes.getFirst(), MvcGameConfig.UNDO_LAST_CMD_KEY)) {
+            EventHolder.anyKeyPressedEvent.invoke();
+        }
 
         if (enteringCheat && !cheatsChecker.addKeysToCheat(pressedKeysCodes)) {
             enteringCheat = false;

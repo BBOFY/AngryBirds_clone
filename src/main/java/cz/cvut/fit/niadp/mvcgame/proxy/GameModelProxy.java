@@ -112,4 +112,9 @@ public class GameModelProxy implements IGameModel {
     public boolean isInDebugMode() {
         return subject.isInDebugMode();
     }
+
+    @Override
+    public boolean hasGameEnded() {
+        return subject.hasGameEnded();
+    }
 }
