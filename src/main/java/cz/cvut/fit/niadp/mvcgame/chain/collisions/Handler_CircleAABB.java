@@ -4,6 +4,7 @@ import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidable;
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableAABB;
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.colliders.ICollidableCircle;
 
+@Deprecated
 public class Handler_CircleAABB extends AbsCollisionHandler {
     @Override
     public boolean handleCollision(ICollidable a, ICollidable b) {

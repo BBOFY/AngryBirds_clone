@@ -4,9 +4,6 @@ import cz.cvut.fit.niadp.mvcgame.chain.cheats.CheatsChecker;
 import cz.cvut.fit.niadp.mvcgame.command.*;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 import java.util.List;
 

@@ -1,16 +1,11 @@
 package cz.cvut.fit.niadp.mvcgame.chain;
 
 import cz.cvut.fit.niadp.mvcgame.chain.collisions.CollisionChecker;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEvent;
-import cz.cvut.fit.niadp.mvcgame.eventSystem.MyEventObject;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.EnemyBuilderA;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.A_family.MissileA;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.niadp.mvcgame.model.gameObjects.Enemy;
-import cz.cvut.fit.niadp.mvcgame.model.gameObjects.EnemyType;
-import cz.cvut.fit.niadp.mvcgame.strategy.onDeathStrategy.IOnDeathStrategy;
-import cz.cvut.fit.niadp.mvcgame.strategy.onDeathStrategy.NothingDeathStrategy;
 import mockit.Mock;
 import mockit.MockUp;
 import mockit.Mocked;
@@ -21,8 +16,6 @@ public class ColliderTests {
 
     CollisionChecker checker = new CollisionChecker();
     EnemyBuilderA builder = new EnemyBuilderA();
-
-//    MyEvent event = new MyEvent();
 
     @Mocked
     AbsMissile missile1 = new MissileA(new Vector2(100, 100), 0, 0, null);

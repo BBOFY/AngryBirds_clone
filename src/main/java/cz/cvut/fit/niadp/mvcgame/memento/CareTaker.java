@@ -4,7 +4,6 @@ import cz.cvut.fit.niadp.mvcgame.model.IGameModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class CareTaker {
     private static CareTaker inst = null;

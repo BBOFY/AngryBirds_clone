@@ -2,13 +2,15 @@ package cz.cvut.fit.niadp.mvcgame.model;
 
 import cz.cvut.fit.niadp.mvcgame.command.MoveCannonUpCmd;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.niadp.mvcgame.eventSystem.EventHolder;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class GameModelBasicTest {
     @Test
     public void undoLastCommandTest() {
-        IGameModel model = new GameModel();
+        GameModel model = new GameModel();
+        EventHolder.toggleDebugEvent.invoke();
 
         double positionBeforeUndoY = model.getCannon().position.y;
         model.registerCommand(new MoveCannonUpCmd(model));

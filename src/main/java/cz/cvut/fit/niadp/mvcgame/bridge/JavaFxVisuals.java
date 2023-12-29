@@ -3,7 +3,7 @@ package cz.cvut.fit.niadp.mvcgame.bridge;
 import cz.cvut.fit.niadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.niadp.mvcgame.model.Vector2;
 import cz.cvut.fit.niadp.mvcgame.nullPattern.AbstractGraphicsContextWrapper;
-;
+
 
 public class JavaFxVisuals implements IGameVisualsImplementor {
     private final AbstractGraphicsContextWrapper gc;
