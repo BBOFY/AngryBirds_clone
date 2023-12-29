@@ -15,8 +15,10 @@ public class SplitMovingStrategy implements IMovingStrategy {
 
     private final MyEventObject triggerFunctionalityEO = new MyEventObject(this::triggerFunctionality);
     private void triggerFunctionality() {
-
         if (triggered) {
+            return;
+        }
+        if (missile.needToRemove()) {
             return;
         }
         triggered = true;
