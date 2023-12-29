@@ -12,6 +12,7 @@ public class CheatsChecker {
 
     public CheatsChecker() {
         handler = new ToggleDebugCheatHandler();
+        handler.setNext(new MuteCheatHandler());
     }
     private void runCheat() {
         handler.handleCheat(cheat);

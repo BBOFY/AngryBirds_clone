@@ -17,7 +17,7 @@ public class MvcGameConfig {
     public static final String W_KEY = "W";
     public static final String S_KEY = "S";
     public static final String SHOOT_KEY = "SPACE";
-    public static final String SECONDARY_ACTION_KEY = "P";
+    public static final String SECONDARY_ACTION_KEY = "ENTER";
     public static final String TOGGLE_MOVING_STRATEGY_KEY = "M";
     public static final String TOGGLE_SHOOTING_MODE_KEY = "N";
     public static final String EXIT_KEY = "ESCAPE";
@@ -70,8 +70,9 @@ public class MvcGameConfig {
     public static final Vector2 OBSTACLE_SPRITE_SIZE = new Vector2(30, 30);
 
 
+    public static final String ENTER_CHEAT_KEY = "P";
     public static final String TOGGLE_DEBUG_CHEAT = "debug";
-    public static final String ENTER_CHEAT_KEY = "ENTER";
+    public static final String MUTE_CHEAT = "mute";
 
     private MvcGameConfig(){
 
